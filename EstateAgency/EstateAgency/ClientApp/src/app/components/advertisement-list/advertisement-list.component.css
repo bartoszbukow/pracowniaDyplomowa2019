@@ -1,0 +1,8 @@
+ul.advertisement li {
+  color: #000acb;
+  cursor: pointer;
+}
+
+  ul.advertisement li.selected {
+    background-color: #cccccc;
+  }

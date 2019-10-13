@@ -1,0 +1,13 @@
+<div *ngIf="advertisement" class="advertisement">
+  <h2>{{advertisement.title}}</h2>
+  <ul>
+    <li>
+      <label>Title:</label>
+      <input [(ngModel)]="advertisement.title" placeholder="Insert the title..." />
+    </li>
+    <li>
+      <label>Description:</label>
+      <textarea [(ngModel)]=" advertisement.description" placeholder="Insert a suitable description..."></textarea>
+    </li>
+  </ul>
+</div> 

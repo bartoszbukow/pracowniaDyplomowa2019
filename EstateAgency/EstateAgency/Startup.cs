@@ -1,8 +1,10 @@
+using EstateAgency.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +24,11 @@ namespace EstateAgency
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddEntityFrameworkSqlServer();
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -32,6 +39,16 @@ namespace EstateAgency
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Create a service scope to get an ApplicationDbContext instance using DI
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())  
+            {        var dbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();     
+                // Create the Db if it doesn't exist and applies any pending migration.
+                dbContext.Database.Migrate();        
+                // Seed the Db.
+                DbSeeder.Seed(dbContext);
+
+            } 
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -63,6 +80,9 @@ namespace EstateAgency
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback", 
+                    defaults: new { controller = "Home", action = "Index" });
             });
 
             app.UseSpa(spa =>
@@ -77,6 +97,7 @@ namespace EstateAgency
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
         }
     }
 }

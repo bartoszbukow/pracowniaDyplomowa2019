@@ -1,0 +1,9 @@
+<h2>{{title}}</h2>
+
+<ul class="advertisements">
+  <li *ngFor="let advertisement of advertisements" [class.selected]="advertisement === selectedAdvertisement" (click)="onSelect(advertisement)">
+    <span>{{advertisement.title}}</span>
+  </li>
+</ul>
+
+<!--<app-advertisement *ngIf="selectedAdvertisement" [advertisement]="selectedAdvertisement"></app-advertisement>-->
