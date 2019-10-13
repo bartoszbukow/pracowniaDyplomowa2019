@@ -1,0 +1,37 @@
+<h2>{{title}}</h2> <div class="advertisement-edit">
+  <div>
+    <label for="title">Advertisement title:</label>
+    <br />
+    <input type="text" id="title" [(ngModel)]="advertisement.title" placeholder="choose a title..." />
+  </div>
+  <div>
+    <label for="description">Advertisement description:</label>
+    <br />
+    <input type="text" id="description" [(ngModel)]="advertisement.description" placeholder="enter a description..." />
+  </div>
+  <div>
+    <label for="price">Advertisement price:</label>
+    <br />
+    <input type="text" id="price" [(ngModel)]="advertisement.price" placeholder="enter a price..." />
+  </div>
+  <div>
+    <label for="yardage">Advertisement yardage:</label>
+    <br />
+    <input type="text" id="yardage" [(ngModel)]="advertisement.yardage" placeholder="enter a yardage..." />
+  </div>
+  <div>
+    <label for="yardage">Advertisement category:</label>
+    <br />
+    <input type="text" id="category" [(ngModel)]="advertisement.category" placeholder="enter a category..." />
+  </div>
+  <div>
+    <label for="text">Advertisement informative text:</label>
+    <br />
+    <textarea id="text" [(ngModel)]="advertisement.text" placeholder="enter a text..."></textarea>
+  </div>
+  <div>
+    <input *ngIf="editMode" type="button" value="Apply Changes" (click)="onSubmit(advertisement)" />
+    <input *ngIf="!editMode" type="button" value="Create the advertisement!" (click)="onSubmit(advertisement)" />
+    <input type="button" value="Cancel" (click)="onBack()" />
+  </div>
+</div> 

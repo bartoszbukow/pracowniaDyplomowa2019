@@ -18,4 +18,16 @@ export class ApiService {
     getAdvertisement(id) {
         return this.http.get<IAdvertisement>(this.url + "api/advertisement/" + id);
     }
+
+    postAdvertisement(advertisement) {
+        return this.http.post<IAdvertisement>(this.url + "api/advertisement", advertisement);
+    }
+
+    putAdvertisement(advertisement) {
+        return this.http.put<IAdvertisement>(this.url + "api/advertisement", advertisement);
+    }
+
+    deleteAdvertisement(id) {
+      return this.http.delete<IAdvertisement>(this.url + "api/advertisement/" + id, id);
+    }
 }

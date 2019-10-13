@@ -12,6 +12,7 @@ import { ApiService } from './services/api.service';
 import { AdvertisementComponent } from './components/advertisement/advertisement.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AdvertisementEditComponent } from './components/advertisement/advertisement-edit/advertisement-edit.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
         AdvertisementListComponent,
         AdvertisementComponent,
         LoginComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        AdvertisementEditComponent
     ],
     entryComponents: [],
     imports: [

@@ -1,0 +1,4 @@
+.advertisement-edit input[type="text"],
+.advertisement-edit textarea {
+  min-width: 500px;
+}
