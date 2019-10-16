@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-advertisement',
@@ -12,7 +13,8 @@ export class AdvertisementComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
         private router: Router,
-        private api: ApiService) {
+        private api: ApiService,
+        public auth: AuthService) {
     }
 
     ngOnInit() {

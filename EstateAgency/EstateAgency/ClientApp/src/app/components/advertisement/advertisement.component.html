@@ -10,7 +10,7 @@
       <textarea [(ngModel)]=" advertisement.description" placeholder="Insert a suitable description..."></textarea>
     </li>
   </ul>
-  <div>
+  <div *ngIf="auth.isLoggedIn()" class="edit">
     <input type="button" value="Edit" (click)="onEdit()" />
     <input type="button" value="Delete this Advertisement" (click)="onDelete()" />
   </div>

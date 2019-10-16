@@ -23,13 +23,17 @@
     "@angular/platform-server": "8.2.11",
     "@angular/router": "8.2.11",
     "@nguniversal/module-map-ngfactory-loader": "9.0.0-next.5",
-    "core-js": "^3.3.2",
-    "rxjs": "^6.5.3",
-    "zone.js": "^0.10.2",
+    "ajv": "^6.10.2",
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.3.1",
+    "core-js": "^3.3.2",
     "jquery": "3.4.1",
-    "popper.js": "^1.16.0"
+    "ng-packagr": "^5.7.0",
+    "popper.js": "^1.16.0",
+    "rxjs": "^6.5.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "zone.js": "^0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.9",

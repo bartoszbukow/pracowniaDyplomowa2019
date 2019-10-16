@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EstateAgency.Data;
 using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -50,12 +51,14 @@ namespace EstateAgency.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Post(AdvertisementHistoryViewModel m)
         {
             throw new NotImplementedException();
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(string id)
         {
             throw new NotImplementedException();

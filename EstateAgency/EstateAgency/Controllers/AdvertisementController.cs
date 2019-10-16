@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
 using EstateAgency.Data;
 using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 
 namespace EstateAgency.Controllers
 {
@@ -24,15 +23,15 @@ namespace EstateAgency.Controllers
         #region Constructor    
 
         public AdvertisementController(ApplicationDbContext context,
-            RoleManager<IdentityRole> roleManager, 
+            RoleManager<IdentityRole> roleManager,
             UserManager<ApplicationUser> userManager,
             IConfiguration configuration
-            ) 
+            )
             : base(context, roleManager, userManager, configuration)
         {
             _dbContext = context;
         }
-        
+
         #endregion Constructor
 
 
@@ -54,6 +53,8 @@ namespace EstateAgency.Controllers
             return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
         }
 
+        [HttpPut]
+        [Authorize]
         public IActionResult Put([FromBody]AdvertisementViewModel model)
         {
             if (model == null) return new StatusCodeResult(500);
@@ -70,7 +71,7 @@ namespace EstateAgency.Controllers
             };
 
             advertisement.LastModifiedDate = advertisement.CreatedDate;
-            advertisement.UserId = _dbContext.Users.FirstOrDefault(u => u.UserName == "Admin")?.Id;
+            advertisement.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             _dbContext.Advertisements.Add(advertisement);
             _dbContext.SaveChanges();
@@ -80,6 +81,7 @@ namespace EstateAgency.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody]AdvertisementViewModel model)
         {
             if (model == null) return new StatusCodeResult(500);
@@ -104,13 +106,14 @@ namespace EstateAgency.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(string id)
         {
             var advertisement = _dbContext.Advertisements.FirstOrDefault(i => i.Id == id);
 
             if (advertisement == null)
             {
-                return NotFound(new { Error = $"Advertisement ID {id} has not been found"});
+                return NotFound(new { Error = $"Advertisement ID {id} has not been found" });
             }
 
             _dbContext.Advertisements.Remove(advertisement);

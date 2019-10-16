@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EstateAgency.Data;
 using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -42,18 +43,22 @@ namespace EstateAgency.Controllers
             return Content("Not implemented (yet)!");
         }
 
+        [HttpPut]
+        [Authorize]
         public IActionResult Put(ReservationViewModel m)
         {
             throw new NotImplementedException();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Post(ReservationViewModel m)
         {
             throw new NotImplementedException();
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(string id)
         {
             throw new NotImplementedException();
