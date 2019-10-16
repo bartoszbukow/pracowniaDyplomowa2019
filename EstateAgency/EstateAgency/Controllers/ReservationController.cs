@@ -2,15 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EstateAgency.Data;
+using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace EstateAgency.Controllers
 {
-    [Route("api/[controller]")]
-    public class ReservationController : Controller
+    public class ReservationController : BaseApiController
     {
+        #region Private Fields 
+
+        private readonly ApplicationDbContext _dbContext;
+
+        #endregion
+
+        #region Constructor    
+
+        public ReservationController(ApplicationDbContext context,
+            RoleManager<IdentityRole> roleManager,
+            UserManager<ApplicationUser> userManager,
+            IConfiguration configuration
+        )
+            : base(context, roleManager, userManager, configuration)
+        {
+            _dbContext = context;
+        }
+
+        #endregion Constructor
+
         #region RESTful conventions methods 
 
         [HttpGet("{id}")]
@@ -70,11 +93,7 @@ namespace EstateAgency.Controllers
             }
             // output the result in JSON format
             return new JsonResult(
-                sampleReservation,
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                sampleReservation, JsonSettings);
         }
 
         #endregion

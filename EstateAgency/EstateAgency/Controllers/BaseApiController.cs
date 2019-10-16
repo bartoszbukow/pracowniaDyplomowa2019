@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EstateAgency.Data;
+using EstateAgency.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+
 
 namespace EstateAgency.Controllers
 {
@@ -14,9 +18,17 @@ namespace EstateAgency.Controllers
     {
         #region Constructor
 
-        public BaseApiController(ApplicationDbContext context)
+        public BaseApiController(ApplicationDbContext context,
+            RoleManager<IdentityRole> roleManager,
+            UserManager<ApplicationUser> userManager,
+            IConfiguration configuration
+            )
         {
             DbContext = context;
+            RoleManager = roleManager;
+            UserManager = userManager; 
+            Configuration = configuration;
+
             JsonSettings = new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented
@@ -28,6 +40,9 @@ namespace EstateAgency.Controllers
         #region Shared Properties     
 
         protected ApplicationDbContext DbContext { get; private set; }
+        protected RoleManager<IdentityRole> RoleManager { get; private set; }
+        protected UserManager<ApplicationUser> UserManager { get; private set; }
+        protected IConfiguration Configuration { get; private set; }
         protected JsonSerializerSettings JsonSettings { get; private set; }
 
         #endregion

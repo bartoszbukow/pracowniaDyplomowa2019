@@ -2,17 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EstateAgency.Data;
+using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace EstateAgency.Controllers
 {
-    [Route("api/[controller]")]
-    public class AdvertisementHistoryController : Controller
+    public class AdvertisementHistoryController : BaseApiController
     {
+        #region Private Fields 
+
+        private readonly ApplicationDbContext _dbContext;
+
+        #endregion
+
+        #region Constructor    
+
+        public AdvertisementHistoryController(ApplicationDbContext context,
+            RoleManager<IdentityRole> roleManager,
+            UserManager<ApplicationUser> userManager,
+            IConfiguration configuration
+        )
+            : base(context, roleManager, userManager, configuration)
+        {
+            _dbContext = context;
+        }
+
+        #endregion Constructor
+
         #region RESTful conventions methods 
 
         [HttpGet("{id}")]
@@ -43,7 +66,7 @@ namespace EstateAgency.Controllers
         #region Attribute-based routing methods
 
         // GET api/advertisementHistory/all
-        [HttpGet("All/{quizId}")]
+        [HttpGet("All/{advertisementId}")]
         public IActionResult All(string advertisementId)
         {
             var sampleAdvertisementHistory = new List<AdvertisementHistoryViewModel>
@@ -70,11 +93,7 @@ namespace EstateAgency.Controllers
             }
             // output the result in JSON format
             return new JsonResult(
-                sampleAdvertisementHistory,
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                sampleAdvertisementHistory, JsonSettings);
 
         }
 

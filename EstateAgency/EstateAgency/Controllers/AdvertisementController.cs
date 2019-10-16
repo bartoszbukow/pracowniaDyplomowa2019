@@ -6,7 +6,9 @@ using EstateAgency.Data;
 using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
 using Mapster;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace EstateAgency.Controllers
@@ -21,7 +23,12 @@ namespace EstateAgency.Controllers
 
         #region Constructor    
 
-        public AdvertisementController(ApplicationDbContext context) : base(context)
+        public AdvertisementController(ApplicationDbContext context,
+            RoleManager<IdentityRole> roleManager, 
+            UserManager<ApplicationUser> userManager,
+            IConfiguration configuration
+            ) 
+            : base(context, roleManager, userManager, configuration)
         {
             _dbContext = context;
         }

@@ -28,14 +28,20 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\interfaces\advertisement.ts" />
+    <None Remove="ClientApp\src\app\interfaces\TokenResponse.ts" />
+    <None Remove="ClientApp\src\app\services\auth.guard.service.ts" />
+    <None Remove="ClientApp\src\app\services\auth.interceptor.ts" />
+    <None Remove="ClientApp\src\app\services\auth.response.interceptor.ts" />
+    <None Remove="ClientApp\src\app\services\token.response.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\advertisement.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\TokenResponse.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\token.response.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\services\" />
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 

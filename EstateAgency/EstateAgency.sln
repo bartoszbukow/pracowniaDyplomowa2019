@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstateAgency", "EstateAgency\EstateAgency.csproj", "{F60508A3-9BA4-4AA4-A017-36E74B36CD8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EstateAgency", "EstateAgency\EstateAgency.csproj", "{F60508A3-9BA4-4AA4-A017-36E74B36CD8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		LessCompiler = f60508a3-9ba4-4aa4-a017-36e74b36cd8d
 		SolutionGuid = {D9FF9403-55A7-4BDC-8658-1989EB99DFA0}
 	EndGlobalSection
 EndGlobal

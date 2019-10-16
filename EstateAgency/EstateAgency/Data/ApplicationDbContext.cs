@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using EstateAgency.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace EstateAgency.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         #region Constructor   
 
@@ -46,7 +47,6 @@ namespace EstateAgency.Data
 
         #region Properties     
         
-        public DbSet<ApplicationUser> Users { get; set; }    
         public DbSet<Advertisement> Advertisements { get; set; }    
         public DbSet<AdvertisementHistory> AdvertisementHistorys { get; set; }  
         public DbSet<Reservation> Reservations { get; set; }    
