@@ -12,7 +12,7 @@
             <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
           </li>
           <li *ngIf="!this.isLoggedIn()" class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/login"]'>Login</a>
+            <a class="nav-link text-dark" [routerLink]='["/login"]'>Login / Register</a>
           </li>
           <li *ngIf="this.isLoggedIn()" class="nav-item" [routerLinkActive]='["link-active"]'>
             <a class="nav-link text-dark" [routerLink]='["/advertisement/create"]'>Create Advertisement</a>

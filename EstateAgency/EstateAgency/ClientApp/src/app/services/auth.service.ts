@@ -22,9 +22,19 @@ export class AuthService {
         var data = {
             username: username,
             password: password,
-            client_id: this.clientId,
+            clientId: this.clientId,
             grant_type: "password",
             scope: "offline_access profile email"
+        };
+        return this.getAuthFromServer(url, data);
+    }
+
+    refreshToken(): Observable<boolean> {
+        var url = "api/token/auth";
+        var data = {
+            clientId: this.clientId,
+            grant_type: "refresh_token",
+            refresh_token: this.getAuth()!.refresh_token,
         };
         return this.getAuthFromServer(url, data);
     }
@@ -40,6 +50,7 @@ export class AuthService {
                 return Observable.throw('Unauthorized');
             }),
                 catchError((error) => {
+                    console.log(error);
                     return new Observable<any>(error);
                 }));
     }
@@ -49,7 +60,7 @@ export class AuthService {
         return true;
     }
 
-    setAuth(auth: TokenResponse | null): boolean {
+    setAuth(auth: ITokenResponse | null): boolean {
         if (isPlatformBrowser(this.platformId)) {
             if (auth) {
                 localStorage.setItem(this.authKey, JSON.stringify(auth));
@@ -60,7 +71,7 @@ export class AuthService {
         return true;
     }
 
-    getAuth(): TokenResponse | null {
+    getAuth(): ITokenResponse | null {
         if (isPlatformBrowser(this.platformId)) {
             var i = localStorage.getItem(this.authKey);
             if (i) { return JSON.parse(i); }
@@ -75,4 +86,17 @@ export class AuthService {
         return false;
     }
 
+    isAdmin() {
+        let token = this.getAuth().token;
+        let tokenData = token.split('.')[1];
+        let decodedTokenJsonData = window.atob(tokenData);
+        let decodedTokenData = JSON.parse(decodedTokenJsonData);
+
+        for (let role of decodedTokenData.roles) {
+            if (role === "Administrator") {
+                return true;
+            }
+        }
+        return false;
+    }
 }

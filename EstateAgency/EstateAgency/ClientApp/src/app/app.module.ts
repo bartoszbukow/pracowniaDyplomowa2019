@@ -15,6 +15,9 @@ import { AdvertisementEditComponent } from './components/advertisement/advertise
 import { AuthService } from './services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { AuthResponseInterceptor } from './services/auth.response.interceptor';
+import { RegisterComponent } from './components/register/register.component';
+
 
 @NgModule({
     declarations: [
@@ -25,7 +28,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
         AdvertisementComponent,
         LoginComponent,
         PageNotFoundComponent,
-        AdvertisementEditComponent
+        AdvertisementEditComponent,
+        RegisterComponent
     ],
     entryComponents: [],
     imports: [
@@ -40,6 +44,11 @@ import { AuthInterceptor } from './services/auth.interceptor';
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthResponseInterceptor,
             multi: true
         },
         ApiService

@@ -30,6 +30,7 @@
     <None Remove="ClientApp\src\app\interfaces\advertisement.ts" />
     <None Remove="ClientApp\src\app\interfaces\token.response.ts" />
     <None Remove="ClientApp\src\app\interfaces\TokenResponse.ts" />
+    <None Remove="ClientApp\src\app\interfaces\user.ts" />
     <None Remove="ClientApp\src\app\services\auth.guard.service.ts" />
     <None Remove="ClientApp\src\app\services\auth.interceptor.ts" />
     <None Remove="ClientApp\src\app\services\auth.response.interceptor.ts" />
@@ -39,7 +40,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\advertisement.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\token.response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\user.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\auth.interceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\auth.response.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\token.response.ts" />
   </ItemGroup>
 
