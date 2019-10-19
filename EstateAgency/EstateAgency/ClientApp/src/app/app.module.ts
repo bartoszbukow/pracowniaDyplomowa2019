@@ -17,7 +17,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthResponseInterceptor } from './services/auth.response.interceptor';
 import { RegisterComponent } from './components/register/register.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,13 @@ import { RegisterComponent } from './components/register/register.component';
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        MatButtonModule
     ],
     providers: [
         AuthService,
