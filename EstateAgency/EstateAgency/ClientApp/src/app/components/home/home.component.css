@@ -5,15 +5,12 @@ app-advertisement-list {
   margin: 0px 5px;
   float: left;
 }
-
-  app-advertisement-list.latest {
-    background-color: #f0f0f0;
-  }
-
-  app-advertisement-list.byTitle {
-    background-color: #e0e0e0;
-  }
-
-  app-advertisement-list.random {
-    background-color: #d0d0d0;
-  }
+app-advertisement-list.latest {
+  background-color: #f0f0f0;
+}
+app-advertisement-list.byTitle {
+  background-color: #e0e0e0;
+}
+app-advertisement-list.random {
+  background-color: #d0d0d0;
+}

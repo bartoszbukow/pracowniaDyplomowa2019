@@ -1,9 +1,8 @@
-import { EventEmitter, Inject, Injectable, PLATFORM_ID } from "@angular/core";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map, catchError } from 'rxjs/operators';
-
+import { ApiService } from './api.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,12 +12,11 @@ export class AuthService {
     clientId: string = "TestMakerFree";
     redirectTo: string = "";
 
-    constructor(private http: HttpClient,
-        @Inject(PLATFORM_ID) private platformId: any) { }
+    constructor(@Inject(PLATFORM_ID) private platformId: any,
+        private api: ApiService) { }
 
     // performs the login
     login(username: string, password: string): Observable<any> {
-        var url = "api/token/auth";
         var data = {
             username: username,
             password: password,
@@ -26,21 +24,20 @@ export class AuthService {
             grant_type: "password",
             scope: "offline_access profile email"
         };
-        return this.getAuthFromServer(url, data);
+        return this.getAuthFromServer(data);
     }
 
     refreshToken(): Observable<boolean> {
-        var url = "api/token/auth";
         var data = {
             clientId: this.clientId,
             grant_type: "refresh_token",
             refresh_token: this.getAuth()!.refresh_token,
         };
-        return this.getAuthFromServer(url, data);
+        return this.getAuthFromServer(data);
     }
 
-    getAuthFromServer(url: string, data: any): Observable<any> {
-        return this.http.post<ITokenResponse>(url, data)
+    getAuthFromServer(data: any): Observable<any> {
+        return this.api.postAuthFromServer(data)
             .pipe(map((res) => {
                 let token = res && res.token;
                 if (token) {

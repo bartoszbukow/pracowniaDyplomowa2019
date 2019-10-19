@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit} from "@angular/core";
+import { Component, OnInit} from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { AuthService } from '../../services/auth.service';
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
     title: string;
     form: FormGroup;
 
-    constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, @Inject('BASE_URL') private baseUrl: string) {
+    constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {
         this.title = "User Login";
         // initialize the form
         this.createForm();
@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        var url = this.baseUrl + "api/token/auth";
         var username = this.form.value.Username;
         var password = this.form.value.Password;
 

@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
+import { ApiService } from '../../services/api.service';
 
 @Component({
     selector: 'app-register',
@@ -14,8 +14,7 @@ export class RegisterComponent implements OnInit {
 
     constructor(private router: Router,
         private fb: FormBuilder,
-        private http: HttpClient,
-        @Inject('BASE_URL') private baseUrl: string) {
+        private api: ApiService) {
 
         this.title = "New User Registration";
         // initialize the form
@@ -45,9 +44,7 @@ export class RegisterComponent implements OnInit {
         tempUser.password = this.form.value.Password;
         tempUser.displayName = this.form.value.DisplayName;
 
-        var url = this.baseUrl + "api/user";
-
-        this.http.post<IUser>(url, tempUser).subscribe(res => {
+        this.api.postRegisterUser(tempUser).subscribe(res => {
             if (res) {
                 var v = res;
                 console.log("User " + v.username + " has been created.");

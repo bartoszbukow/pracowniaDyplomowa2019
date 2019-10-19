@@ -145,5 +145,10 @@
       }
     }
   },
-  "defaultProject": "EstateAgency"
+  "defaultProject": "EstateAgency",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "less"
+    }
+  }
 }
