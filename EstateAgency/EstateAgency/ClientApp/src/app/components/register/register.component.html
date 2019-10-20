@@ -12,7 +12,7 @@
                  placeholder="Insert username..."
                  autocomplete="name"/>
           <mat-error>
-            Please enter a valid username
+            Your name needs to be between 2 and 20 characters long and must start with a capital letter
           </mat-error>
         </mat-form-field>
 
@@ -34,7 +34,7 @@
                  placeholder="Insert display name..."
                  autocomplete="displayName"/>
           <mat-error>
-            Please enter a valid display name
+            Your display name needs to be between 2 and 20 characters long and must start with a capital letter
           </mat-error>
         </mat-form-field>
 
@@ -49,7 +49,7 @@
             {{hidePassword ? 'visibility' : 'visibility_off'}}
           </mat-icon>
           <mat-error>
-            Please enter a valid password
+            Your password needs to be between 6 and 30 characters long and contain one uppercase letter, one symbol, and a number.
           </mat-error>
         </mat-form-field>
 
@@ -60,7 +60,7 @@
                  placeholder="Repeat the password..."
                  [type]="hidePasswordConfirm ? 'password':'text'"
                  autocomplete="passwordConfirm"
-                 [errorStateMatcher]="errorMatcher"/>
+                 [errorStateMatcher]="errorMatcher" />
           <mat-icon matSuffix (click)="hidePasswordConfirm = !hidePasswordConfirm">
             {{hidePasswordConfirm ? 'visibility' : 'visibility_off'}}
           </mat-icon>

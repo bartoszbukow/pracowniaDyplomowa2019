@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { Router } from "@angular/router";
 import { ApiService } from '../../services/api.service';
 import { RegisterModel } from "./../../models/register.model";
