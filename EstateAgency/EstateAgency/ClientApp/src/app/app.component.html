@@ -5,14 +5,17 @@
         <button mat-icon-button class="hamburger-menu" (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
-        <h1 class="title" [routerLink]='["/"]'>Estate Agency</h1>
+        <h1 class="title" [routerLink]='["/"]'>{{ this.title }}</h1>
+        <button mat-icon-button class="user-menu">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
+        </button>
       </mat-toolbar-row>
     </mat-toolbar>
   </header>
 
   <mat-sidenav-container>
     <mat-sidenav #sidenav>
-          <app-nav-menu></app-nav-menu>
+          <app-nav-menu (sidenavToggle)="sidenav.toggle()"></app-nav-menu>
     </mat-sidenav>
 
     <mat-sidenav-content>

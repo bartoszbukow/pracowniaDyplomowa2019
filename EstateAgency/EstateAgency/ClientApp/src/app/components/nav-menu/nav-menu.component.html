@@ -1,10 +1,18 @@
 <nav>
   <mat-nav-list class="min-width-menu">
-    <a mat-list-item [routerLink]="'/'"> Home </a>
-    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/login'"> Login / Register </a>
-    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/advertisement/create'"> Create Advertisement </a>
-    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/'" (click)="logout()"> Logout </a>
+    <a mat-list-item [routerLink]="'/'" (click)="sidenavCloce();"> Home </a>
 
-    <!--<a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>-->
+    <hr *ngIf="!this.isLoggedIn()" class="hr-style" />
+    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/login'" (click)="sidenavCloce();"> Login </a>
+
+    <hr *ngIf="!this.isLoggedIn()" class="hr-style" />
+    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/register'" (click)="sidenavCloce();"> Register </a>
+
+    <hr *ngIf="this.isLoggedIn()" class="hr-style" />
+    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/advertisement/create'" (click)="sidenavCloce();"> Create Advertisement </a>
+
+    <hr *ngIf="this.isLoggedIn()" class="hr-style" />
+    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/'" (click)="logout(); sidenavCloce();"> Logout </a>
+
   </mat-nav-list>
 </nav>

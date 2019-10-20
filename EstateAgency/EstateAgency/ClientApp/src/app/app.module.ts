@@ -18,7 +18,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthResponseInterceptor } from './services/auth.response.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 
 @NgModule({
     declarations: [
@@ -44,7 +44,20 @@ import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatBu
         MatIconModule,
         MatSidenavModule,
         MatListModule,
-        MatButtonModule
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule
+    ],
+    exports: [
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule
     ],
     providers: [
         AuthService,

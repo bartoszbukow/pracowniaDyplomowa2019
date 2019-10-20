@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { Router } from "@angular/router";
 import { ApiService } from '../../services/api.service';
+import { RegisterModel } from "./../../models/register.model";
+import { ErrorStateMatcher } from '@angular/material';
 
 @Component({
     selector: 'app-register',
@@ -9,88 +11,81 @@ import { ApiService } from '../../services/api.service';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-    title: string;
-    form: FormGroup;
+    
+    user: RegisterModel = new RegisterModel();
+    registerForm: FormGroup;
+    hidePassword: boolean = true;
+    hidePasswordConfirm: boolean = true;
+
+    errorMatcher = new CrossFieldErrorMatcher();
 
     constructor(private router: Router,
         private fb: FormBuilder,
         private api: ApiService) {
-
-        this.title = "New User Registration";
-        // initialize the form
-        this.createForm();
     }
 
     ngOnInit() {
+        this.createRegisterForm();
     }
 
-    createForm() {
-        this.form = this.fb.group({
-            Username: ['', Validators.required],
-            Email: ['', [Validators.required, Validators.email]],
-            Password: ['', Validators.required],
-            PasswordConfirm: ['', Validators.required],
-            DisplayName: ['', Validators.required]
+    createRegisterForm() {
+        this.registerForm = this.fb.group({
+            "name": [this.user.name, [
+                Validators.required]],
+
+            "email": [this.user.email, [
+                Validators.required,
+                Validators.email]],
+
+            "displayName": [this.user.password, [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(20)]],
+
+            "password": [this.user.password, [
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(30)]],
+
+            "passwordConfirm": [this.user.passwordConfirm, [
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(30)]],
         }, {
-            validator: this.passwordConfirmValidator
-        });
+                validator: this.passwordValidator
+        })
     }
 
-    onSubmit() {
-        // build a temporary user object from form values
+    onRegisterSubmit() {
         var tempUser = <IUser>{};
-        tempUser.username = this.form.value.Username;
-        tempUser.email = this.form.value.Email;
-        tempUser.password = this.form.value.Password;
-        tempUser.displayName = this.form.value.DisplayName;
+        tempUser.username = this.registerForm.value.name;
+        tempUser.email = this.registerForm.value.email;
+        tempUser.password = this.registerForm.value.password;
+        tempUser.displayName = this.registerForm.value.displayName;
 
         this.api.postRegisterUser(tempUser).subscribe(res => {
             if (res) {
                 var v = res;
                 console.log("User " + v.username + " has been created.");
-                // redirect to login page
                 this.router.navigate(["login"]);
             } else {
-                // registration failed
-                this.form.setErrors({ "register": "User registration failed." });
+                this.registerForm.setErrors({ "register": "User registration failed." });
+                console.log("nie idało sie hehe");
             }
-        }, error => console.log(error));
+        }, error => {
+            console.log(error);
+            
+        });
     }
 
-    onBack() {
-        this.router.navigate(["home"]);
-    }
-
-    passwordConfirmValidator(control: FormControl): any {
-        let p = control.root.get('Password');
-        let pc = control.root.get('PasswordConfirm');
-
-        if (p && pc) {
-            if (p.value !== pc.value) {
-                pc.setErrors({ "PasswordMismatch": true });
-            } else {
-                pc.setErrors(null);
-            }
-        }
-        return null;
-    }
-
-    getFormControl(name: string) {
-        return this.form.get(name);
-    }
-
-    isValid(name: string) {
-        var e = this.getFormControl(name); return e && e.valid;
-    }
-
-    isChanged(name: string) {
-        var e = this.getFormControl(name);
-        return e && (e.dirty || e.touched);
-    }
-
-    hasError(name: string) {
-        var e = this.getFormControl(name);
-        return e && (e.dirty || e.touched) && !e.valid;
+    passwordValidator(form: FormGroup) {
+        const condition = form.get('password').value !== form.get('passwordConfirm').value;
+        return condition ? { passwordsDoNotMatch: true } : null;
     }
 }
 
+class CrossFieldErrorMatcher implements ErrorStateMatcher {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | null): boolean {
+        return control.dirty && (form.errors !== null) && form.directives[4].touched;
+    }
+}

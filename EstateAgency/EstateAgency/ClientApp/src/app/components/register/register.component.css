@@ -1,37 +1,41 @@
-.login-container {
+.medium-list {
+  margin: 50px auto auto auto;
   max-width: 600px;
-  padding: 40px 40px;
-  background-color: #F7F7F7;
-  margin: 0 0 25px 0;
-  border-radius: 10px;
-  border: 1px solid #eee;
+  width: 100%;
 }
-.login-container .login-img {
+.medium-list .list-viewer-wrapper {
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24), 0 0 2px rgba(0, 0, 0, 0.12);
+  margin: 4px;
+  background-color: #F7F7F7;
+  padding: 30px;
+  border-radius: 5px;
+}
+.medium-list .list-viewer-wrapper mat-form-field {
+  margin-bottom: 10px;
+}
+.medium-list .list-viewer-wrapper .login-img {
   width: 96px;
   height: 96px;
   margin: 0 auto 10px;
   display: block;
   border-radius: 50%;
 }
-.login-container .login-title {
-  margin: 15px 0;
+.medium-list .list-viewer-wrapper .list-header-title {
+  color: rgba(0, 0, 0, 0.54);
+  background: rgba(0, 0, 0, 0.03);
+  padding: 8px 20px;
+  font-weight: bold;
   text-align: center;
-  font-size: 1.5em;
-  color: #444;
+  margin-bottom: 10px;
 }
-.login-container .login-forgot-password {
-  margin-top: 10px;
-  text-align: center;
+.medium-list .list-viewer-wrapper .form-container {
+  display: flex;
+  flex-direction: column;
 }
-.login-container .login-form .form-group {
-  margin-bottom: 8px;
+.medium-list .list-viewer-wrapper .divider {
+  margin-top: 10px !important;
 }
-.login-container .login-form .error-panel {
-  color: #e74c3c;
-  text-align: center;
-}
-@media (max-width: 767px) {
-  .login-container {
-    width: 100%;
-  }
+.medium-list .list-viewer-wrapper .button-register {
+  margin-top: 20px;
 }

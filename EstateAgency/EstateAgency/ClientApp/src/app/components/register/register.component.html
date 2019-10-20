@@ -1,95 +1,80 @@
-<div class="login-container">
-  <img id="login-img" class="login-img"
-       src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-  <h2 class="login-title">{{title}}</h2>
-  <form [formGroup]="form"
-        (ngSubmit)="onSubmit()"
-        class="login-form">
-    <div *ngIf="form.errors?.auth"
-         class="error-panel help-block">
-      {{form.errors.register}}
-    </div>
-    <div class="form-group"
-         [ngClass]="{ 'has-error has-feedback' : hasError('Username') }">
-      <input type="text" required autofocus
-             formControlName="Username"
-             class="form-control"
-             placeholder="Insert username..." />
-      <span *ngIf="hasError('Username')"
-            class="glyphicon glyphicon-remove form-control-feedback"
-            aria-hidden="true"></span>
-      <div *ngIf="hasError('Username')"
-           class="help-block">
-        Please insert a valid username.
+<div class="medium-list">
+  <div class="list-viewer-wrapper">
+    <img id="login-img" class="login-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+    <div class="list-header-title">User Register</div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
+      <div class="form-container">
+        <mat-form-field>
+          <input id="name"
+                 matInput
+                 formControlName="name"
+                 placeholder="Insert username..."
+                 autocomplete="name"/>
+          <mat-error>
+            Please enter a valid username
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input id="email"
+                 matInput
+                 formControlName="email"
+                 placeholder="Insert email..."
+                 autocomplete="email"/>
+          <mat-error>
+            Please enter a valid email
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input id="displayName"
+                 matInput
+                 formControlName="displayName"
+                 placeholder="Insert display name..."
+                 autocomplete="displayName"/>
+          <mat-error>
+            Please enter a valid display name
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input id="password"
+                 matInput
+                 formControlName="password"
+                 placeholder="Insert password..."
+                 [type]="hidePassword ? 'password':'text'"
+                 autocomplete="password"/>
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+            {{hidePassword ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+          <mat-error>
+            Please enter a valid password
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input id="passwordConfirm"
+                 matInput
+                 formControlName="passwordConfirm"
+                 placeholder="Repeat the password..."
+                 [type]="hidePasswordConfirm ? 'password':'text'"
+                 autocomplete="passwordConfirm"
+                 [errorStateMatcher]="errorMatcher"/>
+          <mat-icon matSuffix (click)="hidePasswordConfirm = !hidePasswordConfirm">
+            {{hidePasswordConfirm ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+          <mat-error *ngIf="registerForm.hasError('passwordsDoNotMatch')">
+            Passwords do not match!
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-button type="submit" class="mat-raised-button mat-primary button-register">
+          Register
+        </button>
+        <button mat-button routerLink="/login" class="divider">Login</button>
       </div>
-    </div>
-    <div class="form-group"
-         [ngClass]="{ 'has-error has-feedback' : hasError('Email') }">
-      <input type="text" required autofocus
-             formControlName="Email"
-             class="form-control"
-             placeholder="Insert e-mail..." />
-      <span *ngIf="hasError('Email')"
-            class="glyphicon glyphicon-remove form-control-feedback"
-            aria-hidden="true"></span>
-      <div *ngIf="hasError('Email')"
-           class="help-block">
-        Please insert a valid e-mail address.
-      </div>
-    </div>
-    <div class="form-group"
-         [ngClass]="{ 'has-error has-feedback' : hasError('Password') }">
-      <input type="password" required
-             formControlName="Password"
-             class="form-control"
-             placeholder="Insert password..." />
-      <span *ngIf="hasError('Password')"
-            class="glyphicon glyphicon-remove form-control-feedback"
-            aria-hidden="true"></span>
-      <div *ngIf="hasError('Password')"
-           class="help-block">
-        Please insert a valid password.
-      </div>
-    </div>
-    <div class="form-group"
-         [ngClass]="{ 'has-error has-feedback' : hasError('PasswordConfirm') }">
-      <input type="password" required
-             formControlName="PasswordConfirm"
-             class="form-control"
-             placeholder="Repeat the password..." />
-      <span *ngIf="hasError('PasswordConfirm')"
-            class="glyphicon glyphicon-remove form-control-feedback"
-            aria-hidden="true"></span>
-      <div *ngIf="hasError('PasswordConfirm')"
-           class="help-block">
-        Password and confirm password don't match.
-      </div>
-    </div>
-    <div class="form-group"
-         [ngClass]="{ 'has-error has-feedback' : hasError('DisplayName') }">
-      <input type="text" required autofocus
-             formControlName="DisplayName"
-             class="form-control"
-             placeholder="Choose a Display Name..." />
-      <span *ngIf="hasError('DisplayName')"
-            class="glyphicon glyphicon-remove form-control-feedback"
-            aria-hidden="true"></span>
-      <div *ngIf="hasError('DisplayName')"
-           class="help-block">
-        Please insert a valid display name.
-      </div>
-    </div>
-    <div class="text-center">
-      <button type="submit"
-              [disabled]="form.invalid"
-              class="btn btn-md btn-success btn-signin">
-        Register
-      </button>
-      <button type="submit"
-              (click)="onBack()"
-              class="btn btn-md btn-default">
-        Cancel
-      </button>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
+
