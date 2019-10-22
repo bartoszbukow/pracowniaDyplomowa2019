@@ -1,80 +1,119 @@
-<div class="medium-list">
-  <div class="list-viewer-wrapper">
-    <img id="login-img" class="login-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-    <div class="list-header-title">User Register</div>
+<div class="h-100 mt-3">
+  <div class="row justify-content-center align-items-center m-auto register-form">
+    <div class="card rounded shadow bg-white w-100">
+      <div class="card-body">
+        <img id="register-img" class="register-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <div class="list-header-title">User Register</div>
+        <div class="alert alert-danger" *ngIf="registerForm.errors?.register" role="alert">
+          {{registerForm.errors.register}}
+        </div>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text"
+                       class="form-control"
+                       name="displayName"
+                       required
+                       formControlName="displayName"
+                       placeholder="name"
+                       [ngClass]="{'is-invalid':hasError('displayName')}"
+                       autocomplete="displayName">
+                <div *ngIf="hasError('displayName')" class="invalid-feedback">
+                  Name needs to be between 2 and 20 characters long and must start with a capital letter
+                </div>
+              </div>
+            </div>
+          </div><div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Surname</label>
+                <input type="text"
+                       class="form-control"
+                       name="name"
+                       required
+                       formControlName="name"
+                       placeholder="surname"
+                       [ngClass]="{'is-invalid':hasError('name')}"
+                       autocomplete="name">
+                <div *ngIf="hasError('name')" class="invalid-feedback">
+                  Surname needs to be between 2 and 20 characters long and must start with a capital letter
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>E-mail</label>
+                <input type="email"
+                       class="form-control"
+                       name="email"
+                       required
+                       formControlName="email"
+                       placeholder="e-mail"
+                       [ngClass]="{'is-invalid':hasError('email')}"
+                       autocomplete="email">
+                <div *ngIf="hasError('email')" class="invalid-feedback">Please insert correct e-mail address</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password"
+                       formControlName="password"
+                       class="form-control"
+                       [ngClass]="{'is-invalid':hasError('password')}"
+                       placeholder="password"
+                       required
+                       autocomplete="password">
+                <div *ngIf="hasError('password')" class="invalid-feedback">
+                  Password needs to be between 8 and 30 characters long and contain one uppercase letter, one symbol, and a number
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Repeat Password</label>
+                <input type="password"
+                       formControlName="passwordConfirm"
+                       class="form-control"
+                       [ngClass]="{'is-invalid':hasError('passwordConfirm')}"
+                       placeholder="password"
+                       required
+                       autocomplete="passwordConfirm">
 
-    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
-      <div class="form-container">
-        <mat-form-field>
-          <input id="name"
-                 matInput
-                 formControlName="name"
-                 placeholder="Insert username..."
-                 autocomplete="name"/>
-          <mat-error>
-            Your name needs to be between 2 and 20 characters long and must start with a capital letter
-          </mat-error>
-        </mat-form-field>
+                <div *ngIf="f.passwordConfirm.errors" class="invalid-feedback">
+                  <div *ngIf="f.passwordConfirm.errors?.required">
+                    Confirm Password is required
+                  </div>
+                  <div *ngIf="f.passwordConfirm.errors?.mustMatch">
+                    Passwords must match
+                  </div>
+                </div>
 
-        <mat-form-field>
-          <input id="email"
-                 matInput
-                 formControlName="email"
-                 placeholder="Insert email..."
-                 autocomplete="email"/>
-          <mat-error>
-            Please enter a valid email
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input id="displayName"
-                 matInput
-                 formControlName="displayName"
-                 placeholder="Insert display name..."
-                 autocomplete="displayName"/>
-          <mat-error>
-            Your display name needs to be between 2 and 20 characters long and must start with a capital letter
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input id="password"
-                 matInput
-                 formControlName="password"
-                 placeholder="Insert password..."
-                 [type]="hidePassword ? 'password':'text'"
-                 autocomplete="password"/>
-          <mat-icon matSuffix (click)="hidePassword = !hidePassword">
-            {{hidePassword ? 'visibility' : 'visibility_off'}}
-          </mat-icon>
-          <mat-error>
-            Your password needs to be between 6 and 30 characters long and contain one uppercase letter, one symbol, and a number.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input id="passwordConfirm"
-                 matInput
-                 formControlName="passwordConfirm"
-                 placeholder="Repeat the password..."
-                 [type]="hidePasswordConfirm ? 'password':'text'"
-                 autocomplete="passwordConfirm"
-                 [errorStateMatcher]="errorMatcher" />
-          <mat-icon matSuffix (click)="hidePasswordConfirm = !hidePasswordConfirm">
-            {{hidePasswordConfirm ? 'visibility' : 'visibility_off'}}
-          </mat-icon>
-          <mat-error *ngIf="registerForm.hasError('passwordsDoNotMatch')">
-            Passwords do not match!
-          </mat-error>
-        </mat-form-field>
-
-        <button mat-button type="submit" class="mat-raised-button mat-primary button-register">
-          Register
-        </button>
-        <button mat-button routerLink="/login" class="divider">Login</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <input type="submit"
+                     class="btn btn-primary btn-lg btn-block mt-3"
+                     [disabled]="!registerForm.value.email || !registerForm.value.password || !registerForm.value.name || !registerForm.value.displayName || !registerForm.value.passwordConfirm"
+                     value="Sign out">
+            </div>
+          </div>
+        </form>
+        <hr />
+        <div class="col-md-12 p-0 mt-3">
+          <button type="submit" class="btn btn-light btn-lg btn-block" value="Sign out" (click)="routeToLogin()">Sign in</button>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </div>
-

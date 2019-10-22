@@ -3,10 +3,10 @@
     <a mat-list-item [routerLink]="'/'" (click)="sidenavCloce();"> Home </a>
 
     <hr *ngIf="!this.isLoggedIn()" class="hr-style" />
-    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/login'" (click)="sidenavCloce();"> Login </a>
+    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/register'" (click)="sidenavCloce();"> Register </a>
 
     <hr *ngIf="!this.isLoggedIn()" class="hr-style" />
-    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/register'" (click)="sidenavCloce();"> Register </a>
+    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/login'" (click)="sidenavCloce();"> Login </a>
 
     <hr *ngIf="this.isLoggedIn()" class="hr-style" />
     <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/advertisement/create'" (click)="sidenavCloce();"> Create Advertisement </a>

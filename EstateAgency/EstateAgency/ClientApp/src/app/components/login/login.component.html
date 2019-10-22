@@ -1,42 +1,56 @@
-<div class="medium-list">
-  <div class="list-viewer-wrapper">
-    <img id="login-img" class="login-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-    <div class="list-header-title">User Login</div>
-
-    <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && onLoginSubmit()" novalidate>
-      <div class="form-container">
-        <mat-form-field>
-          <input id="email"
-                 matInput
-                 formControlName="email"
-                 placeholder="Insert email..."
-                 autocomplete="email" />
-          <mat-error>
-            Please enter a valid email
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input id="password"
-                 matInput
-                 formControlName="password"
-                 placeholder="Insert password..."
-                 [type]="hidePassword ? 'password':'text'"
-                 autocomplete="password" />
-          <mat-icon matSuffix (click)="hidePassword = !hidePassword">
-            {{hidePassword ? 'visibility' : 'visibility_off'}}
-          </mat-icon>
-          <mat-error>
-            Please enter a valid password
-          </mat-error>
-        </mat-form-field>
-
-        <button mat-button type="submit" class="mat-raised-button mat-primary button-login">
-          Login
-        </button>
-        <button mat-button routerLink="/register" class="divider">Register</button>
+<div class="h-100 mt-3">
+  <div class="row justify-content-center align-items-center m-auto login-form">
+    <div class="card rounded shadow bg-white w-100">
+      <div class="card-body">
+        <img id="login-img" class="login-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <div class="list-header-title">User Login</div>
+        <div class="alert alert-danger" *ngIf="loginForm.errors?.login" role="alert">
+          {{loginForm.errors.login}}
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>E-mail</label>
+                <input type="email"
+                       class="form-control"
+                       name="email"
+                       required
+                       formControlName="email"
+                       placeholder="e-mail"
+                       [ngClass]="{'is-invalid':hasError('email')}"
+                       autocomplete="email">
+                <div *ngIf="hasError('email')" class="invalid-feedback">Please insert correct e-mail address</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password"
+                       formControlName="password"
+                       class="form-control"
+                       [ngClass]="{'is-invalid':hasError('password')}"
+                       placeholder="password"
+                       required
+                       autocomplete="password">
+                <div *ngIf="hasError('password')" class="invalid-feedback">Please insert correct password</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <input type="submit" class="btn btn-primary btn-lg btn-block mt-3" [disabled]="!loginForm.value.email || !loginForm.value.password" value="Sign in">
+            </div>
+          </div>
+        </form>
+        <hr />
+        Not a member yet ? <i> Create your account</i>
+        <div class="col-md-12 p-0 mt-3">
+          <button type="submit" class="btn btn-light btn-lg btn-block" value="Sign out" (click)="routeToRegister()">Sign out</button>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </div>
-

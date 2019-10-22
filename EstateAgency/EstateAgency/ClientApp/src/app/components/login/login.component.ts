@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginModel } from "./../../models/login.model";
-import { AuthService } from "./../../services/auth.service";
 
 @Component({
     selector: 'app-login',
@@ -11,9 +11,8 @@ import { AuthService } from "./../../services/auth.service";
 })
 export class LoginComponent implements OnInit {
 
-    user: LoginModel = new LoginModel();
     loginForm: FormGroup;
-    hidePassword: boolean = true;
+    user: LoginModel = new LoginModel();
 
     constructor(private router: Router,
         private fb: FormBuilder,
@@ -21,32 +20,54 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.createLoginForm();
+        if (this.authService.isLoggedIn()) {
+            this.router.navigate((['home']));
+        }
+        this.createForm();
     }
 
-    createLoginForm() {
+    createForm() {
         this.loginForm = this.fb.group({
-            "email": [this.user.email, [
+            email: [this.user.email, Validators.compose([
                 Validators.required,
-                Validators.email]],
+                Validators.pattern('^[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}$'),
+            ])],
+            password: [this.user.password, Validators.compose([
+                Validators.required,
+                Validators.minLength(8)
+            ])],
 
-            "password": [this.user.password, [
-                Validators.required,
-                Validators.minLength(6),
-                Validators.maxLength(30)]],
         });
     }
 
-    onLoginSubmit() {
-        var username = this.loginForm.value.email;
+    onSubmit() {
+        var email = this.loginForm.value.email;
         var password = this.loginForm.value.password;
 
-        this.authService.login(username, password).subscribe(res => {
-            alert("Login successful! ");
-            this.router.navigate(["home"]);
-        }, err => {
-                this.loginForm.setErrors({ "auth": "Incorrect username or password" });
+        this.authService.login(email, password).subscribe(res => {
+            if (res) {
+                this.authService.redirectTo ? this.router.navigate(([this.authService.redirectTo])) : this.router.navigate((['']));
+                this.authService.redirectTo = "";
+            } else {
+                this.loginForm.setErrors({ "login": "User login failed." });
+            }
+                
+        }, error => {
+                this.loginForm.setErrors({ "login": "User login failed." });
         });
+    }
+
+    getFormControl(name: string) {
+        return this.loginForm.get(name);
+    }
+
+    hasError(name: string) {
+        var e = this.getFormControl(name);
+        return e.touched && !e.valid;
+    }
+
+    routeToRegister() {
+        this.router.navigate(['/register']);
     }
 }
 

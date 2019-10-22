@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
-import { Router } from "@angular/router";
 import { ApiService } from '../../services/api.service';
 import { RegisterModel } from "./../../models/register.model";
-import { ErrorStateMatcher } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-register',
@@ -11,52 +11,65 @@ import { ErrorStateMatcher } from '@angular/material';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-    
-    user: RegisterModel = new RegisterModel();
-    registerForm: FormGroup;
-    hidePassword: boolean = true;
-    hidePasswordConfirm: boolean = true;
 
-    errorMatcher = new CrossFieldErrorMatcher();
+    registerForm: FormGroup;
+    user: RegisterModel = new RegisterModel();
 
     constructor(private router: Router,
         private fb: FormBuilder,
+        private authService: AuthService,
         private api: ApiService) {
     }
 
     ngOnInit() {
-        this.createRegisterForm();
+        if (this.authService.isLoggedIn()) {
+            this.router.navigate((['home']));
+        }
+        this.createForm();
     }
 
-    createRegisterForm() {
+    createForm() {
         this.registerForm = this.fb.group({
-            "name": [this.user.name, [
-                Validators.required]],
-
-            "email": [this.user.email, [
-                Validators.required,
-                Validators.email]],
-
-            "displayName": [this.user.password, [
+            name: [this.user.name, Validators.compose([
                 Validators.required,
                 Validators.minLength(2),
-                Validators.maxLength(20)]],
+                Validators.maxLength(20)
+            ])],
 
-            "password": [this.user.password, [
+            email: [this.user.email, Validators.compose([
                 Validators.required,
-                Validators.minLength(6),
-                Validators.maxLength(30)]],
+                Validators.pattern('^[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}$'),
+            ])],
 
-            "passwordConfirm": [this.user.passwordConfirm, [
+            displayName: [this.user.displayName, Validators.compose([
                 Validators.required,
-                Validators.minLength(6),
-                Validators.maxLength(30)]],
-        }, {
-                validator: this.passwordValidator
-        })
+                Validators.minLength(2),
+                Validators.maxLength(20)
+            ])],
+
+            password: [this.user.password, Validators.compose([
+                Validators.required,
+                Validators.pattern(/\d/),
+                Validators.pattern(/[A-Z]/),
+                Validators.pattern(/[a-z]/),
+                Validators.pattern(/[!@#$%^&*(),./]/),
+                Validators.minLength(8),
+            ])],
+
+            passwordConfirm: [this.user.passwordConfirm, Validators.compose([
+                Validators.required,
+            ])],
+        },
+        {
+            validator: this.mustMatch('password', 'passwordConfirm')
+        });
     }
 
-    onRegisterSubmit() {
+    get f() {
+        return this.registerForm.controls;
+    }
+
+    onSubmit() {
         var tempUser = <IUser>{};
         tempUser.username = this.registerForm.value.name;
         tempUser.email = this.registerForm.value.email;
@@ -73,19 +86,39 @@ export class RegisterComponent implements OnInit {
                 console.log("nie idało sie hehe");
             }
         }, error => {
+            this.registerForm.setErrors({ "register": "User registration failed." });
             console.log(error);
-            
         });
     }
 
-    passwordValidator(form: FormGroup) {
-        const condition = form.get('password').value !== form.get('passwordConfirm').value;
-        return condition ? { passwordsDoNotMatch: true } : null;
+    getFormControl(name: string) {
+        return this.registerForm.get(name);
+    }
+
+    hasError(name: string) {
+        var e = this.getFormControl(name);
+        return e.touched && !e.valid;
+    }
+
+    routeToLogin() {
+        this.router.navigate(['/login']);
+    }
+
+    mustMatch(controlName: string, matchingControlName: string) {
+        return (formGroup: FormGroup) => {
+            const control = formGroup.controls[controlName];
+            const matchingControl = formGroup.controls[matchingControlName];
+
+            if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+                return;
+            }
+
+            if (control.value !== matchingControl.value) {
+                matchingControl.setErrors({ mustMatch: true });
+            } else {
+                matchingControl.setErrors(null);
+            }
+        }
     }
 }
 
-class CrossFieldErrorMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | null): boolean {
-        return control.dirty && (form.errors !== null) && form.directives[4].touched;
-    }
-}

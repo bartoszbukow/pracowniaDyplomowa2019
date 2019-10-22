@@ -28,7 +28,7 @@ export class AuthResponseInterceptor implements HttpInterceptor {
                 if (error && error.status === 401) {
                     if (req.url.includes("token")) {
                         this.auth.logout();
-                        this.router.navigateByUrl('');
+                        this.router.navigateByUrl('login');
                     }
 
                     if (this.refreshTokenInProgress) {

@@ -15,7 +15,7 @@ export class NavMenuComponent {
 
     logout(): boolean {
         if (this.auth.logout()) {
-            this.router.navigate([""]);
+            this.router.navigate(["home"]);
         }
         return false;
     }
