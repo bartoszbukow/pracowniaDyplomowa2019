@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace EstateAgency.ViewModels
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class ReservationViewModel : Controller
+    public class ReservationViewModel 
     {
         #region Constructor 
         

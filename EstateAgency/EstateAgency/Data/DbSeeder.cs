@@ -141,7 +141,7 @@ namespace EstateAgency.Data
             var num = 47;
             for (int i = 1; i <= num; i++)
             {
-                CreateSampleAdvertisement(dbContext, i, authorId, 3, 3, createdDate.AddDays(-num));
+                CreateSampleAdvertisement(dbContext, i, authorId, 3, 3, 3, createdDate.AddDays(-num));
             }
 #endif
             // create 3 more advertisements with better descriptive data
@@ -190,7 +190,7 @@ namespace EstateAgency.Data
 
         #region Utility Methods 
         private static void CreateSampleAdvertisement(
-            ApplicationDbContext dbContext, int num, string authorId, int numberOfAdvertisementHistory, int numberOfReservations, DateTime createdDate)
+            ApplicationDbContext dbContext, int num, string authorId, int numberOfAdvertisementHistory, int numberOfReservations, int numberOfImages, DateTime createdDate)
         {
             var advertisement = new Advertisement()
             {
@@ -231,6 +231,15 @@ namespace EstateAgency.Data
                     ReservationFrom = createdDate
                 });
 
+            }
+
+            for (int i = 1; i <= numberOfImages; i++)
+            {
+                dbContext.Images.Add(new Image()
+                {
+                    AdvertisementId = advertisement.Id,
+                    Path = $"images/{i}.jpg"
+                });
             }
             dbContext.SaveChanges();
         }

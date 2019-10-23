@@ -47,6 +47,9 @@ namespace EstateAgency.Data
             modelBuilder.Entity<Token>().Property(i => i.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Token>().HasOne(i => i.User).WithMany(u => u.Tokens);
 
+            modelBuilder.Entity<Image>().ToTable("Images");
+            modelBuilder.Entity<Image>().Property(i => i.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Image>().HasOne(i => i.Advertisement).WithMany(u => u.Images);
         }
 
         #endregion Methods
@@ -57,6 +60,7 @@ namespace EstateAgency.Data
         public DbSet<AdvertisementHistory> AdvertisementHistorys { get; set; }  
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Token> Tokens { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         #endregion Properties
     }

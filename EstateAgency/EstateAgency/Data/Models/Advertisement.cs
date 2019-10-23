@@ -41,6 +41,7 @@ namespace EstateAgency.Data.Models
         public virtual ApplicationUser User { get; set; }
         public virtual List<AdvertisementHistory> AdvertisementHistorys { get; set; }
         public virtual List<Reservation> Reservations { get; set; }
+        public virtual List<Image> Images { get; set; }
 
         #endregion
 
