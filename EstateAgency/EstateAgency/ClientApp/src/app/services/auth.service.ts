@@ -1,9 +1,8 @@
-import { EventEmitter, Inject, Injectable, PLATFORM_ID } from "@angular/core";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map, catchError } from 'rxjs/operators';
-
+import { ApiService } from './api.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,24 +12,32 @@ export class AuthService {
     clientId: string = "TestMakerFree";
     redirectTo: string = "";
 
-    constructor(private http: HttpClient,
-        @Inject(PLATFORM_ID) private platformId: any) { }
+    constructor(@Inject(PLATFORM_ID) private platformId: any,
+        private api: ApiService) { }
 
     // performs the login
     login(username: string, password: string): Observable<any> {
-        var url = "api/token/auth";
         var data = {
             username: username,
             password: password,
-            client_id: this.clientId,
+            clientId: this.clientId,
             grant_type: "password",
             scope: "offline_access profile email"
         };
-        return this.getAuthFromServer(url, data);
+        return this.getAuthFromServer(data);
     }
 
-    getAuthFromServer(url: string, data: any): Observable<any> {
-        return this.http.post<ITokenResponse>(url, data)
+    refreshToken(): Observable<boolean> {
+        var data = {
+            clientId: this.clientId,
+            grant_type: "refresh_token",
+            refresh_token: this.getAuth()!.refresh_token,
+        };
+        return this.getAuthFromServer(data);
+    }
+
+    getAuthFromServer(data: any): Observable<any> {
+        return this.api.postAuthFromServer(data)
             .pipe(map((res) => {
                 let token = res && res.token;
                 if (token) {
@@ -49,7 +56,7 @@ export class AuthService {
         return true;
     }
 
-    setAuth(auth: TokenResponse | null): boolean {
+    setAuth(auth: ITokenResponse | null): boolean {
         if (isPlatformBrowser(this.platformId)) {
             if (auth) {
                 localStorage.setItem(this.authKey, JSON.stringify(auth));
@@ -60,7 +67,7 @@ export class AuthService {
         return true;
     }
 
-    getAuth(): TokenResponse | null {
+    getAuth(): ITokenResponse | null {
         if (isPlatformBrowser(this.platformId)) {
             var i = localStorage.getItem(this.authKey);
             if (i) { return JSON.parse(i); }
@@ -75,4 +82,17 @@ export class AuthService {
         return false;
     }
 
+    isAdmin() {
+        let token = this.getAuth().token;
+        let tokenData = token.split('.')[1];
+        let decodedTokenJsonData = window.atob(tokenData);
+        let decodedTokenData = JSON.parse(decodedTokenJsonData);
+
+        for (let role of decodedTokenData.roles) {
+            if (role === "Administrator") {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -1,11 +1,14 @@
-@media (max-width: 767px) {
-  .body-content {
-    padding-top: 50px;
-  }
+.title {
+  margin-left: 10px;
+  outline: none;
+  cursor: pointer;
 }
-
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1340px;
-  }
+.hamburger-menu {
+  outline: none;
+}
+.user-menu {
+  outline: none;
+  position: absolute;
+  right: 0;
+  margin-right: 15px;
 }

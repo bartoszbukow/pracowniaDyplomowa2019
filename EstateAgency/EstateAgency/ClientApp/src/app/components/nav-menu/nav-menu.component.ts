@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from "@angular/router";
 
@@ -8,26 +8,23 @@ import { Router } from "@angular/router";
     styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-    isExpanded = false;
+
+    @Output() sidenavToggle = new EventEmitter();
 
     constructor(public auth: AuthService, private router: Router) { }
 
-    collapse() {
-        this.isExpanded = false;
-    }
-
-    toggle() {
-        this.isExpanded = !this.isExpanded;
-    }
-
     logout(): boolean {
         if (this.auth.logout()) {
-            this.router.navigate([""]);
+            this.router.navigate(["home"]);
         }
         return false;
     }
 
     isLoggedIn(): boolean {
         return this.auth.isLoggedIn();
+    }
+
+    sidenavCloce() {
+        this.sidenavToggle.next();
     }
 }

@@ -11,6 +11,14 @@ export class ApiService {
         this.url = baseUrl;
     }
 
+    postRegisterUser(user) {
+        return this.http.post<IUser>(this.url + "api/user", user);
+    }
+
+    postAuthFromServer(data) {
+        return this.http.post<ITokenResponse>(this.url + "api/token/auth", data);
+    }
+
     getAdvertisementList() {
         return this.http.get<IAdvertisement[]>(this.url + "api/advertisement/Latest/10");
     }

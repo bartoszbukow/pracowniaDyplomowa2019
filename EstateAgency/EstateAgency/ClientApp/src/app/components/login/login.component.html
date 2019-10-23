@@ -1,34 +1,56 @@
-<div class="login-container">
-  <img id="login-img" class="login-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-  <h2 class="login-title">{{title}}</h2>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
-    <div *ngIf="form.errors?.auth" class="error-panel help-block">
-      {{form.errors.auth}}
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error has-feedback' : hasError('Username') }">
-      <input type="text" required formControlName="Username" class="form-control" placeholder="Username or Email address" />
-      <span *ngIf="hasError('Username')" class="glyphicon glyphicon-remove form-control feedback" aria-hidden="true"></span>
-      <div *ngIf="hasError('Username')" class="help-block">
-        Please insert a valid username or e-mail address.
+<div class="h-100 mt-3">
+  <div class="row justify-content-center align-items-center m-auto login-form">
+    <div class="card rounded shadow bg-white w-100">
+      <div class="card-body">
+        <img id="login-img" class="login-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <div class="list-header-title">User Login</div>
+        <div class="alert alert-danger" *ngIf="loginForm.errors?.login" role="alert">
+          {{loginForm.errors.login}}
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>E-mail</label>
+                <input type="email"
+                       class="form-control"
+                       name="email"
+                       required
+                       formControlName="email"
+                       placeholder="e-mail"
+                       [ngClass]="{'is-invalid':hasError('email')}"
+                       autocomplete="email">
+                <div *ngIf="hasError('email')" class="invalid-feedback">Please insert correct e-mail address</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password"
+                       formControlName="password"
+                       class="form-control"
+                       [ngClass]="{'is-invalid':hasError('password')}"
+                       placeholder="password"
+                       required
+                       autocomplete="password">
+                <div *ngIf="hasError('password')" class="invalid-feedback">Please insert correct password</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <input type="submit" class="btn btn-primary btn-lg btn-block mt-3" [disabled]="!loginForm.value.email || !loginForm.value.password" value="Sign in">
+            </div>
+          </div>
+        </form>
+        <hr />
+        Not a member yet ? <i> Create your account</i>
+        <div class="col-md-12 p-0 mt-3">
+          <button type="submit" class="btn btn-light btn-lg btn-block" value="Sign out" (click)="routeToRegister()">Sign out</button>
+        </div>
       </div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error has-feedback' : hasError('Password') }">
-      <input type="password" required formControlName="Password" class="form-control" placeholder="Password" />
-      <span *ngIf="hasError('Password')" class="glyphicon glyphicon-remove form-control feedback" aria-hidden="true"></span>
-      <div *ngIf="hasError('Password')" class="help-block">
-        Please insert a password.
-      </div>
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember" value="remember" />Remember me</label>
-    </div>
-    <button type="submit" [disabled]="form.invalid" class="btn btn-md btn-success btn-block btn-signin">
-      Sign in
-    </button>
-  </form>
-  <div class="login-link">
-    <a href="#">
-      Forgot the password?
-    </a>
   </div>
-</div> 
+</div>

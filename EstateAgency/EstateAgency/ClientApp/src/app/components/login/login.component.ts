@@ -1,7 +1,8 @@
-import { Component, Inject, OnInit} from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LoginModel } from "./../../models/login.model";
 
 @Component({
     selector: 'app-login',
@@ -10,65 +11,65 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-    title: string;
-    form: FormGroup;
+    loginForm: FormGroup;
+    user: LoginModel = new LoginModel();
 
-    constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, @Inject('BASE_URL') private baseUrl: string) {
-        this.title = "User Login";
-        // initialize the form
-        this.createForm();
+    constructor(private router: Router,
+        private fb: FormBuilder,
+        private authService: AuthService) {
     }
 
     ngOnInit() {
-
+        if (this.authService.isLoggedIn()) {
+            this.router.navigate((['home']));
+        }
+        this.createForm();
     }
 
     createForm() {
-        this.form = this.fb.group({
-            Username: ['', Validators.required],
-            Password: ['', Validators.required]
+        this.loginForm = this.fb.group({
+            email: [this.user.email, Validators.compose([
+                Validators.required,
+                Validators.pattern('^[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}$'),
+            ])],
+            password: [this.user.password, Validators.compose([
+                Validators.required,
+                Validators.minLength(8)
+            ])],
+
         });
     }
 
     onSubmit() {
-        var url = this.baseUrl + "api/token/auth";
-        var username = this.form.value.Username;
-        var password = this.form.value.Password;
+        var email = this.loginForm.value.email;
+        var password = this.loginForm.value.password;
 
-        this.authService.login(username, password).subscribe(res => {
-            // login successful
-            // outputs the login info through a JS alert.
-            // IMPORTANT: remove this when test is done.
-            alert("Login successful! " + "USERNAME: " + username + " TOKEN: " + this.authService.getAuth()!.token);
-            this.router.navigate(["home"]);
-        }, err => {
-            this.form.setErrors({ "auth": "Incorrect username or password" });
+        this.authService.login(email, password).subscribe(res => {
+            if (res) {
+                this.authService.redirectTo ? this.router.navigate(([this.authService.redirectTo])) : this.router.navigate((['']));
+                this.authService.redirectTo = "";
+            } else {
+                this.loginForm.setErrors({ "login": "User login failed." });
+            }
+                
+        }, error => {
+                this.loginForm.setErrors({ "login": "User login failed." });
         });
     }
 
-    onBack() {
-        this.router.navigate(["home"]);
-    }
-
-    // retrieve a FormControl
     getFormControl(name: string) {
-        return this.form.get(name);
+        return this.loginForm.get(name);
     }
 
-    // returns TRUE if the FormControl is valid
-    isValid(name: string) {
-        var e = this.getFormControl(name); return e && e.valid;
-    }
-
-    // returns TRUE if the FormControl has been changed
-    isChanged(name: string) {
-        var e = this.getFormControl(name);
-        return e && (e.dirty || e.touched);
-    }
-
-    // returns TRUE if the FormControl is invalid after user changes
     hasError(name: string) {
         var e = this.getFormControl(name);
-        return e && (e.dirty || e.touched) && !e.valid;
+        return e.touched && !e.valid;
+    }
+
+    routeToRegister() {
+        this.router.navigate(['/register']);
     }
 }
+
+
+

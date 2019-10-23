@@ -15,6 +15,11 @@ import { AdvertisementEditComponent } from './components/advertisement/advertise
 import { AuthService } from './services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { AuthResponseInterceptor } from './services/auth.response.interceptor';
+import { RegisterComponent } from './components/register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import { SearchComponent } from './components/home/search/search.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +30,9 @@ import { AuthInterceptor } from './services/auth.interceptor';
         AdvertisementComponent,
         LoginComponent,
         PageNotFoundComponent,
-        AdvertisementEditComponent
+        AdvertisementEditComponent,
+        RegisterComponent,
+        SearchComponent
     ],
     entryComponents: [],
     imports: [
@@ -33,13 +40,37 @@ import { AuthInterceptor } from './services/auth.interceptor';
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule
+    ],
+    exports: [
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule
     ],
     providers: [
         AuthService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthResponseInterceptor,
             multi: true
         },
         ApiService

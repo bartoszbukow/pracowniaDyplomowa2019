@@ -5,6 +5,7 @@ import { AdvertisementComponent } from './components/advertisement/advertisement
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AdvertisementEditComponent } from './components/advertisement/advertisement-edit/advertisement-edit.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
     { path: 'advertisement/edit/:id', component: AdvertisementEditComponent },
     { path: 'advertisement/:id', component: AdvertisementComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
     { path: '**', component: PageNotFoundComponent }
 ];
 

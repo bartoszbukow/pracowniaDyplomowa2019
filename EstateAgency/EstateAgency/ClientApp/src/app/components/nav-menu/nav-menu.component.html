@@ -1,27 +1,18 @@
-<header>
-  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
-    <div class="container">
-      <a class="navbar-brand" [routerLink]='["/"]'>EstateAgency</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
-        <ul class="navbar-nav flex-grow">
-          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
-          </li>
-          <li *ngIf="!this.isLoggedIn()" class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/login"]'>Login</a>
-          </li>
-          <li *ngIf="this.isLoggedIn()" class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/advertisement/create"]'>Create Advertisement</a>
-          </li>
-          <li *ngIf="this.isLoggedIn()" class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" (click)="logout()">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
+<nav>
+  <mat-nav-list class="min-width-menu">
+    <a mat-list-item [routerLink]="'/'" (click)="sidenavCloce();"> Home </a>
+
+    <hr *ngIf="!this.isLoggedIn()" class="hr-style" />
+    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/register'" (click)="sidenavCloce();"> Register </a>
+
+    <hr *ngIf="!this.isLoggedIn()" class="hr-style" />
+    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/login'" (click)="sidenavCloce();"> Login </a>
+
+    <hr *ngIf="this.isLoggedIn()" class="hr-style" />
+    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/advertisement/create'" (click)="sidenavCloce();"> Create Advertisement </a>
+
+    <hr *ngIf="this.isLoggedIn()" class="hr-style" />
+    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/'" (click)="logout(); sidenavCloce();"> Logout </a>
+
+  </mat-nav-list>
+</nav>

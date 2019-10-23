@@ -5,11 +5,9 @@
   background-color: #dddddd;
   width: 300px;
 }
-
-  .advertisement * {
-    vertical-align: middle;
-  }
-
-  .advertisement ul li {
-    padding: 5px 0;
-  }
+.advertisement * {
+  vertical-align: middle;
+}
+.advertisement ul li {
+  padding: 5px 0;
+}
