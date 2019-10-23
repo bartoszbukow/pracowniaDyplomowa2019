@@ -14,10 +14,20 @@ app-advertisement-list.byTitle {
 app-advertisement-list.random {
   background-color: #d0d0d0;
 }
-.example-card {
-  max-width: 400px;
-}
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+.jumbotron-witch-search {
+  border-radius: 0;
+  background-color: none !important;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
+  background-image: url('src/assets/images/estateAgency.jpg');
+  color: white;
+}
+.jumbotron {
+  padding: 2rem 1rem 1rem 1rem !important;
+}
+@media (min-width: 576px) {
+  .jumbotron {
+    padding: 4rem 2rem 2rem 2rem !important;
+  }
 }

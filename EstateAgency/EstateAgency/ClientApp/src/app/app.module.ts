@@ -19,6 +19,7 @@ import { AuthResponseInterceptor } from './services/auth.response.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import { SearchComponent } from './components/home/search/search.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatBu
         LoginComponent,
         PageNotFoundComponent,
         AdvertisementEditComponent,
-        RegisterComponent
+        RegisterComponent,
+        SearchComponent
     ],
     entryComponents: [],
     imports: [
