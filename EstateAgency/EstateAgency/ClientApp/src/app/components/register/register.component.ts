@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         var tempUser = <IUser>{};
-        tempUser.username = this.registerForm.value.name;
+        tempUser.userName = this.registerForm.value.name;
         tempUser.email = this.registerForm.value.email;
         tempUser.password = this.registerForm.value.password;
         tempUser.displayName = this.registerForm.value.displayName;
@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
         this.api.postRegisterUser(tempUser).subscribe(res => {
             if (res) {
                 var v = res;
-                console.log("User " + v.username + " has been created.");
+                console.log("User " + v.userName + " has been created.");
                 this.router.navigate(["login"]);
             } else {
                 this.registerForm.setErrors({ "register": "User registration failed." });

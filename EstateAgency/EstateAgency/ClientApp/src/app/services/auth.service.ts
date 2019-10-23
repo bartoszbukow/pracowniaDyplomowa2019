@@ -20,7 +20,7 @@ export class AuthService {
         var data = {
             username: username,
             password: password,
-            clientId: this.clientId,
+            client_id: this.clientId,
             grant_type: "password",
             scope: "offline_access profile email"
         };
@@ -29,7 +29,7 @@ export class AuthService {
 
     refreshToken(): Observable<boolean> {
         var data = {
-            clientId: this.clientId,
+            client_id: this.clientId,
             grant_type: "refresh_token",
             refresh_token: this.getAuth()!.refresh_token,
         };

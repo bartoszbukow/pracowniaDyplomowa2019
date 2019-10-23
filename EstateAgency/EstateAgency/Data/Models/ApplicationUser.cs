@@ -38,6 +38,7 @@ namespace EstateAgency.Data.Models
 
         public virtual List<Advertisement> Advertisements { get; set; }
         public virtual List<Reservation> Reservations { get; set; }
+        public virtual List<Token> Tokens { get; set; }
 
         #endregion
     }
