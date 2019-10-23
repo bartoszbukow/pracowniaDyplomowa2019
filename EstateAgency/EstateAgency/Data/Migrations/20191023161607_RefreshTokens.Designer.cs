@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstateAgency.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191019073619_RefreshTokens")]
+    [Migration("20191023161607_RefreshTokens")]
     partial class RefreshTokens
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

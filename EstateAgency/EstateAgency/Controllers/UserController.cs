@@ -28,10 +28,10 @@ namespace EstateAgency.Controllers
         {
             if (model == null) return new StatusCodeResult(500);
             ApplicationUser user = await UserManager.FindByNameAsync(model.UserName);
-            
+
             if (user != null) return BadRequest("Username already exists");
             user = await UserManager.FindByEmailAsync(model.Email);
-            
+
             if (user != null) return BadRequest("Email already exists.");
             var now = DateTime.Now;
 
@@ -47,15 +47,15 @@ namespace EstateAgency.Controllers
 
             await UserManager.CreateAsync(user, model.Password);
             await UserManager.AddToRoleAsync(user, "RegisteredUser");
-            
+
             user.EmailConfirmed = true;
             user.LockoutEnabled = false;
-           
+
             DbContext.SaveChanges();
             return Json(user.Adapt<UserViewModel>(), JsonSettings);
         }
         #endregion
     }
-} 
-   
+}
+
 

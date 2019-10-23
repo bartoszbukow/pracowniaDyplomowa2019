@@ -44,7 +44,7 @@ namespace EstateAgency.Data
             modelBuilder.Entity<AdvertisementHistory>().HasOne(i => i.Advertisement).WithMany(u => u.AdvertisementHistorys);
 
             modelBuilder.Entity<Token>().ToTable("Tokens"); 
-            modelBuilder.Entity<Token>().Property(i => i.Id).ValueGeneratedOnAdd(); 
+            modelBuilder.Entity<Token>().Property(i => i.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Token>().HasOne(i => i.User).WithMany(u => u.Tokens);
 
         }

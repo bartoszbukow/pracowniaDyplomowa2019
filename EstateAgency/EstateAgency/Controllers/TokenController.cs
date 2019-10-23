@@ -122,17 +122,18 @@ namespace EstateAgency.Controllers
             };
         }
 
-        private TokenResponseViewModel CreateAccessToken(string userId, string refresh_token)
+        private TokenResponseViewModel CreateAccessToken(string userId, string refreshToken)
         {
             DateTime now = DateTime.UtcNow;
             var claims = new[] {
-                new Claim(JwtRegisteredClaimNames.Sub, userId),
-                new Claim(JwtRegisteredClaimNames.Jti,
-                Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat,
-                new DateTimeOffset(now).ToUnixTimeSeconds().ToString())     
-                // TODO: add additional claims here  
-            };
+                 new Claim(JwtRegisteredClaimNames.Sub, userId),
+                 new Claim(JwtRegisteredClaimNames.Jti,
+                 Guid.NewGuid().ToString()),
+                 new Claim(JwtRegisteredClaimNames.Iat,
+                 new DateTimeOffset(now).ToUnixTimeSeconds().ToString())   
+                 // TODO: add additional claims here   
+             };
+
             var tokenExpirationMins = Configuration.GetValue<int>("Auth:Jwt:TokenExpirationInMinutes");
             var issuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Auth:Jwt:Key"]));
             var token = new JwtSecurityToken(issuer: Configuration["Auth:Jwt:Issuer"],
@@ -147,13 +148,11 @@ namespace EstateAgency.Controllers
             {
                 token = encodedToken,
                 expiration = tokenExpirationMins,
-                refresh_token = refresh_token
+                refresh_token = refreshToken
             };
         }
 
-
     }
-
 }
 
 
