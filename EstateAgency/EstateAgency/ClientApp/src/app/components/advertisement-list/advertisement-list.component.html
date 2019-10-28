@@ -1,9 +1,40 @@
-<h2>{{title}}</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-4 advertisement-box" *ngFor="let advertisement of advertisements" [class.selected]="advertisement === selectedAdvertisement" (click)="onSelect(advertisement)">
+      <div class="card mb-4 shadow-sm card-box">
+        <div class="photo-box">
+          <img class="bd-placeholder-img card-img-top photo-box__area"
+               src="{{this.url}}{{advertisement.images[0].path}}"
+               alt="image"
+               preserveAspectRatio="xMidYMid slice"
+               focusable="false"
+               role="img"
+               aria-label="Placeholder: Thumbnail" />
+        </div>
+        <div class="card-body data-box">
+          <div class="card-text row data-box__area">
+            <div class="col-6">
+              <span class="data-box__city">{{advertisement.city}}</span>
+              <span class="data-box__address">{{advertisement.address}}</span>
+            </div>
+            <div class="col-6">
+              <span class="data-box__price">{{advertisement.price}} PLN</span>
+              <span class="data-box__yardage">{{advertisement.yardage}} m2</span>
+            </div>
+            <div class="col-12 pt-2">
+              <span class="data-box__title">{{advertisement.title}}</span>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center pt-3 pb-2 button-box">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary button-box__details">SZCZEGÓŁY OFERTY</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary button-box__edit">EDYCJA</button>
+            </div>
+          </div>
+          <p class="card-text"><small class="text-muted">Ostatnia aktualizacja: {{advertisement.lastModifiedDate}}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<ul class="advertisements">
-  <li *ngFor="let advertisement of advertisements" [class.selected]="advertisement === selectedAdvertisement" (click)="onSelect(advertisement)">
-    <span>{{advertisement.title}}</span>
-  </li>
-</ul>
-
-<!--<app-advertisement *ngIf="selectedAdvertisement" [advertisement]="selectedAdvertisement"></app-advertisement>-->

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using EstateAgency.Data.Models;
 using Newtonsoft.Json;
 
 namespace EstateAgency.ViewModels
@@ -51,6 +52,21 @@ namespace EstateAgency.ViewModels
         [JsonProperty("type")]
         [DefaultValue(0)] 
         public int Type { get; set; } // typ - czy aktywne?
+
+        [JsonProperty("city")]
+        public string City { get; set; }
+
+        [JsonProperty("address")]
+        public string Address { get; set; }
+
+        [JsonProperty("numberOfRoom")]
+        public int NumberOfRoom { get; set; }
+
+        [JsonProperty("rent")]
+        public int? Rent { get; set; }
+
+        [JsonProperty("images")]
+        public virtual List<ImageViewModel> Images { get; set; }
 
         #endregion
     }

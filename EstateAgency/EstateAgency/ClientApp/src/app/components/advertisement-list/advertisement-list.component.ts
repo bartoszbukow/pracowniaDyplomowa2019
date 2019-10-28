@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router } from "@angular/router";
 
@@ -11,23 +11,26 @@ export class AdvertisementListComponent implements OnInit {
     title: string;
     selectedAdvertisement: IAdvertisement;
     advertisements: IAdvertisement[];
+    url: string;
 
     constructor(private api: ApiService,
-      private router: Router) {
-
+        private router: Router,
+        @Inject('BASE_URL') baseUrl: string)
+    {
+        this.url = baseUrl;
     }
 
-    onSelect(quiz: IAdvertisement) {
-        this.selectedAdvertisement = quiz;
-        console.log("advertisement with Id " + this.selectedAdvertisement.id + " has been selected.");
-        this.router.navigate(["advertisement", this.selectedAdvertisement.id]); 
+    onSelect(advertisement: IAdvertisement) {
+        this.selectedAdvertisement = advertisement;
+        this.router.navigate(["advertisement", this.selectedAdvertisement.id]);
     }
 
     ngOnInit() {
         this.title = "Latest Advertisements";
-        this.api.getAdvertisementList().subscribe(res =>
-            this.advertisements = res
-        );
+        this.api.getAdvertisementList().subscribe(res => {
+            this.advertisements = res;
+            console.log(res)
+        });
     }
 
 }

@@ -144,46 +144,6 @@ namespace EstateAgency.Data
                 CreateSampleAdvertisement(dbContext, i, authorId, 3, 3, 3, createdDate.AddDays(-num));
             }
 #endif
-            // create 3 more advertisements with better descriptive data
-            // (we'll add the advertisements, advertisementHistorys & reservations later on)
-
-            EntityEntry<Advertisement> e1 = dbContext.Advertisements.Add(new Advertisement()
-            {
-                UserId = authorId,
-                Title = "Are you more Light or Dark side of the Force?",
-                Description = "Star Wars personality test",
-                Price = 23332,
-                Yardage = 23,
-                Category = "Mieszkania",
-                CreatedDate = createdDate,
-                LastModifiedDate = lastModifiedDate
-
-            });
-
-            EntityEntry<Advertisement> e2 = dbContext.Advertisements.Add(new Advertisement()
-            {
-                UserId = authorId,
-                Title = "GenX, GenY or Genz?",
-                Description = "Find out what decade most represents you",
-                Price = 232,
-                Yardage = 22,
-                Category = "Domy",
-                CreatedDate = createdDate,
-                LastModifiedDate = lastModifiedDate
-            });
-
-            EntityEntry<Advertisement> e3 = dbContext.Advertisements.Add(new Advertisement()
-            {
-                UserId = authorId,
-                Title = "Which Shingeki No Kyojin character are you?",
-                Description = "Attack On Titan personality test",
-                Price = 2131,
-                Yardage = 11,
-                Category = "Mieszkania",
-                CreatedDate = createdDate,
-                LastModifiedDate = lastModifiedDate
-            });
-            // persist the changes on the Database
             dbContext.SaveChanges();
         }
         #endregion
@@ -195,14 +155,17 @@ namespace EstateAgency.Data
             var advertisement = new Advertisement()
             {
                 UserId = authorId,
-                Title = $"Quiz {num} Title",
+                Title = $"Piękne mieszkanie numer {num} w centrum Olsztyna!",
                 Description = $"This is a sample description for advertisement {num}.",
                 Price = 2131,
                 Yardage = 11,
                 Category = "Domy",
                 CreatedDate = createdDate,
-                LastModifiedDate = createdDate
-
+                LastModifiedDate = createdDate,
+                City = "Olsztyn",
+                Address = "Barcza 44/39",
+                NumberOfRoom = 3,
+                Rent = 1500
             };
             dbContext.Advertisements.Add(advertisement);
             dbContext.SaveChanges();

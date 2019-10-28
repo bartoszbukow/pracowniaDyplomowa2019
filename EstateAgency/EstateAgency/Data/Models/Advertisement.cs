@@ -25,13 +25,17 @@ namespace EstateAgency.Data.Models
         [Key][Required] public string Id { get; set; }
         [Required] public string Title { get; set; }
         public string Description { get; set; }
-        public double Price { get; set; }
+        public double? Price { get; set; }
         public double Yardage { get; set; }
         public string Category { get; set; }
         [Required] public string UserId { get; set; }
         [Required] public DateTime CreatedDate { get; set; }
         [Required] public DateTime LastModifiedDate { get; set; }
         [DefaultValue(0)] public int Type { get; set; }
+        public string City { get; set; }
+        public string Address { get; set; }
+        public int NumberOfRoom { get; set; }
+        public int? Rent { get; set; }
 
         #endregion
 

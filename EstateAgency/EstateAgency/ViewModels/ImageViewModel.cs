@@ -23,6 +23,7 @@ namespace EstateAgency.ViewModels
         [JsonProperty("id")]
         public string Id { get; set; }
 
+        [JsonIgnore]
         [JsonProperty("advertisementId")]
         public string AdvertisementId { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using EstateAgency.Data;
@@ -48,6 +49,14 @@ namespace EstateAgency.Controllers
                 {
                     Error = $"Advertisement ID {id} has not been found"
                 });
+            }
+
+            foreach (var image in _dbContext.Images)
+            {
+                if (image.AdvertisementId == id)
+                {
+                    advertisement.Images.Add(image);
+                }
             }
 
             return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
@@ -130,6 +139,17 @@ namespace EstateAgency.Controllers
         public IActionResult Latest(int num = 10)
         {
             var latest = _dbContext.Advertisements.OrderByDescending(q => q.CreatedDate).Take(num).ToArray();
+
+            foreach(var advertisement in latest)
+            {
+                foreach (var image in _dbContext.Images)
+                {
+                    if (image.AdvertisementId == advertisement.Id)
+                    {
+                        advertisement.Images.Add(image);
+                    }
+                }
+            }
 
             return new JsonResult(latest.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }

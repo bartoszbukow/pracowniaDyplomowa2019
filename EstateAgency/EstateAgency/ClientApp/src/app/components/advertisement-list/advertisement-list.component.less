@@ -1,9 +1,82 @@
-ul.advertisement li {
-  color: #000acb;
-  cursor: pointer;
+.container {
+  max-width: 81%;
+
+  .advertisement-box {
+    .card-box {
+      border-radius: 0;
+      background-color: #FFFFFF;
+      border: solid #D5DBE0 1px;
+
+      .photo-box {
+
+        .card-img-top {
+          border-radius: 0;
+        }
+
+        .photo-box__area {
+          width: 100%;
+
+          img {
+            height: 225px;
+            width: auto;
+            max-width: 100%;
+          }
+        }
+      }
+
+      .data-box {
+        .data-box__area {
+          .data-box__city {
+            width: 100%;
+            float: left;
+            font-weight: 700;
+            font-size: 1.2rem;
+          }
+
+          .data-box__price {
+            width: 100%;
+            float: right;
+            text-align: right;
+            font-weight: 700;
+            font-size: 1.2rem;
+          }
+
+          .data-box__address {
+            width: 100%;
+            float: left;
+          }
+
+          .data-box__yardage {
+            width: 100%;
+            float: right;
+            text-align: right;
+          }
+
+          .data-box__title {
+            width: 100%;
+          }
+        }
+
+        .button-box {
+          .button-box__details {
+            border-radius: 0;
+          }
+
+          .button-box__edit {
+            border-radius: 0;
+          }
+        }
+      }
+    }
+  }
 }
 
-  ul.advertisement li.selected {
-    background-color: #cccccc;
+@media (max-width: 980px) {
+  .container {
+    max-width: 92%;
   }
+}
+
+
+
 
