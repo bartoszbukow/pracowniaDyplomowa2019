@@ -1,128 +1,69 @@
-.advertisement-box {
+.backToMainPage {
   max-width: 81%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 30px auto 0 auto;
 
-  .card-box {
-    border-radius: 0;
-    background-color: #FFFFFF;
-    border: solid #D5DBE0 1px;
-    width: 100%;
-    height: 500px;
+  .button-box {
+    width: 140px;
+    height: 40px;
 
-    .slider-box {
-      width: calc(~"100% - 400px");
-      display: inline-block;
+    button {
+      width: 100%;
       height: 100%;
-      background-color: #D5DBE0;
+      border-radius: 0;
+      color: #292929;
+      border: solid #D5DBE0 1px;
 
-      .carousel {
-        width: 100%;
+      .button-box__text {
+        margin-left: 5px;
+        font-size: 17px;
+      }
+    }
+
+    button:hover {
+      color: #fff;
+    }
+  }
+}
+
+  .advertisement-box {
+    margin-top: 20px;
+    max-width: 81%;
+    margin-left: auto;
+    margin-right: auto;
+
+    .card-box {
+      border-radius: 0;
+      background-color: #FFFFFF;
+      border: solid #D5DBE0 1px;
+      width: 100%;
+      height: 500px;
+
+      .slider-box {
+        width: calc(~"100% - 400px");
+        display: inline-block;
         height: 100%;
+        background-color: #D5DBE0;
 
-        .carousel-inner {
+        .carousel {
+          width: 100%;
           height: 100%;
 
-          .carousel-item {
+          .carousel-inner {
             height: 100%;
 
-            .photo {
-              display: block;
-              width: auto;
-              height: 100%;
-              margin-right: auto;
-              margin-left: auto;
-
-              img {
-                min-width: 100%;
-              }
-            }
-          }
-        }
-
-        .button {
-          background: none;
-          color: inherit;
-          border: none;
-          padding: 0;
-          font: inherit;
-          cursor: pointer;
-          outline: inherit;
-        }
-      }
-    }
-
-    .data-box {
-      width: 400px;
-      display: inline-block;
-      float: right;
-      height: 100%;
-      padding: 30px;
-
-      .data-box__header {
-
-        .price {
-          font-size: 32px;
-          font-weight: 700;
-        }
-
-        .address {
-          font-size: 30px;
-          font-weight: 700;
-          color: #292929;
-          line-height: 1.25;
-          margin: 0.6em 0 0;
-        }
-
-        .additional-data {
-          width: 100%;
-          margin-top: 30px;
-
-          ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-          }
-
-          li {
-            padding: 10px 0;
-            border-top: solid #D5DBE0 1px;
-          }
-
-          li:last-child {
-            border-bottom: solid #D5DBE0 1px;
-          }
-
-          .additional-data__city {
-            float: right;
-            font-weight: 700;
-          }
-        }
-      }
-    }
-  }
-}
-
-
-@media (max-width: 980px) {
-  .advertisement-box {
-    max-width: 92%;
-  }
-}
-
-@media (max-width: 767px) {
-  .advertisement-box {
-    .card-box {
-      height: auto;
-      .slider-box {
-        width: 100%;
-        height: auto;
-        .carousel {
-          .carousel-inner {
             .carousel-item {
+              height: 100%;
+
               .photo {
-                width: 100%;
-                height: auto;
+                display: block;
+                width: auto;
+                height: 100%;
+                margin-right: auto;
+                margin-left: auto;
+
+                img {
+                  min-width: 100%;
+                }
               }
             }
           }
@@ -135,13 +76,159 @@
             font: inherit;
             cursor: pointer;
             outline: inherit;
+
+            .carousel-control-prev-icon {
+              width: 40px;
+              height: 40px;
+            }
+
+            .carousel-control-next-icon {
+              width: 40px;
+              height: 40px;
+            }
           }
         }
       }
 
       .data-box {
-        width: 100%;
+        width: 400px;
+        display: inline-block;
+        float: right;
+        height: 100%;
+        padding: 30px;
+
+        .data-box__header {
+
+          .price {
+            font-size: 32px;
+            font-weight: 700;
+          }
+
+          .address {
+            font-size: 30px;
+            font-weight: 700;
+            color: #292929;
+            line-height: 1.25;
+            margin: 0.6em 0 0;
+          }
+
+          .additional-data {
+            width: 100%;
+            margin-top: 30px;
+
+            ul {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+            }
+
+            li {
+              padding: 10px 0;
+              border-top: solid #D5DBE0 1px;
+            }
+
+            li:last-child {
+              border-bottom: solid #D5DBE0 1px;
+            }
+
+            .additional-data__city {
+              float: right;
+              font-weight: 700;
+            }
+          }
+        }
+
+        .button-box {
+          margin-top: 40px;
+
+          .button-box__inner {
+            display: inline-block;
+            width: 50%;
+
+            button {
+              border: solid #D5DBE0 2px;
+              width: 100%;
+              height: 50px;
+            }
+          }
+        }
+      }
+    }
+
+    .description-box {
+      margin-top: 20px;
+
+      .description-box__title {
+        padding: 10px 0;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 2px;
+      }
+
+      .description-box__content {
+        font-size: 16px;
+        border-radius: 0;
+        background-color: #FFFFFF;
+        border: solid #D5DBE0 1px;
+        padding: 10px 30px;
       }
     }
   }
-}
+
+
+  @media (max-width: 980px) {
+    .backToMainPage,
+    .advertisement-box {
+      max-width: 92%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .advertisement-box {
+      .card-box {
+        height: auto;
+
+        .slider-box {
+          width: 100%;
+          height: auto;
+
+          .carousel {
+            .carousel-inner {
+              .carousel-item {
+                .photo {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+
+            .button {
+              background: none;
+              color: inherit;
+              border: none;
+              padding: 0;
+              font: inherit;
+              cursor: pointer;
+              outline: inherit;
+            }
+          }
+        }
+
+        .data-box {
+          width: 100%;
+          padding: 30px 0;
+        }
+      }
+
+      .description-box {
+
+        .description-box__content {
+          font-size: 16px;
+          border-radius: 0;
+          background-color: inherit;
+          border: none;
+          padding: 10px 0;
+        }
+      }
+    }
+  }

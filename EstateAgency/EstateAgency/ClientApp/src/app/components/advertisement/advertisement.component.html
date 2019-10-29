@@ -1,4 +1,12 @@
-<div class="advertisement-box py-5">
+<div class="backToMainPage">
+  <div class="button-box">
+    <button class="btn btn-sm btn-outline-secondary" [routerLink]="['/home']">
+      <i class="fas fa-chevron-left"></i>
+      <span class="button-box__text">Powrót</span>
+    </button>
+  </div>
+</div>
+<div class="advertisement-box">
   <div class="card-box">
     <div class="slider-box">
       <div id="slider" #slider class="carousel slide" data-ride="carousel">
@@ -32,7 +40,7 @@
           {{advertisement.price}} PLN
         </div>
         <div class="address">
-          {{advertisement.city}}, {{advertisement.address}} 
+          {{advertisement.city}}, {{advertisement.address}}
         </div>
         <div class="additional-data">
           <ul>
@@ -52,9 +60,31 @@
               <span>Metraż</span>
               <span class="additional-data__city">{{advertisement.yardage}} m2</span>
             </li>
+            <li>
+              <span>Cena</span>
+              <span class="additional-data__city">{{advertisement.price}} PLN</span>
+            </li>
           </ul>
         </div>
       </div>
+
+      <div class="button-box">
+        <div class="button-box__inner">
+          <button class="bg-success">KONTAKT</button>
+        </div>
+        <div class="button-box__inner">
+          <button class="bg-info">REZERWACJA</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="description-box">
+    <div class="description-box__title">
+      OPIS NIERUCHOMOŚCI
+    </div>
+    <div class="description-box__content">
+      {{advertisement.description}}
     </div>
   </div>
 </div>
