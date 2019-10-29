@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-lg-4 advertisement-box" *ngFor="let advertisement of advertisements" [class.selected]="advertisement === selectedAdvertisement" (click)="onSelect(advertisement)">
+    <div class="col-md-6 col-lg-4 advertisement-box" *ngFor="let advertisement of advertisements">
       <div class="card mb-4 shadow-sm card-box">
         <div class="photo-box">
           <img class="bd-placeholder-img card-img-top photo-box__area"
@@ -18,6 +18,7 @@
               <span class="data-box__address">{{advertisement.address}}</span>
             </div>
             <div class="col-6">
+
               <span class="data-box__price">{{advertisement.price}} PLN</span>
               <span class="data-box__yardage">{{advertisement.yardage}} m2</span>
             </div>
@@ -27,11 +28,19 @@
           </div>
           <div class="d-flex justify-content-between align-items-center pt-3 pb-2 button-box">
             <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary button-box__details">SZCZEGÓŁY OFERTY</button>
-              <button type="button" class="btn btn-sm btn-outline-secondary button-box__edit">EDYCJA</button>
+              <button type="button"
+                      class="btn btn-sm btn-outline-secondary button-box__details"
+                      [class.selected]="advertisement === selectedAdvertisement"
+                      (click)="onSelect(advertisement)">
+                SZCZEGÓŁY OFERTY
+              </button>
+              <button type="button"
+                      class="btn btn-sm btn-outline-secondary button-box__edit">
+                EDYCJA
+              </button>
             </div>
           </div>
-          <p class="card-text"><small class="text-muted">Ostatnia aktualizacja: {{advertisement.lastModifiedDate}}</small></p>
+          <p class="card-text"><small class="text-muted">Ostatnia aktualizacja: {{advertisement.lastModifiedDate.substring(0, 10)}}</small></p>
         </div>
       </div>
     </div>

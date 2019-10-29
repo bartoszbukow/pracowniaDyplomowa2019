@@ -29,8 +29,6 @@ export class AdvertisementListComponent implements OnInit {
         this.title = "Latest Advertisements";
         this.api.getAdvertisementList().subscribe(res => {
             this.advertisements = res;
-            console.log(res)
         });
     }
-
 }

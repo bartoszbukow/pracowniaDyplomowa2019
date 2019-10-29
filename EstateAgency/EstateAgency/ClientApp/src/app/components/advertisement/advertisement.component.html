@@ -1,17 +1,60 @@
-<div *ngIf="advertisement" class="advertisement">
-  <h2>{{advertisement.title}}</h2>
-  <ul>
-    <li>
-      <label>Title:</label>
-      <input [(ngModel)]="advertisement.title" placeholder="Insert the title..." />
-    </li>
-    <li>
-      <label>Description:</label>
-      <textarea [(ngModel)]=" advertisement.description" placeholder="Insert a suitable description..."></textarea>
-    </li>
-  </ul>
-  <div *ngIf="auth.isLoggedIn()" class="edit">
-    <input type="button" value="Edit" (click)="onEdit()" />
-    <input type="button" value="Delete this Advertisement" (click)="onDelete()" />
+<div class="advertisement-box py-5">
+  <div class="card-box">
+    <div class="slider-box">
+      <div id="slider" #slider class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li *ngFor="let image of advertisement.images; let k = index"
+              [ngClass]="k == 0 ? 'active' : ''"
+              data-target="#carouselExampleIndicators"
+              data-slide-to="k"
+              (click)="goToSlide(k)">
+          </li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let image of advertisement.images; let k = index" [ngClass]="k == 0 ? 'active' : ''">
+            <img class="photo" src="{{this.url}}{{image.path}}" alt="First slide">
+          </div>
+        </div>
+        <button class="button carousel-control-prev" role="button" data-slide="prev" (click)="prevSlide()">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </button>
+        <button class="button carousel-control-next" role="button" data-slide="next" (click)="nextSlide()">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </button>
+      </div>
+
+    </div>
+    <div class="data-box">
+      <div class="data-box__header">
+        <div class="price">
+          {{advertisement.price}} PLN
+        </div>
+        <div class="address">
+          {{advertisement.city}}, {{advertisement.address}} 
+        </div>
+        <div class="additional-data">
+          <ul>
+            <li>
+              <span>Miejscowość</span>
+              <span class="additional-data__city">{{advertisement.city}}</span>
+            </li>
+            <li>
+              <span>Ulica</span>
+              <span class="additional-data__city">{{advertisement.address}}</span>
+            </li>
+            <li>
+              <span>Liczba pokoi</span>
+              <span class="additional-data__city">{{advertisement.numberOfRoom}}</span>
+            </li>
+            <li>
+              <span>Metraż</span>
+              <span class="additional-data__city">{{advertisement.yardage}} m2</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

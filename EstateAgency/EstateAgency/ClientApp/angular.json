@@ -11,6 +11,9 @@
       "schematics": {},
       "architect": {
         "build": {
+          "scripts": [
+            "node_modules/jquery/dist/jquery.min.js"
+          ],
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "progress": true,
