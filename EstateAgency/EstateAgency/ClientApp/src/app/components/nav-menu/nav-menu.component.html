@@ -1,18 +1,18 @@
 <nav>
   <mat-nav-list class="min-width-menu">
-    <a mat-list-item [routerLink]="'/'" (click)="sidenavCloce();"> Home </a>
+    <a mat-list-item [routerLink]="'/'" (click)="sidenavCloce();"> Strona Główna </a>
 
     <hr *ngIf="!this.isLoggedIn()" class="hr-style" />
-    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/register'" (click)="sidenavCloce();"> Register </a>
+    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/register'" (click)="sidenavCloce();"> Rejestracja </a>
 
     <hr *ngIf="!this.isLoggedIn()" class="hr-style" />
-    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/login'" (click)="sidenavCloce();"> Login </a>
+    <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/login'" (click)="sidenavCloce();"> Logowanie </a>
 
     <hr *ngIf="this.isLoggedIn()" class="hr-style" />
-    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/advertisement/create'" (click)="sidenavCloce();"> Create Advertisement </a>
+    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/advertisement/create'" (click)="sidenavCloce();"> Utwórz Ogłoszenie </a>
 
     <hr *ngIf="this.isLoggedIn()" class="hr-style" />
-    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/'" (click)="logout(); sidenavCloce();"> Logout </a>
+    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/'" (click)="logout(); sidenavCloce();"> Wyloguj </a>
 
   </mat-nav-list>
 </nav>

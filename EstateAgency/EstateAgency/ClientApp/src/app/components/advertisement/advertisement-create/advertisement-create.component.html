@@ -1,0 +1,149 @@
+<div class="backToMainPage">
+  <div class="button-box">
+    <button class="btn btn-sm btn-outline-secondary" [routerLink]="['/home']">
+      <i class="fas fa-chevron-left"></i>
+      <span class="button-box__text">Powrót</span>
+    </button>
+  </div>
+</div>
+<div class="advertisement-create-box">
+  <form [formGroup]="createAdvertisementForm" (ngSubmit)="createAdvertisement()">
+    <div class="create-content-box">
+
+      <div class="title-box__name">
+        <label>Tytuł</label>
+      </div>
+      <div class="caterogy-box__name">
+        <label>Kategoria</label>
+      </div>
+      <div class="description-box__name">
+        <label>Opis</label>
+      </div>
+      <div class="yardage-box__name">
+        <label>Metraż</label>
+      </div>
+      <div class="numberOfRoom-box__name">
+        <label>Liczba pokoi</label>
+      </div>
+      <div class="price-box__name">
+        <label>Cena</label>
+      </div>
+      <div class="city-box__name">
+        <label>Miasto</label>
+      </div>
+      <div class="address-box__name">
+        <label>Adres</label>
+      </div>
+      <div class="photos-box__name">
+        <label>Zdjecia</label>
+      </div>
+
+      <div class="dividing-line">
+        <div class="line"></div>
+      </div>
+
+      <div class="title-box__content form-group">
+        <input type="text"
+               class="form-control"
+               name="title"
+               required
+               formControlName="title"
+               placeholder="title"
+               autocomplete="title"
+               [ngClass]="{'is-invalid':hasError('title')}">
+        <div *ngIf="hasError('title')" class="invalid-feedback">Please insert correct title</div>
+      </div>
+
+      <div class="caterogy-box__content form-group">
+        <select class="form-control"
+                id="category"
+                formControlName="category"
+                autocomplete="category">
+          <option>Mieszkania</option>
+          <option>Domy</option>
+          <option>Domek letniskowy</option>
+          <option>Inne</option>
+        </select>
+      </div>
+
+      <div class="description-box__content form-group">
+        <textarea class="form-control"
+                  id="description"
+                  rows="3"
+                  formControlName="description"
+                  autocomplete="description"
+                  [ngClass]="{'is-invalid':hasError('description')}"></textarea>
+        <div *ngIf="hasError('description')" class="invalid-feedback">Please insert correct description</div>
+      </div>
+
+      <div class="yardage-box__content form-group">
+        <input type="text"
+               class="form-control"
+               name="yardage"
+               required
+               formControlName="yardage"
+               placeholder="yardage"
+               autocomplete="yardage"
+               [ngClass]="{'is-invalid':hasError('yardage')}">
+        <div *ngIf="hasError('yardage')" class="invalid-feedback">Please insert correct yardage</div>
+      </div>
+
+      <div class="numberOfRoom-box__content form-group">
+        <input type="text"
+               class="form-control"
+               name="numberOfRoom"
+               required
+               formControlName="numberOfRoom"
+               placeholder="number of room"
+               autocomplete="numberOfRoom"
+               [ngClass]="{'is-invalid':hasError('numberOfRoom')}">
+        <div *ngIf="hasError('numberOfRoom')" class="invalid-feedback">Please insert correct number of room</div>
+      </div>
+
+      <div class="price-box__content form-group">
+        <input type="text"
+               class="form-control"
+               name="price"
+               required
+               formControlName="price"
+               placeholder="price"
+               autocomplete="price"
+               [ngClass]="{'is-invalid':hasError('price')}">
+        <div *ngIf="hasError('price')" class="invalid-feedback">Please insert correct price</div>
+      </div>
+
+      <div class="city-box__content form-group">
+        <input type="text"
+               class="form-control"
+               name="city"
+               required
+               formControlName="city"
+               placeholder="city"
+               autocomplete="city"
+               [ngClass]="{'is-invalid':hasError('city')}">
+        <div *ngIf="hasError('city')" class="invalid-feedback">Please insert correct city</div>
+      </div>
+
+      <div class="address-box__content form-group">
+        <input type="text"
+               class="form-control"
+               name="address"
+               required
+               formControlName="address"
+               placeholder="address"
+               autocomplete="address"
+               [ngClass]="{'is-invalid':hasError('address')}">
+        <div *ngIf="hasError('address')" class="invalid-feedback">Please insert correct address</div>
+      </div>
+
+      <div class="photos-box__content">
+        Tu beda foteczkii
+      </div>
+
+      <div class="button-box">
+        <input type="submit" class="btn btn-primary" [disabled]="!createAdvertisementForm.value.title" value="Utwórz Ogłoszenie">
+      </div>
+
+    </div>
+  </form>
+</div>

@@ -76,7 +76,10 @@ namespace EstateAgency.Controllers
                 Yardage = model.Yardage,
                 Category = model.Category,
                 Type = model.Type,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                NumberOfRoom = model.NumberOfRoom,
+                City = model.City,
+                Address = model.Address
             };
 
             advertisement.LastModifiedDate = advertisement.CreatedDate;
@@ -85,6 +88,16 @@ namespace EstateAgency.Controllers
             _dbContext.Advertisements.Add(advertisement);
             _dbContext.SaveChanges();
 
+            if (model.Images == null)
+            {
+                _dbContext.Images.Add(new Image()
+                {
+                    AdvertisementId = advertisement.Id,
+                    Path = $"empty-photo.jpg"
+                });
+            }
+
+            _dbContext.SaveChanges();
 
             return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
         }

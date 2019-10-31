@@ -20,6 +20,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import { SearchComponent } from './components/home/search/search.component';
+import { AdvertisementCreateComponent } from './components/advertisement/advertisement-create/advertisement-create.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { SearchComponent } from './components/home/search/search.component';
         PageNotFoundComponent,
         AdvertisementEditComponent,
         RegisterComponent,
-        SearchComponent
+        SearchComponent,
+        AdvertisementCreateComponent
     ],
     entryComponents: [],
     imports: [
