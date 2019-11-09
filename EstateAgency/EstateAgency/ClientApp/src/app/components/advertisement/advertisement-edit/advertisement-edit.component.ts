@@ -41,21 +41,21 @@ export class AdvertisementEditComponent implements OnInit {
 
     onSubmit(advertisement: IAdvertisement) {
         
-        if (this.editMode) {
-            this.api.postAdvertisement(advertisement).subscribe(res => {
-                var v = res;
-                console.log("Advertisement " + v.id + " has been updated.");
-                this.router.navigate(["home"]);
-            },
-                error => console.log(error));
-        } else {
-            this.api.putAdvertisement(advertisement).subscribe(res => {
-                var q = res;
-                console.log("Advertisement " + q.id + " has been created.");
-                this.router.navigate(["home"]);
-            },
-                error => console.log(error));
-        }
+        //if (this.editMode) {
+        //    this.api.putAdvertisement(advertisement).subscribe(res => {
+        //        var v = res;
+        //        console.log("Advertisement " + v.id + " has been updated.");
+        //        this.router.navigate(["home"]);
+        //    },
+        //        error => console.log(error));
+        //} else {
+        //    this.api.postAdvertisement(advertisement).subscribe(res => {
+        //        var q = res;
+        //        console.log("Advertisement " + q.id + " has been created.");
+        //        this.router.navigate(["home"]);
+        //    },
+        //        error => console.log(error));
+        //}
     }
 
     onBack() {

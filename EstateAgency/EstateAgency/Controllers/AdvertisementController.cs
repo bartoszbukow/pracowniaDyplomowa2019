@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using EstateAgency.Data;
 using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -62,33 +65,36 @@ namespace EstateAgency.Controllers
             return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
         }
 
-        [HttpPut]
+        [HttpPost("create"), DisableRequestSizeLimit]
         [Authorize]
-        public IActionResult Put([FromBody]AdvertisementViewModel model)
+        public IActionResult Post(IFormCollection form)
         {
-            if (model == null) return new StatusCodeResult(500);
+            if (form == null) return new StatusCodeResult(500);
 
             var advertisement = new Advertisement
             {
-                Title = model.Title,
-                Description = model.Description,
-                Price = model.Price,
-                Yardage = model.Yardage,
-                Category = model.Category,
-                Type = model.Type,
+                Title = form["title"],
+                Description = form["description"],
+                Price = Convert.ToDouble(form["price"]),
+                Yardage = Convert.ToDouble(form["yardage"]),
+                Category = form["category"],
+                Type = Convert.ToInt32(form["type"]),
                 CreatedDate = DateTime.Now,
-                NumberOfRoom = model.NumberOfRoom,
-                City = model.City,
-                Address = model.Address
+                NumberOfRoom = Convert.ToInt32(form["numberOfRoom"]),
+                City = form["city"],
+                Address = form["address"]
             };
 
             advertisement.LastModifiedDate = advertisement.CreatedDate;
             advertisement.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             _dbContext.Advertisements.Add(advertisement);
-            _dbContext.SaveChanges();
 
-            if (model.Images == null)
+            var files = Request.Form.Files;
+            var folderName = Path.Combine("wwwroot", "Images");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+            if (files.Count == 0)
             {
                 _dbContext.Images.Add(new Image()
                 {
@@ -96,15 +102,34 @@ namespace EstateAgency.Controllers
                     Path = $"empty-photo.jpg"
                 });
             }
+            else
+            {
+                foreach (var file in files)
+                {
+                    var fileName = Guid.NewGuid().ToString() + ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName); 
 
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    _dbContext.Images.Add(new Image()
+                    {
+                        AdvertisementId = advertisement.Id,
+                        Path = dbPath
+                    });
+                }
+            }
             _dbContext.SaveChanges();
-
             return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
+
         }
 
-        [HttpPost]
+        [HttpPut]
         [Authorize]
-        public IActionResult Post([FromBody]AdvertisementViewModel model)
+        public IActionResult Put([FromBody]AdvertisementViewModel model)
         {
             if (model == null) return new StatusCodeResult(500);
 
@@ -153,7 +178,7 @@ namespace EstateAgency.Controllers
         {
             var latest = _dbContext.Advertisements.OrderByDescending(q => q.CreatedDate).Take(num).ToArray();
 
-            foreach(var advertisement in latest)
+            foreach (var advertisement in latest)
             {
                 foreach (var image in _dbContext.Images)
                 {

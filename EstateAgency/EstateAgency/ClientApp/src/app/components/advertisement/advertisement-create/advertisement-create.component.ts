@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AdvertisementModel } from "./../../../models/advertisement.model";
 import { ApiService } from '../../../services/api.service';
 import { Router } from "@angular/router";
+import { HttpEventType, HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-advertisement-create',
@@ -10,14 +11,18 @@ import { Router } from "@angular/router";
     styleUrls: ['./advertisement-create.component.less']
 })
 export class AdvertisementCreateComponent implements OnInit {
-
     createAdvertisementForm: FormGroup;
     advertisementModel: AdvertisementModel = new AdvertisementModel();
+
+    //public progress: number;
+    //public message: string;
+   
+    formData: FormData = new FormData();
 
     constructor(
         private fb: FormBuilder,
         private api: ApiService,
-        private router: Router,)
+        private router: Router)
     { }
 
     ngOnInit() {
@@ -49,10 +54,7 @@ export class AdvertisementCreateComponent implements OnInit {
             ])],
             address: [this.advertisementModel.address, Validators.compose([
                 Validators.required
-            ])],
-            photos: [this.advertisementModel.photos, Validators.compose([
-                Validators.required
-            ])],
+            ])]
         });
     }
 
@@ -66,13 +68,41 @@ export class AdvertisementCreateComponent implements OnInit {
     }
 
     createAdvertisement() {
+        if (!this.createAdvertisementForm.valid) {
+            return;
+        }
 
-        let advertisement = Object.assign({}, this.createAdvertisementForm.value);
-        this.api.putAdvertisement(advertisement).subscribe(res => {
-            var q = res;
-            console.log("Advertisement " + q.id + " has been created.");
-            this.router.navigate(["home"]);
-        },
-            error => console.log(error));
+        for (var key in this.createAdvertisementForm.value) {
+            if (this.createAdvertisementForm.value.hasOwnProperty(key)) {
+                let element = this.createAdvertisementForm.value[key];
+                this.formData.append(key, element);
+            }
+        }
+
+        let additionalData = { reportProgress: true, observe: 'events' };
+
+        this.api.postAdvertisement(this.formData, additionalData)
+            .subscribe(event => {
+                //if (event.type === HttpEventType.UploadProgress)
+                //    this.progress = Math.round(100 * event.loaded / event.total);
+                //else if (event.type === HttpEventType.Response) {
+                //    this.message = 'Upload success.';
+                //    this.onUploadFinished.emit(event.body);
+                //}
+                this.router.navigate(["home"]);
+            },
+                error => console.log(error));
+    }
+
+    uploadFile = (files) => {
+        if (files.length === 0) {
+            return;
+        }
+
+        let filesToUpload: File[] = files;
+
+        Array.from(filesToUpload).map((file, index) => {
+            return this.formData.append('file' + index, file, file.name);
+        });
     }
 }

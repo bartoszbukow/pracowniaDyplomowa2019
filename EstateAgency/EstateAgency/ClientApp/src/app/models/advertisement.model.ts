@@ -7,6 +7,5 @@ export class AdvertisementModel {
     price: Number;
     city: string;
     address: string;
-    photos: any;
 }
 

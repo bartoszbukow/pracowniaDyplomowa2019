@@ -137,7 +137,8 @@
       </div>
 
       <div class="photos-box__content">
-        Tu beda foteczkii
+        <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" multiple accept=".jpg,.jpeg,.png">
+        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
       </div>
 
       <div class="button-box">

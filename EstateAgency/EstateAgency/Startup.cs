@@ -13,6 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
 
 namespace EstateAgency
 {
@@ -116,6 +119,11 @@ namespace EstateAgency
                     context.Context.Response.Headers["Expires"] = Configuration["StaticFiles:Headers:Expires"];
 
                 }
+            });
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot")),
+                RequestPath = new PathString("/wwwroot")
             });
             app.UseSpaStaticFiles();
             app.UseAuthentication();
