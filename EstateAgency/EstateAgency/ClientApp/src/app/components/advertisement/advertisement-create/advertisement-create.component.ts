@@ -5,6 +5,12 @@ import { ApiService } from '../../../services/api.service';
 import { Router } from "@angular/router";
 import { HttpEventType, HttpClient } from '@angular/common/http';
 
+class ImageSnipped {
+    constructor(public src: string, public file: File) {
+
+    }
+}
+
 @Component({
     selector: 'app-advertisement-create',
     templateUrl: './advertisement-create.component.html',
@@ -13,19 +19,20 @@ import { HttpEventType, HttpClient } from '@angular/common/http';
 export class AdvertisementCreateComponent implements OnInit {
     createAdvertisementForm: FormGroup;
     advertisementModel: AdvertisementModel = new AdvertisementModel();
+    selectedFileList: Array<ImageSnipped>;
 
     //public progress: number;
     //public message: string;
-   
+
     formData: FormData = new FormData();
 
     constructor(
         private fb: FormBuilder,
         private api: ApiService,
-        private router: Router)
-    { }
+        private router: Router) { }
 
     ngOnInit() {
+        this.selectedFileList = new Array<ImageSnipped>();
         this.createForm();
     }
 
@@ -104,5 +111,16 @@ export class AdvertisementCreateComponent implements OnInit {
         Array.from(filesToUpload).map((file, index) => {
             return this.formData.append('file' + index, file, file.name);
         });
+
+        for (let file of files) {
+            let reader = new FileReader();
+            reader.addEventListener('load', (event: any) => {
+                if (this.selectedFileList.length < 8) {
+                    this.selectedFileList.push(new ImageSnipped(event.target.result, file));
+                }
+            });
+
+            reader.readAsDataURL(file);
+        }
     }
 }

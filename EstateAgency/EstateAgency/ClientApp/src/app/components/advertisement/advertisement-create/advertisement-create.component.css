@@ -167,6 +167,39 @@
   grid-row-end: 10;
   min-height: 100px;
 }
+.advertisement-create-box .create-content-box .photos-box__content .add-photo-area {
+  height: 100px;
+  width: 100px;
+  border: solid #D5DBE0 1px;
+  border-radius: 4px;
+  margin: 0 10px 10px 0;
+  float: left;
+}
+.advertisement-create-box .create-content-box .photos-box__content .add-photo-area button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  padding: 35px;
+}
+.advertisement-create-box .create-content-box .photos-box__content .add-photo-area button .fa-plus {
+  width: 100%;
+  height: 100%;
+}
+.advertisement-create-box .create-content-box .photos-box__content .add-photo-area .img-preview-container {
+  background-color: #f7f7f7;
+  position: relative;
+}
+.advertisement-create-box .create-content-box .photos-box__content .add-photo-area .img-preview-container .img-preview {
+  background: center center no-repeat;
+  background-size: contain;
+  height: 100px;
+  width: 100px;
+}
 .advertisement-create-box .create-content-box .button-box {
   grid-column: 3;
   grid-row-start: 10;
