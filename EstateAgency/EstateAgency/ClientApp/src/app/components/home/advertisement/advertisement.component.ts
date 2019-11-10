@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef} from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { ApiService } from '../../services/api.service';
-import { AuthService } from '../../services/auth.service';
+import { ApiService } from '../../../services/api.service';
+import { AuthService } from '../../../services/auth.service';
 declare let $: any; 
 
 @Component({
