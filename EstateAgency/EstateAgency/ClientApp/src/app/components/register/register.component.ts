@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
     constructor(private router: Router,
         private fb: FormBuilder,
         private authService: AuthService,
-        private api: ApiService) {
+        private api: ApiService,
+        private toastr: ToastrService) {
     }
 
     ngOnInit() {
@@ -78,16 +80,16 @@ export class RegisterComponent implements OnInit {
 
         this.api.postRegisterUser(tempUser).subscribe(res => {
             if (res) {
-                var v = res;
-                console.log("User " + v.userName + " has been created.");
+                this.toastr.success("Konto zostało utworzone", "Sukces!");
                 this.router.navigate(["login"]);
             } else {
-                this.registerForm.setErrors({ "register": "User registration failed." });
+                this.toastr.error("Tworzenie konta nie powiodło się", "Error!");
+                //this.registerForm.setErrors({ "register": "User registration failed." });
                 console.log("nie idało sie hehe");
             }
         }, error => {
-            this.registerForm.setErrors({ "register": "User registration failed." });
-            console.log(error);
+            this.toastr.error("Tworzenie konta nie powiodło się", "Error!");
+            //this.registerForm.setErrors({ "register": "User registration failed." });
         });
     }
 

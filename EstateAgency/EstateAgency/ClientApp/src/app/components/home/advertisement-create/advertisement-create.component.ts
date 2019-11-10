@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AdvertisementModel } from "./../../../models/advertisement.model";
 import { ApiService } from '../../../services/api.service';
 import { Router } from "@angular/router";
-import { HttpEventType, HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 class ImageSnipped {
     constructor(public src: string, public file: File) {
@@ -29,7 +29,8 @@ export class AdvertisementCreateComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private api: ApiService,
-        private router: Router) { }
+        private router: Router,
+        private toastr: ToastrService) { }
 
     ngOnInit() {
         this.selectedFileList = new Array<ImageSnipped>();
@@ -90,15 +91,12 @@ export class AdvertisementCreateComponent implements OnInit {
 
         this.api.postAdvertisement(this.formData, additionalData)
             .subscribe(event => {
-                //if (event.type === HttpEventType.UploadProgress)
-                //    this.progress = Math.round(100 * event.loaded / event.total);
-                //else if (event.type === HttpEventType.Response) {
-                //    this.message = 'Upload success.';
-                //    this.onUploadFinished.emit(event.body);
+                this.toastr.success("Ogłoszenie zostało utworzone", "Sukces!");
                 //}
                 this.router.navigate(["home"]);
-            },
-                error => console.log(error));
+            }, error => {
+                this.toastr.error("Nie udało się dodać ogłoszenia", "Error!");
+            });
     }
 
     uploadFile = (files) => {

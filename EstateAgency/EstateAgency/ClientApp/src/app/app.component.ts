@@ -9,6 +9,6 @@ declare let $: any;
 
 export class AppComponent {
 
-    title = 'Estate Agency';
+    title = 'Biuro Nieruchomości';
 
 }

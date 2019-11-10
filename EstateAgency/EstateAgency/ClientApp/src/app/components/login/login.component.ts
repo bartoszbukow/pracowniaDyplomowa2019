@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginModel } from "./../../models/login.model";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
     constructor(private router: Router,
         private fb: FormBuilder,
-        private authService: AuthService) {
+        private authService: AuthService,
+        private toastr: ToastrService) {
     }
 
     ngOnInit() {
@@ -46,14 +48,17 @@ export class LoginComponent implements OnInit {
 
         this.authService.login(email, password).subscribe(res => {
             if (res) {
+                this.toastr.success("Logowanie przebiegło pomyślnie.", "Sukces!");
                 this.authService.redirectTo ? this.router.navigate(([this.authService.redirectTo])) : this.router.navigate((['']));
                 this.authService.redirectTo = "";
             } else {
-                this.loginForm.setErrors({ "login": "User login failed." });
+                this.toastr.error("Logowanie nie powiodło się.", "Error!");
+                //this.loginForm.setErrors({ "login": "User login failed." });
             }
                 
         }, error => {
-                this.loginForm.setErrors({ "login": "User login failed." });
+              this.toastr.error("Logowanie nie powiodło się.", "Error!");
+              //this.loginForm.setErrors({ "login": "User login failed." });
         });
     }
 

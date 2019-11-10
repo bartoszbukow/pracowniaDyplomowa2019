@@ -3,7 +3,7 @@
     <div class="card rounded shadow bg-white w-100">
       <div class="card-body">
         <img id="register-img" class="register-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-        <div class="list-header-title">User Register</div>
+        <div class="list-header-title">Rejestracja Użytkownika</div>
         <div class="alert alert-danger" *ngIf="registerForm.errors?.register" role="alert">
           {{registerForm.errors.register}}
         </div>
@@ -11,34 +11,32 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label>Name</label>
+                <label>Imie</label>
                 <input type="text"
                        class="form-control"
                        name="displayName"
                        required
                        formControlName="displayName"
-                       placeholder="name"
                        [ngClass]="{'is-invalid':hasError('displayName')}"
                        autocomplete="displayName">
                 <div *ngIf="hasError('displayName')" class="invalid-feedback">
-                  Name needs to be between 2 and 20 characters long and must start with a capital letter
+                  Imie musi zawierać od 2 do 20 lister oraz pierwsza z nich musi być duża
                 </div>
               </div>
             </div>
           </div><div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label>Surname</label>
+                <label>Nazwisko</label>
                 <input type="text"
                        class="form-control"
                        name="name"
                        required
                        formControlName="name"
-                       placeholder="surname"
                        [ngClass]="{'is-invalid':hasError('name')}"
                        autocomplete="name">
                 <div *ngIf="hasError('name')" class="invalid-feedback">
-                  Surname needs to be between 2 and 20 characters long and must start with a capital letter
+                  Nazwisko musi zawierać od 2 do 20 lister oraz pierwsza z nich musi być duża
                 </div>
               </div>
             </div>
@@ -52,26 +50,24 @@
                        name="email"
                        required
                        formControlName="email"
-                       placeholder="e-mail"
                        [ngClass]="{'is-invalid':hasError('email')}"
                        autocomplete="email">
-                <div *ngIf="hasError('email')" class="invalid-feedback">Please insert correct e-mail address</div>
+                <div *ngIf="hasError('email')" class="invalid-feedback">E-mail musi zawierać znak "@"</div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label>Password</label>
+                <label>Hasło</label>
                 <input type="password"
                        formControlName="password"
                        class="form-control"
                        [ngClass]="{'is-invalid':hasError('password')}"
-                       placeholder="password"
                        required
                        autocomplete="password">
                 <div *ngIf="hasError('password')" class="invalid-feedback">
-                  Password needs to be between 8 and 30 characters long and contain one uppercase letter, one symbol, and a number
+                  Hasło musi zawierać od 8 do 30 lister, conajmniej jedna dużą litere, znak specjalny oraz liczbę
                 </div>
               </div>
             </div>
@@ -79,21 +75,20 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label>Repeat Password</label>
+                <label>Powtórz hasło</label>
                 <input type="password"
                        formControlName="passwordConfirm"
                        class="form-control"
                        [ngClass]="{'is-invalid':hasError('passwordConfirm')}"
-                       placeholder="password"
                        required
                        autocomplete="passwordConfirm">
 
                 <div *ngIf="f.passwordConfirm.errors" class="invalid-feedback">
                   <div *ngIf="f.passwordConfirm.errors?.required">
-                    Confirm Password is required
+                    To pole jest wymagane
                   </div>
                   <div *ngIf="f.passwordConfirm.errors?.mustMatch">
-                    Passwords must match
+                    Hasła muszą być takie same
                   </div>
                 </div>
 
@@ -105,13 +100,13 @@
               <input type="submit"
                      class="btn btn-primary btn-lg btn-block mt-3"
                      [disabled]="!registerForm.value.email || !registerForm.value.password || !registerForm.value.name || !registerForm.value.displayName || !registerForm.value.passwordConfirm"
-                     value="Sign out">
+                     value="Zarejestruj">
             </div>
           </div>
         </form>
         <hr />
         <div class="col-md-12 p-0 mt-3">
-          <button type="submit" class="btn btn-light btn-lg btn-block" value="Sign out" (click)="routeToLogin()">Sign in</button>
+          <button type="submit" class="btn btn-light btn-lg btn-block" value="Sign out" (click)="routeToLogin()">Logowanie</button>
         </div>
       </div>
     </div>

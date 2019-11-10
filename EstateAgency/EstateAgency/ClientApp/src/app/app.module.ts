@@ -22,6 +22,7 @@ import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatBu
 import { SearchComponent } from './components/home/search/search.component';
 import { AdvertisementCreateComponent } from './components/home/advertisement-create/advertisement-create.component';
 import { AdvertisementOwnerComponent } from './components/home/advertisement-owner/advertisement-owner.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
     declarations: [
@@ -53,7 +54,11 @@ import { AdvertisementOwnerComponent } from './components/home/advertisement-own
         MatButtonModule,
         MatCardModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        ToastrModule.forRoot({
+            timeOut: 10000,
+            preventDuplicates: true,
+        }),
     ],
     exports: [
         MatToolbarModule,
