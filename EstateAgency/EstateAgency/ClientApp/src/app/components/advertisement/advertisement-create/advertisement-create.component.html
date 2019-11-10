@@ -7,7 +7,7 @@
   </div>
 </div>
 <div class="advertisement-create-box">
-  <form [formGroup]="createAdvertisementForm" (ngSubmit)="createAdvertisement()">
+  <form [formGroup]="createAdvertisementForm">
     <div class="create-content-box">
 
       <div class="title-box__name">
@@ -48,10 +48,9 @@
                name="title"
                required
                formControlName="title"
-               placeholder="title"
                autocomplete="title"
                [ngClass]="{'is-invalid':hasError('title')}">
-        <div *ngIf="hasError('title')" class="invalid-feedback">Please insert correct title</div>
+        <div *ngIf="hasError('title')" class="invalid-feedback">Wpisz poprawny tytuł</div>
       </div>
 
       <div class="caterogy-box__content form-group">
@@ -73,7 +72,7 @@
                   formControlName="description"
                   autocomplete="description"
                   [ngClass]="{'is-invalid':hasError('description')}"></textarea>
-        <div *ngIf="hasError('description')" class="invalid-feedback">Please insert correct description</div>
+        <div *ngIf="hasError('description')" class="invalid-feedback">Wpisz poprawny opis</div>
       </div>
 
       <div class="yardage-box__content form-group">
@@ -82,10 +81,9 @@
                name="yardage"
                required
                formControlName="yardage"
-               placeholder="yardage"
                autocomplete="yardage"
                [ngClass]="{'is-invalid':hasError('yardage')}">
-        <div *ngIf="hasError('yardage')" class="invalid-feedback">Please insert correct yardage</div>
+        <div *ngIf="hasError('yardage')" class="invalid-feedback">Podaj poprawny metraż</div>
       </div>
 
       <div class="numberOfRoom-box__content form-group">
@@ -94,10 +92,9 @@
                name="numberOfRoom"
                required
                formControlName="numberOfRoom"
-               placeholder="number of room"
                autocomplete="numberOfRoom"
                [ngClass]="{'is-invalid':hasError('numberOfRoom')}">
-        <div *ngIf="hasError('numberOfRoom')" class="invalid-feedback">Please insert correct number of room</div>
+        <div *ngIf="hasError('numberOfRoom')" class="invalid-feedback">Podaj poprawna liczbe pokoi</div>
       </div>
 
       <div class="price-box__content form-group">
@@ -106,10 +103,9 @@
                name="price"
                required
                formControlName="price"
-               placeholder="price"
                autocomplete="price"
                [ngClass]="{'is-invalid':hasError('price')}">
-        <div *ngIf="hasError('price')" class="invalid-feedback">Please insert correct price</div>
+        <div *ngIf="hasError('price')" class="invalid-feedback">Podaj poprawna cene</div>
       </div>
 
       <div class="city-box__content form-group">
@@ -118,10 +114,9 @@
                name="city"
                required
                formControlName="city"
-               placeholder="city"
                autocomplete="city"
                [ngClass]="{'is-invalid':hasError('city')}">
-        <div *ngIf="hasError('city')" class="invalid-feedback">Please insert correct city</div>
+        <div *ngIf="hasError('city')" class="invalid-feedback">Podaj poprawna nazwe miasta</div>
       </div>
 
       <div class="address-box__content form-group">
@@ -130,10 +125,9 @@
                name="address"
                required
                formControlName="address"
-               placeholder="address"
                autocomplete="address"
                [ngClass]="{'is-invalid':hasError('address')}">
-        <div *ngIf="hasError('address')" class="invalid-feedback">Please insert correct address</div>
+        <div *ngIf="hasError('address')" class="invalid-feedback">Wpisz poprawny adres, np: Towarowa 21/11</div>
       </div>
 
       <div class="photos-box__content">
@@ -154,9 +148,27 @@
       </div>
 
       <div class="button-box">
-        <input type="submit" class="btn btn-primary" [disabled]="!createAdvertisementForm.value.title" value="Utwórz Ogłoszenie">
-      </div>
+        <div class="button-box__area">
+          <button type="submit"
+                  class="btn btn-sm btn-primary"
+                  [disabled]="!(createAdvertisementForm.value.title &&
+               createAdvertisementForm.value.category &&
+               createAdvertisementForm.value.description &&
+               createAdvertisementForm.value.yardage &&
+               createAdvertisementForm.value.numberOfRoom &&
+               createAdvertisementForm.value.city &&
+               createAdvertisementForm.value.address)"
+                  (click)="createAdvertisement()">
+            Utwórz Ogłoszenie
+          </button>
 
+          <button type="submit"
+                  class="btn btn-sm btn-outline-secondary"
+                  [routerLink]="['/home']">
+            Anuluj
+          </button>
+        </div>
+      </div>
     </div>
   </form>
 </div>

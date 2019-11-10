@@ -6,6 +6,7 @@
       border-radius: 0;
       background-color: #FFFFFF;
       border: solid #D5DBE0 1px;
+      min-height: 557px;
 
       .photo-box {
         max-height: 360px;
@@ -17,7 +18,6 @@
         .photo-box__area {
           width: 100%;
           max-height: 100%;
-
         }
 
         img {
@@ -28,6 +28,7 @@
       }
 
       .data-box {
+        position: relative;
         .data-box__area {
           .data-box__city {
             width: 100%;
@@ -61,6 +62,8 @@
         }
 
         .button-box {
+          position:absolute;
+          bottom: 40px;
           .button-box__details {
             border-radius: 0;
           }
@@ -68,6 +71,11 @@
           .button-box__edit {
             border-radius: 0;
           }
+        }
+
+        p.card-text{
+          position: absolute;
+          bottom:20px;
         }
       }
     }
@@ -80,6 +88,25 @@
   }
 }
 
-
+@media (max-width: 768px) {
+  .container {
+    .advertisement-box {
+      .card-box {
+        min-height: 0px;
+        .data-box {
+          position: static;
+          .button-box {
+            position: static;
+            bottom: 0;
+          }
+          p.card-text {
+            position: static;
+            bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
 
 

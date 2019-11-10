@@ -5,6 +5,7 @@
   border-radius: 0;
   background-color: #FFFFFF;
   border: solid #D5DBE0 1px;
+  min-height: 557px;
 }
 .container .advertisement-box .card-box .photo-box {
   max-height: 360px;
@@ -20,6 +21,9 @@
   height: 330px;
   width: auto;
   max-width: 100%;
+}
+.container .advertisement-box .card-box .data-box {
+  position: relative;
 }
 .container .advertisement-box .card-box .data-box .data-box__area .data-box__city {
   width: 100%;
@@ -46,14 +50,38 @@
 .container .advertisement-box .card-box .data-box .data-box__area .data-box__title {
   width: 100%;
 }
+.container .advertisement-box .card-box .data-box .button-box {
+  position: absolute;
+  bottom: 40px;
+}
 .container .advertisement-box .card-box .data-box .button-box .button-box__details {
   border-radius: 0;
 }
 .container .advertisement-box .card-box .data-box .button-box .button-box__edit {
   border-radius: 0;
 }
+.container .advertisement-box .card-box .data-box p.card-text {
+  position: absolute;
+  bottom: 20px;
+}
 @media (max-width: 980px) {
   .container {
     max-width: 92%;
+  }
+}
+@media (max-width: 768px) {
+  .container .advertisement-box .card-box {
+    min-height: 0px;
+  }
+  .container .advertisement-box .card-box .data-box {
+    position: static;
+  }
+  .container .advertisement-box .card-box .data-box .button-box {
+    position: static;
+    bottom: 0;
+  }
+  .container .advertisement-box .card-box .data-box p.card-text {
+    position: static;
+    bottom: 0;
   }
 }

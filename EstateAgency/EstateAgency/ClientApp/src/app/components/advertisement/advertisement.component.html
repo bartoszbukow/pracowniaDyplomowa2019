@@ -19,7 +19,7 @@
           </li>
         </ol>
         <div class="carousel-inner">
-          <div class="carousel-item" *ngFor="let image of advertisement.images; let k = index" [ngClass]="k == 0 ? 'active' : ''">
+          <div class="carousel-item " *ngFor="let image of advertisement.images; let k = index" [ngClass]="k == 0 ? 'active' : ''">
             <img class="photo" src="{{this.url}}{{image.path}}" alt="First slide">
           </div>
         </div>

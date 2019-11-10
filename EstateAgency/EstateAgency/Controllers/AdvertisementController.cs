@@ -54,13 +54,7 @@ namespace EstateAgency.Controllers
                 });
             }
 
-            foreach (var image in _dbContext.Images)
-            {
-                if (image.AdvertisementId == id)
-                {
-                    advertisement.Images.Add(image);
-                }
-            }
+            advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == id).ToList();
 
             return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
         }
