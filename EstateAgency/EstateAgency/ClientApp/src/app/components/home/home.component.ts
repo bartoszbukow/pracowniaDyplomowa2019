@@ -7,15 +7,13 @@ import { ApiService } from '../../services/api.service';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+    advertisements: IAdvertisement[];
 
-    constructor(private api: ApiService) {
-
-    }
+    constructor(private api: ApiService){ }
 
     ngOnInit() {
-
-        //this.api.getAdvertisement("19d799a7-f65a-4b3d-b4c1-ae78b3fce0c3").subscribe(res => {
-        //    console.log(res);
-        //})
+        this.api.getAdvertisementList().subscribe(res => {
+            this.advertisements = res;
+        });
     }
 }

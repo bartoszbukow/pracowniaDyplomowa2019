@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import { SearchComponent } from './components/home/search/search.component';
 import { AdvertisementCreateComponent } from './components/home/advertisement-create/advertisement-create.component';
+import { AdvertisementOwnerComponent } from './components/home/advertisement-owner/advertisement-owner.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { AdvertisementCreateComponent } from './components/home/advertisement-cr
         AdvertisementEditComponent,
         RegisterComponent,
         SearchComponent,
-        AdvertisementCreateComponent
+        AdvertisementCreateComponent,
+        AdvertisementOwnerComponent
     ],
     entryComponents: [],
     imports: [

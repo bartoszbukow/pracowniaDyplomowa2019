@@ -34,7 +34,8 @@
                       (click)="onSelect(advertisement)">
                 SZCZEGÓŁY OFERTY
               </button>
-              <button type="button"
+              <button *ngIf="IAmOwnerOfAdvertisement(advertisement)"
+                      type="button"
                       class="btn btn-sm btn-outline-secondary button-box__edit">
                 EDYCJA
               </button>

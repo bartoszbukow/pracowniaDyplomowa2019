@@ -44,6 +44,7 @@ namespace EstateAgency.Controllers
         protected UserManager<ApplicationUser> UserManager { get; private set; }
         protected IConfiguration Configuration { get; private set; }
         protected JsonSerializerSettings JsonSettings { get; private set; }
+        protected Task<ApplicationUser> GetCurrentUserAsync() => this.UserManager.GetUserAsync(HttpContext.User);
 
         #endregion
     }

@@ -1,8 +1,9 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { ApiService } from '../../../services/api.service';
 import { AuthService } from '../../../services/auth.service';
-declare let $: any; 
+import { Location } from '@angular/common';
+declare let $: any;
 
 @Component({
     selector: 'app-advertisement',
@@ -18,8 +19,8 @@ export class AdvertisementComponent implements OnInit {
         private router: Router,
         private api: ApiService,
         public auth: AuthService,
-        @Inject('BASE_URL') baseUrl: string)
-    {
+        @Inject('BASE_URL') baseUrl: string,
+        private _location: Location) {
         this.url = baseUrl;
     }
 
@@ -31,7 +32,6 @@ export class AdvertisementComponent implements OnInit {
         if (id) {
             this.api.getAdvertisement(id).subscribe(res => {
                 this.advertisement = res;
-                console.log(res);
             });
         }
         else {
@@ -65,5 +65,9 @@ export class AdvertisementComponent implements OnInit {
 
     goToSlide = (index) => {
         $(this.slider.nativeElement).carousel(index);
+    }
+
+    backClicked() {
+        this._location.back();
     }
 }

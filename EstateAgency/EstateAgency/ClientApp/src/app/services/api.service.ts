@@ -20,7 +20,11 @@ export class ApiService {
     }
 
     getAdvertisementList() {
-        return this.http.get<IAdvertisement[]>(this.url + "api/advertisement/Latest/10");
+        return this.http.get<IAdvertisement[]>(this.url + "api/advertisement/Latest/9");
+    }
+
+    getAdvertisementListOfUser() {
+        return this.http.get<IAdvertisement[]>(this.url + "api/advertisement/MyAdvertisement");
     }
 
     getAdvertisement(id) {
@@ -37,5 +41,9 @@ export class ApiService {
 
     deleteAdvertisement(id) {
       return this.http.delete<IAdvertisement>(this.url + "api/advertisement/" + id, id);
+    }
+
+    getUserId() {
+        return this.http.get(this.url + "api/user/UserId");
     }
 }

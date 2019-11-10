@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using EstateAgency.Data;
 using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
@@ -200,6 +201,33 @@ namespace EstateAgency.Controllers
             var random = _dbContext.Advertisements.OrderBy(q => Guid.NewGuid()).Take(num).ToArray();
 
             return new JsonResult(random.Adapt<AdvertisementViewModel[]>(), JsonSettings);
+        }
+
+        [HttpGet("MyAdvertisement")]
+        public async Task<IActionResult> MyAdvertisement()
+        {
+            var requestUser = await GetCurrentUserAsync();
+            if (requestUser == null)
+            {
+                return Unauthorized();
+            }
+
+            var advertisements = _dbContext.Advertisements.Where(i => i.User.Id == requestUser.Id).ToArray(); 
+
+            if (advertisements == null)
+            {
+                return NotFound(new
+                {
+                    Error = $"User with ID {requestUser.Id} has no adverts"
+                });
+            }
+
+            foreach(var advertisement in advertisements)
+            {
+                advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
+            }
+            
+            return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
 
         #endregion

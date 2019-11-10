@@ -9,6 +9,9 @@
     <a *ngIf="!this.isLoggedIn()" mat-list-item [routerLink]="'/login'" (click)="sidenavCloce();"> Logowanie </a>
 
     <hr *ngIf="this.isLoggedIn()" class="hr-style" />
+    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/advertisement/my'" (click)="sidenavCloce();"> Moje Ogłoszenia </a>
+
+    <hr *ngIf="this.isLoggedIn()" class="hr-style" />
     <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/advertisement/create'" (click)="sidenavCloce();"> Utwórz Ogłoszenie </a>
 
     <hr *ngIf="this.isLoggedIn()" class="hr-style" />

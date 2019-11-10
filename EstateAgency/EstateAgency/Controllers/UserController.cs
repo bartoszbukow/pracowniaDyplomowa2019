@@ -54,6 +54,18 @@ namespace EstateAgency.Controllers
             DbContext.SaveChanges();
             return Json(user.Adapt<UserViewModel>(), JsonSettings);
         }
+
+        [HttpGet("UserId")]
+        public async Task<IActionResult> MyAdvertisement()
+        {
+            var requestUser = await GetCurrentUserAsync();
+            if (requestUser == null)
+            {
+                return Unauthorized();
+            }
+
+            return new JsonResult(requestUser.Id, JsonSettings);
+        }
         #endregion
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { Router } from "@angular/router";
 
@@ -8,10 +8,10 @@ import { Router } from "@angular/router";
     styleUrls: ['./advertisement-list.component.css']
 })
 export class AdvertisementListComponent implements OnInit {
-    title: string;
     selectedAdvertisement: IAdvertisement;
-    advertisements: IAdvertisement[];
+    @Input() advertisements: IAdvertisement[];
     url: string;
+    private userId: string;
 
     constructor(private api: ApiService,
         private router: Router,
@@ -26,9 +26,13 @@ export class AdvertisementListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.title = "Latest Advertisements";
-        this.api.getAdvertisementList().subscribe(res => {
-            this.advertisements = res;
-        });
+        this.api.getUserId().subscribe(res => { this.userId = <string>res });
+    }
+
+    IAmOwnerOfAdvertisement(advertisement) {
+        if (advertisement.userId === this.userId) {
+            return true;
+        }
+        return false;
     }
 }

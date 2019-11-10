@@ -7,10 +7,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AdvertisementEditComponent } from './components/home/advertisement-edit/advertisement-edit.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AdvertisementCreateComponent } from './components/home/advertisement-create/advertisement-create.component';
+import { AdvertisementOwnerComponent } from './components/home/advertisement-owner/advertisement-owner.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
+    { path: 'advertisement/my', component: AdvertisementOwnerComponent },
     { path: 'advertisement/create', component: AdvertisementCreateComponent },
     { path: 'advertisement/edit/:id', component: AdvertisementEditComponent },
     { path: 'advertisement/:id', component: AdvertisementComponent },
