@@ -36,7 +36,8 @@
               </button>
               <button *ngIf="IAmOwnerOfAdvertisement(advertisement)"
                       type="button"
-                      class="btn btn-sm btn-outline-secondary button-box__edit">
+                      class="btn btn-sm btn-outline-secondary button-box__edit"
+                      (click)="onEdit(advertisement)">
                 EDYCJA
               </button>
             </div>

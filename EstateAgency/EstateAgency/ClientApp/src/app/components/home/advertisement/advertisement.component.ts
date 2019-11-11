@@ -44,17 +44,6 @@ export class AdvertisementComponent implements OnInit {
         })
     }
 
-    //onEdit() {
-    //    this.router.navigate(["advertisement/edit", this.advertisement.id]);
-    //}
-
-    //onDelete() {
-    //    this.api.deleteAdvertisement(this.advertisement.id).subscribe(res => {
-    //        console.log("Advertisement " + this.advertisement.id + " has been deleted.");
-    //        this.router.navigate(["home"]);
-    //    }, error => console.log(error));
-    //}
-
     prevSlide = () => {
         $(this.slider.nativeElement).carousel('prev');
     }

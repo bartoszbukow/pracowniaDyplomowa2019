@@ -1,9 +1,14 @@
 <div class="backToMainPage">
-  <div class="button-box">
-    <button class="btn btn-sm btn-outline-secondary" [routerLink]="['/home']">
-      <i class="fas fa-chevron-left"></i>
-      <span class="button-box__text">Powrót</span>
-    </button>
+  <div class="header-box">
+    <div class="button-box">
+      <button class="btn btn-sm btn-outline-secondary" (click)="backClicked()">
+        <i class="fas fa-chevron-left"></i>
+        <span class="button-box__text">Powrót</span>
+      </button>
+    </div>
+    <div class="title-box">
+      NOWE OGŁOSZENIE
+    </div>
   </div>
 </div>
 <div class="advertisement-create-box">
@@ -131,14 +136,16 @@
       </div>
 
       <div class="photos-box__content">
-        <div *ngFor="let selectedFile of selectedFileList" class="add-photo-area">
+        <div *ngFor="let selectedFile of selectedFileList; let i = index" class="add-photo-area">
           <div class="img-preview-container">
             <div class="img-preview"
-                 [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+                 [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"
+                 id="{{ i }}"
+                 (click)="removeImage(i)">
+              <i class="fas fa-trash-alt"></i>
             </div>
           </div>
         </div>
-
         <div *ngIf="selectedFileList.length < 8" class="add-photo-area">
           <button (click)="file.click()">
             <i class="fas fa-plus"></i>

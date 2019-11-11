@@ -20,13 +20,18 @@ export class AdvertisementListComponent implements OnInit {
         this.url = baseUrl;
     }
 
+    ngOnInit() {
+        this.api.getUserId().subscribe(res => { this.userId = <string>res });
+    }
+
     onSelect(advertisement: IAdvertisement) {
         this.selectedAdvertisement = advertisement;
         this.router.navigate(["advertisement", this.selectedAdvertisement.id]);
     }
 
-    ngOnInit() {
-        this.api.getUserId().subscribe(res => { this.userId = <string>res });
+    onEdit(advertisement: IAdvertisement) {
+        this.selectedAdvertisement = advertisement;
+        this.router.navigate(["advertisement/edit", this.selectedAdvertisement.id]);
     }
 
     IAmOwnerOfAdvertisement(advertisement) {

@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AdvertisementModel } from "./../../../models/advertisement.model";
 import { ApiService } from '../../../services/api.service';
 import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 class ImageSnipped {
     constructor(public src: string, public file: File) {
@@ -21,16 +22,14 @@ export class AdvertisementCreateComponent implements OnInit {
     advertisementModel: AdvertisementModel = new AdvertisementModel();
     selectedFileList: Array<ImageSnipped>;
 
-    //public progress: number;
-    //public message: string;
-
     formData: FormData = new FormData();
 
     constructor(
         private fb: FormBuilder,
         private api: ApiService,
         private router: Router,
-        private toastr: ToastrService) { }
+        private toastr: ToastrService,
+        private _location: Location) { }
 
     ngOnInit() {
         this.selectedFileList = new Array<ImageSnipped>();
@@ -92,7 +91,6 @@ export class AdvertisementCreateComponent implements OnInit {
         this.api.postAdvertisement(this.formData, additionalData)
             .subscribe(event => {
                 this.toastr.success("Ogłoszenie zostało utworzone", "Sukces!");
-                //}
                 this.router.navigate(["home"]);
             }, error => {
                 this.toastr.error("Nie udało się dodać ogłoszenia", "Error!");
@@ -119,6 +117,16 @@ export class AdvertisementCreateComponent implements OnInit {
             });
 
             reader.readAsDataURL(file);
+        }
+    }
+
+    backClicked() {
+        this._location.back();
+    }
+
+    removeImage(i) {
+        if (i !== undefined) {
+            this.selectedFileList.splice(i, 1);
         }
     }
 }
