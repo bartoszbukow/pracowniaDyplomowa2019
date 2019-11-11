@@ -103,7 +103,7 @@ namespace EstateAgency.Controllers
                 {
                     var fileName = Guid.NewGuid().ToString() + ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine(folderName, fileName); 
+                    var dbPath = Path.Combine(folderName, fileName);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
@@ -122,29 +122,72 @@ namespace EstateAgency.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut("update")]
         [Authorize]
-        public IActionResult Put([FromBody]AdvertisementViewModel model)
+        public IActionResult Put(IFormCollection form)
         {
-            if (model == null) return new StatusCodeResult(500);
+            if (form == null) return new StatusCodeResult(500);
 
-            var advertisement = _dbContext.Advertisements.FirstOrDefault(q => q.Id == model.Id);
+            var advertisement = _dbContext.Advertisements.FirstOrDefault(q => q.Id == form["id"]);
 
             if (advertisement == null)
             {
-                return NotFound(new { Error = $"Advertisement ID {model.Id} has not been found" });
+                return NotFound(new { Error = $"Advertisement ID {form["id"]} has not been found" });
             }
 
-            advertisement.Title = model.Title;
-            advertisement.Description = model.Description;
-            advertisement.Price = model.Price;
-            advertisement.Yardage = model.Yardage;
-            advertisement.Category = model.Category;
-            advertisement.LastModifiedDate = advertisement.CreatedDate;
+            advertisement.Title = form["title"];
+            advertisement.Description = form["description"];
+            advertisement.Price = Convert.ToDouble(form["price"]);
+            advertisement.Yardage = Convert.ToDouble(form["yardage"]);
+            advertisement.Category = form["category"];
+            advertisement.Type = Convert.ToInt32(form["type"]);
+            advertisement.LastModifiedDate = DateTime.Now;
+            advertisement.NumberOfRoom = Convert.ToInt32(form["numberOfRoom"]);
+            advertisement.City = form["city"];
+            advertisement.Address = form["address"];
+
+            advertisement.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            //var images = _dbContext.Images.Where(q => q.AdvertisementId == form["id"]).ToList();
+            var images = form["images"];
+
+            foreach(var image in images)
+            {
+                var item = image;
+            }
+
+            //foreach(var image in advertisement.Images)
+            //{
+            //    foreach(var imageFromForm in images)
+            //    {
+            //        if(image.Id == imageFromForm.Id)
+            //        {
+
+            //        }
+            //    }
+            //}
+
+            //foreach (var image in images)
+            //{
+            //    if (!advertisement.Images.Contains(image))
+            //    {
+            //        _dbContext.Images.Remove(image);
+            //    };
+            //}
 
             _dbContext.SaveChanges();
 
-            return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
+            //advertisement.Title = model.Title;
+            //advertisement.Description = model.Description;
+            //advertisement.Price = model.Price;
+            //advertisement.Yardage = model.Yardage;
+            //advertisement.Category = model.Category;
+            //advertisement.LastModifiedDate = advertisement.CreatedDate;
+
+            //_dbContext.SaveChanges();
+
+            //return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
+            return Ok();
         }
 
         [HttpDelete("{id}")]
@@ -212,7 +255,7 @@ namespace EstateAgency.Controllers
                 return Unauthorized();
             }
 
-            var advertisements = _dbContext.Advertisements.Where(i => i.User.Id == requestUser.Id).ToArray(); 
+            var advertisements = _dbContext.Advertisements.Where(i => i.User.Id == requestUser.Id).ToArray();
 
             if (advertisements == null)
             {
@@ -222,11 +265,11 @@ namespace EstateAgency.Controllers
                 });
             }
 
-            foreach(var advertisement in advertisements)
+            foreach (var advertisement in advertisements)
             {
                 advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
             }
-            
+
             return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
 

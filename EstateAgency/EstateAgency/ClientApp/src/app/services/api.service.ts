@@ -31,8 +31,8 @@ export class ApiService {
         return this.http.get<IAdvertisement>(this.url + "api/advertisement/" + id);
     }
 
-    putAdvertisement(advertisement) {
-        return this.http.put<IAdvertisement>(this.url + "api/advertisement", advertisement);
+    putAdvertisement(advertisement, additionalData) {
+        return this.http.put<IAdvertisement>(this.url + "api/advertisement/update", advertisement, additionalData);
     }
 
     postAdvertisement(advertisement, additionalData) {

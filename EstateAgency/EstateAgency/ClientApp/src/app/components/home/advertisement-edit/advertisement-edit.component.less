@@ -233,14 +233,12 @@
         }
 
         .img-preview-container {
-          background-color: rgba(247, 247, 247, 1);
           position: relative;
 
           .img-preview {
             background: center center no-repeat;
             background-size: contain;
             height: 100px;
-            width: 100px;
 
             .fa-trash-alt {
               display: none;
@@ -259,6 +257,43 @@
               display: block;
               opacity: 1;
             }
+          }
+        }
+
+        .img-container {
+          position: relative;
+          text-align: center;
+          margin: 1em 0;
+
+          .img {
+            background: center center no-repeat;
+            background-size: contain;
+            max-height: 100%;
+          }
+
+          img {
+            display: inline-block;
+            width: 100%;
+            vertical-align: middle;
+          }
+        }
+
+        .fa-trash-alt-edit {
+          width: 100%;
+          height: 100%;
+          transform: translateY(-100px);
+
+          .fa-trash-alt {
+            display: none;
+            width: 100px;
+            height: 100px;
+            padding: 35px;
+          }
+        }
+
+        .fa-trash-alt-edit:hover {
+          .fa-trash-alt {
+            display: block;
           }
         }
       }

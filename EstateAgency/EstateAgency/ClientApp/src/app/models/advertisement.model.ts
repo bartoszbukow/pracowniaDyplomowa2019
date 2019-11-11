@@ -1,4 +1,5 @@
 export class AdvertisementModel {
+    id?: string;
     title: String;
     category: String;
     desciption: String;
@@ -7,5 +8,6 @@ export class AdvertisementModel {
     price: Number;
     city: string;
     address: string;
+    images?: any;
 }
 

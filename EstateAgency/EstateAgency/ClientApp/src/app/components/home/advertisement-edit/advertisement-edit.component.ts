@@ -22,6 +22,7 @@ export class AdvertisementEditComponent implements OnInit {
     advertisementModel: AdvertisementModel = new AdvertisementModel();
     selectedFileList: Array<ImageSnipped>;
     formData: FormData = new FormData();
+    numberOfPhotos: number = 0;
 
     constructor(
         private fb: FormBuilder,
@@ -41,6 +42,7 @@ export class AdvertisementEditComponent implements OnInit {
         if (id) {
             this.api.getAdvertisement(id).subscribe(res => {
                 this.editAdvertisementForm.setValue({
+                    id: res.id,
                     title: res.title,
                     category: res.category,
                     description: res.description,
@@ -48,8 +50,11 @@ export class AdvertisementEditComponent implements OnInit {
                     numberOfRoom: res.numberOfRoom,
                     price: res.price,
                     city: res.city,
-                    address: res.address
-                })
+                    address: res.address,
+                    images: res.images
+                });
+
+                this.numberOfPhotos = res.images.length;
             });
         }
         else {
@@ -60,6 +65,7 @@ export class AdvertisementEditComponent implements OnInit {
 
     createForm() {
         this.editAdvertisementForm = this.fb.group({
+            id: [this.advertisementModel.id],
             title: [this.advertisementModel.title, Validators.compose([
                 Validators.required
             ])],
@@ -83,7 +89,8 @@ export class AdvertisementEditComponent implements OnInit {
             ])],
             address: [this.advertisementModel.address, Validators.compose([
                 Validators.required
-            ])]
+            ])],
+            images: [this.advertisementModel.images]
         });
     }
 
@@ -101,6 +108,8 @@ export class AdvertisementEditComponent implements OnInit {
             return;
         }
 
+        console.log(this.editAdvertisementForm.value)
+
         for (var key in this.editAdvertisementForm.value) {
             if (this.editAdvertisementForm.value.hasOwnProperty(key)) {
                 let element = this.editAdvertisementForm.value[key];
@@ -110,8 +119,10 @@ export class AdvertisementEditComponent implements OnInit {
 
         let additionalData = { reportProgress: true, observe: 'events' };
 
-        this.api.postAdvertisement(this.formData, additionalData)
-            .subscribe(event => {
+        console.log(this.editAdvertisementForm.value.images);
+
+        this.api.putAdvertisement(this.formData, additionalData)
+            .subscribe(res => {
                 this.toastr.success("Ogłoszenie zostało edytowane", "Sukces!");
                 this.router.navigate(["home"]);
             }, error => {
@@ -133,7 +144,8 @@ export class AdvertisementEditComponent implements OnInit {
         for (let file of files) {
             let reader = new FileReader();
             reader.addEventListener('load', (event: any) => {
-                if (this.selectedFileList.length < 8) {
+                if (this.numberOfPhotos < 8) {
+                    this.numberOfPhotos += 1;
                     this.selectedFileList.push(new ImageSnipped(event.target.result, file));
                 }
             });
@@ -146,9 +158,17 @@ export class AdvertisementEditComponent implements OnInit {
         this._location.back();
     }
 
-    removeImage(i) {
+    removePreviewImage(i) {
         if (i !== undefined) {
             this.selectedFileList.splice(i, 1);
+            this.numberOfPhotos -= 1;
+        }
+    }
+
+    removeNewImage(i) {
+        if (i !== undefined) {
+            this.editAdvertisementForm.value.images.splice(i, 1);
+            this.numberOfPhotos -= 1;
         }
     }
 }
