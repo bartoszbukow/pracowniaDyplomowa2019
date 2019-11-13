@@ -101,7 +101,7 @@ namespace EstateAgency.Controllers
             {
                 foreach (var file in files)
                 {
-                    var image = new Image(){ Id = Guid.NewGuid().ToString() };
+                    var image = new Image() { Id = Guid.NewGuid().ToString() };
                     var fileName = image.Id.ToString() + Path.GetExtension(file.FileName);
                     var fullPath = Path.Combine(pathToSave, fileName);
                     var dbPath = Path.Combine(folderName, fileName);
@@ -167,7 +167,7 @@ namespace EstateAgency.Controllers
                 {
                     _dbContext.Images.Remove(image);
                     var fileName = Path.GetFileName(image.Id);
-                    string[] pathToFile = System.IO.Directory.GetFiles(pathToSave, fileName +".*");
+                    string[] pathToFile = System.IO.Directory.GetFiles(pathToSave, fileName + ".*");
                     foreach (string f in pathToFile)
                     {
                         System.IO.File.Delete(f);
@@ -183,7 +183,7 @@ namespace EstateAgency.Controllers
             {
                 foreach (var file in files)
                 {
-                    var image = new Image(){ Id = Guid.NewGuid().ToString() };
+                    var image = new Image() { Id = Guid.NewGuid().ToString() };
                     var fileName = image.Id.ToString() + Path.GetExtension(file.FileName);
                     var fullPath = Path.Combine(pathToSave, fileName);
                     var dbPath = Path.Combine(folderName, fileName);
@@ -199,7 +199,7 @@ namespace EstateAgency.Controllers
                     _dbContext.Images.Add(image);
                 }
             }
-            
+
             if (files.Count == 0 && imagesId.Count == 0)
             {
                 _dbContext.Images.Add(new Image()
@@ -214,15 +214,31 @@ namespace EstateAgency.Controllers
             return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete")]
         [Authorize]
-        public IActionResult Delete(string id)
+        public IActionResult Delete([FromBody] AdvertisementDeleteViewModel model)
         {
-            var advertisement = _dbContext.Advertisements.FirstOrDefault(i => i.Id == id);
+            var advertisement = _dbContext.Advertisements.FirstOrDefault(i => i.Id == model.Id);
 
             if (advertisement == null)
             {
-                return NotFound(new { Error = $"Advertisement ID {id} has not been found" });
+                return NotFound(new { Error = $"Advertisement ID {model.Id} has not been found" });
+            }
+
+            advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
+
+            var folderName = Path.Combine("wwwroot", "Images");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+            foreach (var image in advertisement.Images)
+            {
+                _dbContext.Images.Remove(image);
+                var fileName = Path.GetFileName(image.Id);
+                string[] pathToFile = System.IO.Directory.GetFiles(pathToSave, fileName + ".*");
+                foreach (string f in pathToFile)
+                {
+                    System.IO.File.Delete(f);
+                }
             }
 
             _dbContext.Advertisements.Remove(advertisement);

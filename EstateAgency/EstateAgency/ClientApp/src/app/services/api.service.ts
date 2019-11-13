@@ -39,8 +39,8 @@ export class ApiService {
         return this.http.post<IAdvertisement>(this.url + "api/advertisement/create", advertisement, additionalData);
     }
 
-    deleteAdvertisement(id) {
-      return this.http.delete<IAdvertisement>(this.url + "api/advertisement/" + id, id);
+    deleteAdvertisement(data) {
+        return this.http.delete(this.url + "api/advertisement/delete", data);
     }
 
     getUserId() {

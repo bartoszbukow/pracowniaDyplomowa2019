@@ -178,14 +178,20 @@
                editAdvertisementForm.value.city &&
                editAdvertisementForm.value.address)"
                   (click)="editAdvertisement()">
-            Edytuj Ogłoszenie
+            Edytuj
           </button>
 
           <button type="submit"
                   class="btn btn-sm btn-outline-secondary"
+                  (click)="deleteAdvertisement()">
+            Usuń
+          </button>
+
+          <!--<button type="submit"
+                  class="btn btn-sm btn-outline-secondary"
                   [routerLink]="['/home']">
             Anuluj
-          </button>
+          </button>-->
         </div>
       </div>
     </div>

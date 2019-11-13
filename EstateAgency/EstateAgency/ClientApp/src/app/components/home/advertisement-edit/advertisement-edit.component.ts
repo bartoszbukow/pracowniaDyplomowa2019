@@ -181,4 +181,21 @@ export class AdvertisementEditComponent implements OnInit {
             this.numberOfPhotos -= 1;
         }
     }
+
+    deleteAdvertisement() {
+        let data = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: {
+                id: this.editAdvertisementForm.value.id
+            }
+        }
+        this.api.deleteAdvertisement(data).subscribe(res => {
+            this.toastr.success("Ogłoszenie zostało usunięte", "Sukces!");
+            this.router.navigate(["home"]);
+        }, error => {
+            this.toastr.error("Nie udało się usunąć ogłoszenia", "Error!");
+        });
+    }
 }
