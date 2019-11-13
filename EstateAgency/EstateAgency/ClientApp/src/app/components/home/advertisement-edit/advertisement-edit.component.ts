@@ -55,6 +55,10 @@ export class AdvertisementEditComponent implements OnInit {
                 });
 
                 this.numberOfPhotos = res.images.length;
+
+                if (this.editAdvertisementForm.value.images[0].path === "empty-photo.jpg") {
+                    this.removeNewImage(0);
+                }
             });
         }
         else {
@@ -108,18 +112,24 @@ export class AdvertisementEditComponent implements OnInit {
             return;
         }
 
-        console.log(this.editAdvertisementForm.value)
-
         for (var key in this.editAdvertisementForm.value) {
             if (this.editAdvertisementForm.value.hasOwnProperty(key)) {
-                let element = this.editAdvertisementForm.value[key];
-                this.formData.append(key, element);
+                if (key === "images") {
+                    let element = this.editAdvertisementForm.value[key];
+                    for (var i = 0; i < element.length; i++) {
+                        var value = element[i].id;
+                        var id = "image" + i;
+                        this.formData.append(id, value);
+                    }
+                }
+                else {
+                    let element = this.editAdvertisementForm.value[key];
+                    this.formData.append(key, element);
+                }
             }
         }
 
         let additionalData = { reportProgress: true, observe: 'events' };
-
-        console.log(this.editAdvertisementForm.value.images);
 
         this.api.putAdvertisement(this.formData, additionalData)
             .subscribe(res => {

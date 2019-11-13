@@ -62,7 +62,7 @@ namespace EstateAgency.Controllers
 
         [HttpPost("create"), DisableRequestSizeLimit]
         [Authorize]
-        public IActionResult Post(IFormCollection form)
+        public IActionResult Post([FromForm] IFormCollection form)
         {
             if (form == null) return new StatusCodeResult(500);
 
@@ -101,7 +101,8 @@ namespace EstateAgency.Controllers
             {
                 foreach (var file in files)
                 {
-                    var fileName = Guid.NewGuid().ToString() + ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var image = new Image(){ Id = Guid.NewGuid().ToString() };
+                    var fileName = image.Id.ToString() + Path.GetExtension(file.FileName);
                     var fullPath = Path.Combine(pathToSave, fileName);
                     var dbPath = Path.Combine(folderName, fileName);
 
@@ -110,11 +111,10 @@ namespace EstateAgency.Controllers
                         file.CopyTo(stream);
                     }
 
-                    _dbContext.Images.Add(new Image()
-                    {
-                        AdvertisementId = advertisement.Id,
-                        Path = dbPath
-                    });
+                    image.AdvertisementId = advertisement.Id;
+                    image.Path = dbPath;
+
+                    _dbContext.Images.Add(image);
                 }
             }
             _dbContext.SaveChanges();
@@ -124,7 +124,7 @@ namespace EstateAgency.Controllers
 
         [HttpPut("update")]
         [Authorize]
-        public IActionResult Put(IFormCollection form)
+        public IActionResult Put([FromForm] IFormCollection form)
         {
             if (form == null) return new StatusCodeResult(500);
 
@@ -148,46 +148,70 @@ namespace EstateAgency.Controllers
 
             advertisement.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            //var images = _dbContext.Images.Where(q => q.AdvertisementId == form["id"]).ToList();
-            var images = form["images"];
+            advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
+            var imagesId = new List<string>();
 
-            foreach(var image in images)
+            int i = 0;
+            while (form["image" + i].ToString() != "")
             {
-                var item = image;
+                imagesId.Add(form["image" + i]);
+                i++;
             }
 
-            //foreach(var image in advertisement.Images)
-            //{
-            //    foreach(var imageFromForm in images)
-            //    {
-            //        if(image.Id == imageFromForm.Id)
-            //        {
+            var folderName = Path.Combine("wwwroot", "Images");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
-            //        }
-            //    }
-            //}
-
-            //foreach (var image in images)
-            //{
-            //    if (!advertisement.Images.Contains(image))
-            //    {
-            //        _dbContext.Images.Remove(image);
-            //    };
-            //}
+            foreach (var image in advertisement.Images)
+            {
+                if (!imagesId.Contains(image.Id))
+                {
+                    _dbContext.Images.Remove(image);
+                    var fileName = Path.GetFileName(image.Id);
+                    string[] pathToFile = System.IO.Directory.GetFiles(pathToSave, fileName +".*");
+                    foreach (string f in pathToFile)
+                    {
+                        System.IO.File.Delete(f);
+                    }
+                }
+            }
 
             _dbContext.SaveChanges();
 
-            //advertisement.Title = model.Title;
-            //advertisement.Description = model.Description;
-            //advertisement.Price = model.Price;
-            //advertisement.Yardage = model.Yardage;
-            //advertisement.Category = model.Category;
-            //advertisement.LastModifiedDate = advertisement.CreatedDate;
+            var files = Request.Form.Files;
 
-            //_dbContext.SaveChanges();
+            if (files.Count > 0)
+            {
+                foreach (var file in files)
+                {
+                    var image = new Image(){ Id = Guid.NewGuid().ToString() };
+                    var fileName = image.Id.ToString() + Path.GetExtension(file.FileName);
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
 
-            //return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
-            return Ok();
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    image.AdvertisementId = advertisement.Id;
+                    image.Path = dbPath;
+
+                    _dbContext.Images.Add(image);
+                }
+            }
+            
+            if (files.Count == 0 && imagesId.Count == 0)
+            {
+                _dbContext.Images.Add(new Image()
+                {
+                    AdvertisementId = advertisement.Id,
+                    Path = $"empty-photo.jpg"
+                });
+            }
+
+            _dbContext.SaveChanges();
+
+            return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
         }
 
         [HttpDelete("{id}")]
