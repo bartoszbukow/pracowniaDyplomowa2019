@@ -71,28 +71,44 @@ export class AdvertisementEditComponent implements OnInit {
         this.editAdvertisementForm = this.fb.group({
             id: [this.advertisementModel.id],
             title: [this.advertisementModel.title, Validators.compose([
-                Validators.required
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(50)
             ])],
             category: [this.advertisementModel.category, Validators.compose([
-                Validators.required
+                Validators.required,
             ])],
             description: [this.advertisementModel.desciption, Validators.compose([
-                Validators.required
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(2000)
             ])],
             yardage: [this.advertisementModel.yardage, Validators.compose([
-                Validators.required
+                Validators.required,
+                Validators.pattern('^[0-9]{1,}$'),
+                Validators.maxLength(10)
             ])],
             numberOfRoom: [this.advertisementModel.numberOfRoom, Validators.compose([
-                Validators.required
+                Validators.required,
+                Validators.pattern('^[0-9]{1,}$'),
+                Validators.maxLength(10)
             ])],
             price: [this.advertisementModel.price, Validators.compose([
-                Validators.required
+                Validators.required,
+                Validators.pattern('^[0-9]{1,}$'),
+                Validators.maxLength(20)
             ])],
             city: [this.advertisementModel.city, Validators.compose([
-                Validators.required
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(50),
+                Validators.pattern('^[A-ZĄĘŁŃÓŚŹŻ][a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]+(?:[\s-][a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]+)*$'),
             ])],
             address: [this.advertisementModel.address, Validators.compose([
-                Validators.required
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(50),
+                Validators.pattern('^[A-ZĄĘŁŃÓŚŹŻ][a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]+[ ]*[1-9]*[ ]*[/]*[ ]*[1-9]*$'),
             ])],
             images: [this.advertisementModel.images]
         });
