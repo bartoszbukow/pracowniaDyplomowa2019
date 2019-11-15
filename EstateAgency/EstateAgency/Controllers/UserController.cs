@@ -3,6 +3,7 @@ using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
 using EstateAgency.ViewModels.UserViewModels;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +27,7 @@ namespace EstateAgency.Controllers
         #region RESTful Conventions    
         
         [HttpPost()]
-        public async Task<IActionResult> Add([FromBody]UserViewModel model)
+        public async Task<IActionResult> UserAdd([FromBody]UserViewModel model)
         {
             if (model == null) return new StatusCodeResult(500);
             ApplicationUser user = await UserManager.FindByNameAsync(model.UserName);
@@ -58,6 +59,7 @@ namespace EstateAgency.Controllers
         }
 
         [HttpGet("UserId")]
+        [Authorize]
         public async Task<IActionResult> MyAdvertisement()
         {
             var requestUser = await GetCurrentUserAsync();
@@ -70,13 +72,52 @@ namespace EstateAgency.Controllers
         }
 
         [HttpPut("UserEdit")]
-        public async Task<IActionResult> Edit([FromBody] UserEditViewModel model)
+        [Authorize]
+        public async Task<IActionResult> UserEdit([FromBody] UserEditViewModel model)
         {
             if (model == null) return new StatusCodeResult(500);
-            ApplicationUser user = await UserManager.FindByNameAsync(model.Email);
+            ApplicationUser user = await UserManager.FindByEmailAsync(model.Email);
 
-            if (user == null) return BadRequest("The user does not exist");
-            return Ok();
+            if (user == null) return NotFound(new { Error = $"The user has not been found" });
+
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+            user.DisplayName = model.DisplayName;
+
+            await UserManager.UpdateAsync(user);
+
+            return new JsonResult(user.Adapt<UserEditViewModel>(), JsonSettings);
+        }
+
+        [HttpPut("UserChangePassword")]
+        [Authorize]
+        public async Task<IActionResult> UserChangePassword([FromBody] UserChangePasswordViewModel model)
+        {
+            if (model == null) return new StatusCodeResult(500);
+
+            string userId = User.Claims.First(c => c.Type == "UserID").Value;
+            var user = await UserManager.FindByIdAsync(userId);
+            var result = await UserManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+            return new JsonResult(user.Adapt<UserEditViewModel>(), JsonSettings);
+        }
+
+        [HttpDelete("UserDelete")]
+        [Authorize]
+        public async Task<IActionResult> UserDelete([FromBody] UserDeleteViewModel model)
+        {
+            if (model == null) return new StatusCodeResult(500);
+
+            var user = await UserManager.FindByIdAsync(model.Id);
+            var advertisements = DbContext.Advertisements.Where(q => q.UserId == model.Id);
+
+            foreach (var advertisement in advertisements)
+            {
+                DbContext.Advertisements.Remove(advertisement);
+            }
+
+            await UserManager.DeleteAsync(user);
+            return new OkResult();
         }
 
         #endregion
