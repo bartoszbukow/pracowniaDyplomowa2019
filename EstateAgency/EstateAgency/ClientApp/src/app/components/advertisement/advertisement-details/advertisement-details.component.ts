@@ -6,9 +6,9 @@ import { Location } from '@angular/common';
 declare let $: any;
 
 @Component({
-    selector: 'app-advertisement',
-    templateUrl: './advertisement.component.html',
-    styleUrls: ['./advertisement.component.css']
+    selector: 'app-advertisement-details',
+    templateUrl: './advertisement-details.component.html',
+    styleUrls: ['./advertisement-details.component.css']
 })
 export class AdvertisementComponent implements OnInit {
     advertisement: IAdvertisement;

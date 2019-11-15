@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
 
         this.authService.login(email, password).subscribe(res => {
             if (res) {
-                this.toastr.success("Logowanie przebiegło pomyślnie.", "Sukces!");
+                this.toastr.success("Zalogowano do systemu.", "Sukces!");
                 this.authService.redirectTo ? this.router.navigate(([this.authService.redirectTo])) : this.router.navigate((['']));
                 this.authService.redirectTo = "";
             } else {

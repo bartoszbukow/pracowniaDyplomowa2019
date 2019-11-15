@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { AdvertisementComponent } from './components/home/advertisement/advertisement.component';
+import { HomeComponent } from './components/advertisement/home.component';
+import { AdvertisementComponent } from './components/advertisement/advertisement-details/advertisement-details.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AdvertisementEditComponent } from './components/home/advertisement-edit/advertisement-edit.component';
+import { AdvertisementEditComponent } from './components/advertisement/advertisement-edit/advertisement-edit.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AdvertisementCreateComponent } from './components/home/advertisement-create/advertisement-create.component';
-import { AdvertisementOwnerComponent } from './components/home/advertisement-owner/advertisement-owner.component';
+import { AdvertisementCreateComponent } from './components/advertisement/advertisement-create/advertisement-create.component';
+import { AdvertisementOwnerComponent } from './components/advertisement/advertisement-owner/advertisement-owner.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
