@@ -1,6 +1,7 @@
 ﻿using EstateAgency.Data;
 using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
+using EstateAgency.ViewModels.UserViewModels;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,8 @@ namespace EstateAgency.Controllers
             IConfiguration configuration) : base(context, roleManager, userManager, configuration) { }
         #endregion
 
-        #region RESTful Conventions              
+        #region RESTful Conventions    
+        
         [HttpPost()]
         public async Task<IActionResult> Add([FromBody]UserViewModel model)
         {
@@ -66,6 +68,17 @@ namespace EstateAgency.Controllers
 
             return new JsonResult(requestUser.Id, JsonSettings);
         }
+
+        [HttpPut("UserEdit")]
+        public async Task<IActionResult> Edit([FromBody] UserEditViewModel model)
+        {
+            if (model == null) return new StatusCodeResult(500);
+            ApplicationUser user = await UserManager.FindByNameAsync(model.Email);
+
+            if (user == null) return BadRequest("The user does not exist");
+            return Ok();
+        }
+
         #endregion
     }
 }

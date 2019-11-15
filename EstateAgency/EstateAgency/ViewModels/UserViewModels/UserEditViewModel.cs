@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EstateAgency.ViewModels
+namespace EstateAgency.ViewModels.UserViewModels
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class UserViewModel
+    public class UserEditViewModel
     {
         #region Constructor    
         
-        public UserViewModel()
+        public UserEditViewModel()
         {
 
         }
@@ -22,8 +22,6 @@ namespace EstateAgency.ViewModels
         
         [JsonProperty("userName")]
         public string UserName { get; set; }
-        [JsonProperty("password")]
-        public string Password { get; set; }
         [JsonProperty("email")]
         public string Email { get; set; }
         [JsonProperty("displayName")]
