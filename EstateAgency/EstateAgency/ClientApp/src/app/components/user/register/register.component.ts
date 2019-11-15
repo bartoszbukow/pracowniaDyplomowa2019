@@ -1,7 +1,7 @@
-import { ApiService } from '../../services/api.service';
-import { RegisterModel } from "./../../models/register.model";
+import { ApiService } from '../../../services/api.service';
+import { RegisterModel } from "./../../../models/register.model";
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
