@@ -1,1 +1,72 @@
-<p>user-edit works!</p>
+<div class="h-100 mt-3">
+  <div class="row justify-content-center align-items-center m-auto user-edit-form">
+    <div class="card rounded shadow bg-white w-100">
+      <div class="card-body">
+        <img id="user-edit-img" class="user-edit-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <div class="list-header-title">Edycja Profilu Użytkownika</div>
+        <form [formGroup]="userEditForm" (ngSubmit)="editUser()">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Imie</label>
+                <input type="text"
+                       class="form-control"
+                       name="displayName"
+                       required
+                       formControlName="displayName"
+                       [ngClass]="{'is-invalid':hasError('displayName')}"
+                       autocomplete="displayName">
+                <div *ngIf="hasError('displayName')" class="invalid-feedback">
+                  Imie musi zawierać od 2 do 20 lister oraz pierwsza z nich musi być duża
+                </div>
+              </div>
+            </div>
+          </div><div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Nazwisko</label>
+                <input type="text"
+                       class="form-control"
+                       name="name"
+                       required
+                       formControlName="name"
+                       [ngClass]="{'is-invalid':hasError('name')}"
+                       autocomplete="name">
+                <div *ngIf="hasError('name')" class="invalid-feedback">
+                  Nazwisko musi zawierać od 2 do 20 lister oraz pierwsza z nich musi być duża
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Numer telefonu</label>
+                <input type="text"
+                       class="form-control"
+                       name="phoneNumber"
+                       required
+                       formControlName="phoneNumber"
+                       [ngClass]="{'is-invalid':hasError('phoneNumber')}"
+                       autocomplete="phoneNumber">
+                <div *ngIf="hasError('phoneNumber')" class="invalid-feedback">Numer telefonu powinien składać sie z 9 cyfr</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <input type="submit"
+                     class="btn btn-primary btn-lg btn-block mt-3"
+                     [disabled]="!userEditForm.value.email || !userEditForm.value.name || !userEditForm.value.displayName"
+                     value="Aktualizuj">
+            </div>
+          </div>
+        </form>
+        <hr />
+        <div class="col-md-12 p-0 mt-3">
+          <button type="submit" class="btn btn-light btn-lg btn-block" value="Anuluj" (click)="routeToHome()">Anuluj</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

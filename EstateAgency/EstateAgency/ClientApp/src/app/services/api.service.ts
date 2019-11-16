@@ -46,4 +46,13 @@ export class ApiService {
     getUserId() {
         return this.http.get(this.url + "api/user/UserId");
     }
+
+    getUserEditData() {
+        return this.http.get<IUser>(this.url + "api/user/UserEditData");
+    }
+
+    putUser(user) {
+        return this.http.put<IAdvertisement>(this.url + "api/user/UserEdit", user);
+    }
+    UserEdit
 }

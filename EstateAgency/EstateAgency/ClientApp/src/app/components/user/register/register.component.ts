@@ -49,6 +49,13 @@ export class RegisterComponent implements OnInit {
                 Validators.maxLength(20)
             ])],
 
+            phoneNumber: [this.user.phoneNumber, Validators.compose([
+                Validators.required,
+                Validators.pattern('^[0-9]{1,}$'),
+                Validators.maxLength(9),
+                Validators.minLength(9),
+            ])],
+
             password: [this.user.password, Validators.compose([
                 Validators.required,
                 Validators.pattern(/\d/),
@@ -75,6 +82,7 @@ export class RegisterComponent implements OnInit {
         var tempUser = <IUser>{};
         tempUser.userName = this.registerForm.value.name;
         tempUser.email = this.registerForm.value.email;
+        tempUser.phoneNumber = this.registerForm.value.phoneNumber;
         tempUser.password = this.registerForm.value.password;
         tempUser.displayName = this.registerForm.value.displayName;
 

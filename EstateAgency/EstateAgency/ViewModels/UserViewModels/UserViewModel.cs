@@ -28,6 +28,8 @@ namespace EstateAgency.ViewModels
         public string Email { get; set; }
         [JsonProperty("displayName")]
         public string DisplayName { get; set; }
+        [JsonProperty("phoneNumber")]
+        public string PhoneNumber { get; set; }
 
         #endregion
     }

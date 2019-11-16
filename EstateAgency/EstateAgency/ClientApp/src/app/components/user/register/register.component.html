@@ -59,6 +59,21 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
+                <label>Numer telefonu</label>
+                <input type="text"
+                       class="form-control"
+                       name="phoneNumber"
+                       required
+                       formControlName="phoneNumber"
+                       [ngClass]="{'is-invalid':hasError('phoneNumber')}"
+                       autocomplete="phoneNumber">
+                <div *ngIf="hasError('phoneNumber')" class="invalid-feedback">Numer telefonu powinien składać sie z 9 cyfr</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
                 <label>Hasło</label>
                 <input type="password"
                        formControlName="password"

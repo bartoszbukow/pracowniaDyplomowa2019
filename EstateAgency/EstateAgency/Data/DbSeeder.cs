@@ -55,7 +55,8 @@ namespace EstateAgency.Data
                 UserName = "Admin",
                 Email = "admin@testmakerfree.com",
                 CreatedDate = createdDate,
-                LastModifiedDate = lastModifiedDate
+                LastModifiedDate = lastModifiedDate,
+                PhoneNumber = "516603856"
             };
 
             // Insert "Admin" into the Database and assign the "Administrator" and "RegisteredUser" roles to him.
@@ -76,7 +77,8 @@ namespace EstateAgency.Data
                 UserName = "Ryan",
                 Email = "ryan@testmakerfree.com",
                 CreatedDate = createdDate,
-                LastModifiedDate = lastModifiedDate
+                LastModifiedDate = lastModifiedDate,
+                PhoneNumber = "515609978"
             };
             var user_Solice = new ApplicationUser()
             {
@@ -84,7 +86,8 @@ namespace EstateAgency.Data
                 UserName = "Solice",
                 Email = "solice@testmakerfree.com",
                 CreatedDate = createdDate,
-                LastModifiedDate = lastModifiedDate
+                LastModifiedDate = lastModifiedDate,
+                PhoneNumber = "603394456"
             };
             var user_Vodan = new ApplicationUser()
             {
@@ -92,7 +95,8 @@ namespace EstateAgency.Data
                 UserName = "Vodan",
                 Email = "vodan@testmakerfree.com",
                 CreatedDate = createdDate,
-                LastModifiedDate = lastModifiedDate
+                LastModifiedDate = lastModifiedDate,
+                PhoneNumber = "609354423"
             };
             
             /// Insert sample registered users into the Database and also assign the "Registered" role to him.

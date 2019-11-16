@@ -44,6 +44,7 @@ namespace EstateAgency.Controllers
                 UserName = model.UserName,
                 Email = model.Email,
                 DisplayName = model.DisplayName,
+                PhoneNumber = model.PhoneNumber,
                 CreatedDate = now,
                 LastModifiedDate = now
             };
@@ -81,7 +82,7 @@ namespace EstateAgency.Controllers
             if (user == null) return NotFound(new { Error = $"The user has not been found" });
 
             user.UserName = model.UserName;
-            user.Email = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
             user.DisplayName = model.DisplayName;
 
             await UserManager.UpdateAsync(user);
@@ -118,6 +119,19 @@ namespace EstateAgency.Controllers
 
             await UserManager.DeleteAsync(user);
             return new OkResult();
+        }
+
+        [HttpGet("UserEditData")]
+        [Authorize]
+        public async Task<IActionResult> UserEditData()
+        {
+            var requestUser = await GetCurrentUserAsync();
+            if (requestUser == null)
+            {
+                return Unauthorized();
+            }
+
+            return new JsonResult(requestUser.Adapt<UserEditViewModel>(), JsonSettings);
         }
 
         #endregion
