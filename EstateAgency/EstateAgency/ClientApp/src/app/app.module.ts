@@ -26,6 +26,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { UserMenuComponent } from './components/user/user-menu/user-menu.component';
 import { UserChangePasswordComponent } from './components/user/user-change-password/user-change-password.component';
+import { BackToPageComponent } from './components/back-to-page/back-to-page.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { UserChangePasswordComponent } from './components/user/user-change-passw
         AdvertisementOwnerComponent,
         UserEditComponent,
         UserMenuComponent,
-        UserChangePasswordComponent
+        UserChangePasswordComponent,
+        BackToPageComponent
     ],
     entryComponents: [],
     imports: [

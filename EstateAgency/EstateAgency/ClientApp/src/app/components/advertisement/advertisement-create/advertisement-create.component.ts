@@ -21,8 +21,12 @@ export class AdvertisementCreateComponent implements OnInit {
     createAdvertisementForm: FormGroup;
     advertisementModel: AdvertisementModel = new AdvertisementModel();
     selectedFileList: Array<ImageSnipped>;
-
     formData: FormData = new FormData();
+
+    dateToReturn: { title: string, pathToReturn:string } = {
+        title: "NOWE OGŁOSZENIE",
+        pathToReturn: "home"
+    }
 
     constructor(
         private fb: FormBuilder,

@@ -9,6 +9,11 @@ import { ApiService } from '../../../services/api.service';
 export class AdvertisementOwnerComponent implements OnInit {
     advertisements: IAdvertisement[];
 
+    dateToReturn: { title: string, pathToReturn: string } = {
+        title: "MOJE OGŁOSZENIA",
+        pathToReturn: "home"
+    }
+
     constructor(private api: ApiService) { }
 
     ngOnInit() {

@@ -15,6 +15,11 @@ export class AdvertisementComponent implements OnInit {
     url: string;
     @ViewChild('slider', { static: true }) slider: ElementRef;
 
+    dateToReturn: { title: string, pathToReturn: string } = {
+        title: "SZCZEGÓŁY OGŁOSZENIA",
+        pathToReturn: "locationBack"
+    }
+
     constructor(private activatedRoute: ActivatedRoute,
         private router: Router,
         private api: ApiService,

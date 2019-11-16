@@ -11,7 +11,7 @@ export class NavMenuComponent {
 
     @Output() sidenavToggle = new EventEmitter();
 
-    constructor(public auth: AuthService, private router: Router) { }
+    constructor(private auth: AuthService, private router: Router) { }
 
     logout(): boolean {
         if (this.auth.logout()) {

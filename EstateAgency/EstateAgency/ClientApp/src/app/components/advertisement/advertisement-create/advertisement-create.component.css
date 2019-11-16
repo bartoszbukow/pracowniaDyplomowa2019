@@ -2,37 +2,6 @@
   max-width: 81%;
   margin: 30px auto 0 auto;
 }
-.backToMainPage .header-box {
-  width: 100%;
-  height: 40px;
-}
-.backToMainPage .header-box .button-box {
-  float: left;
-  width: 140px;
-}
-.backToMainPage .header-box .button-box button {
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  color: #292929;
-  border: solid #D5DBE0 1px;
-}
-.backToMainPage .header-box .button-box button .button-box__text {
-  margin-left: 5px;
-  font-size: 17px;
-}
-.backToMainPage .header-box .button-box button:hover {
-  color: #fff;
-}
-.backToMainPage .header-box .title-box {
-  height: 40px;
-  float: left;
-  width: calc(100% - 140px);
-  font-size: 22px;
-  padding-left: 35px;
-  letter-spacing: 3px;
-  font-weight: 700;
-}
 .advertisement-create-box {
   margin: 20px 0;
   max-width: 81%;

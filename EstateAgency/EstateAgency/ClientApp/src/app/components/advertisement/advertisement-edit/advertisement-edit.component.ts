@@ -24,6 +24,11 @@ export class AdvertisementEditComponent implements OnInit {
     formData: FormData = new FormData();
     numberOfPhotos: number = 0;
 
+    dateToReturn: { title: string, pathToReturn: string } = {
+        title: "EDYCJA OGŁOSZENIA",
+        pathToReturn: "locationBack"
+    }
+
     constructor(
         private fb: FormBuilder,
         private api: ApiService,

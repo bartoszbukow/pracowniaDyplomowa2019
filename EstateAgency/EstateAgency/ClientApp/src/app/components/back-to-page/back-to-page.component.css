@@ -1,0 +1,32 @@
+.header-box {
+  width: 100%;
+  height: 40px;
+}
+.header-box .button-box {
+  float: left;
+  width: 140px;
+  height: 40px;
+}
+.header-box .button-box button {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  color: #292929;
+  border: solid #D5DBE0 1px;
+}
+.header-box .button-box button .button-box__text {
+  margin-left: 5px;
+  font-size: 17px;
+}
+.header-box .button-box button:hover {
+  color: #fff;
+}
+.header-box .title-box {
+  height: 40px;
+  float: left;
+  width: calc(100% - 140px);
+  font-size: 26px;
+  padding-left: 35px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
