@@ -6,20 +6,23 @@
           <mat-icon>menu</mat-icon>
         </button>
         <h1 class="title" [routerLink]='["/"]'>{{ this.title }}</h1>
-        <button mat-icon-button class="user-menu">
-          <mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
-        </button>
+        <div class="dropdown user-menu">
+          <button mat-icon-button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
+          </button>
+          <app-user-menu></app-user-menu>
+        </div>
       </mat-toolbar-row>
     </mat-toolbar>
   </header>
 
   <mat-sidenav-container>
-    <mat-sidenav #sidenav>
+    <mat-sidenav #sidenav style="height: 100vh;">
           <app-nav-menu (sidenavToggle)="sidenav.toggle()"></app-nav-menu>
     </mat-sidenav>
 
-    <mat-sidenav-content>
-      <div class="main-content" style="height: 100%; min-height: 88vh;"> <!--88-->
+    <mat-sidenav-content style="min-height: 100vh; padding-top: 64px;">
+      <div class="main-content"> <!--88-->
         <main>
           <router-outlet></router-outlet>
         </main>

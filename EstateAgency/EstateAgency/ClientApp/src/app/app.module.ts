@@ -23,6 +23,9 @@ import { SearchComponent } from './components/advertisement/search/search.compon
 import { AdvertisementCreateComponent } from './components/advertisement/advertisement-create/advertisement-create.component';
 import { AdvertisementOwnerComponent } from './components/advertisement/advertisement-owner/advertisement-owner.component';
 import { ToastrModule } from 'ngx-toastr';
+import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { UserMenuComponent } from './components/user/user-menu/user-menu.component';
+import { UserChangePasswordComponent } from './components/user/user-change-password/user-change-password.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +40,10 @@ import { ToastrModule } from 'ngx-toastr';
         RegisterComponent,
         SearchComponent,
         AdvertisementCreateComponent,
-        AdvertisementOwnerComponent
+        AdvertisementOwnerComponent,
+        UserEditComponent,
+        UserMenuComponent,
+        UserChangePasswordComponent
     ],
     entryComponents: [],
     imports: [

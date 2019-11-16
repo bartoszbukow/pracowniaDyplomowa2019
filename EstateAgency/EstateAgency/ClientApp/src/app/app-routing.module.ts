@@ -8,6 +8,8 @@ import { AdvertisementEditComponent } from './components/advertisement/advertise
 import { RegisterComponent } from './components/user/register/register.component';
 import { AdvertisementCreateComponent } from './components/advertisement/advertisement-create/advertisement-create.component';
 import { AdvertisementOwnerComponent } from './components/advertisement/advertisement-owner/advertisement-owner.component';
+import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { UserChangePasswordComponent } from './components/user/user-change-password/user-change-password.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,6 +18,8 @@ const appRoutes: Routes = [
     { path: 'advertisement/create', component: AdvertisementCreateComponent },
     { path: 'advertisement/edit/:id', component: AdvertisementEditComponent },
     { path: 'advertisement/:id', component: AdvertisementComponent },
+    { path: 'user/edit', component: UserEditComponent },
+    { path: 'user/change-password', component: UserChangePasswordComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: '**', component: PageNotFoundComponent }

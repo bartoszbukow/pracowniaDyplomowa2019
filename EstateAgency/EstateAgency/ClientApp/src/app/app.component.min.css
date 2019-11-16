@@ -1,1 +1,1 @@
-﻿.title{margin-left:10px;outline:none;cursor:pointer}.hamburger-menu{outline:none}.user-menu{outline:none;position:absolute;right:0;margin-right:15px}
+﻿.title{margin-left:10px;outline:none;cursor:pointer}.hamburger-menu{outline:none}.user-menu{position:absolute;right:0;margin-right:15px}.user-menu button{outline:none}.mat-drawer{position:fixed;bottom:0;top:64px}header{height:6vh;position:fixed;top:0;width:100%;z-index:1000}
