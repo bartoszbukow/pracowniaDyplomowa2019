@@ -2,5 +2,23 @@
   <app-back-to-page [dateToReturn]="this.dateToReturn"></app-back-to-page>
 </div>
 <div class="advertisements-box">
-  <app-advertisement-list [advertisements]="this.advertisements"></app-advertisement-list>
+  <app-advertisement-list *ngIf="this.advertisements?.length > 0" [advertisements]="this.advertisements"></app-advertisement-list>
+  <div *ngIf="this.advertisements?.length === 0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-4 advertisement-box">
+          <button type="button" (click)="goToAdvertisementAdd()">
+            <div class="mb-4 shadow-sm card-box">
+              <div class="advertisement-add-box">
+                <i class="fas fa-plus"></i>
+                <div class="advertisement-add-box__text">
+                  Dodaj ogłoszenie
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

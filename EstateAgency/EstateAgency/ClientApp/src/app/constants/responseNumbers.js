@@ -8,5 +8,8 @@ exports.responseNumbers = {
     104: "Konto zostało utworzone",
     105: "",
     106: "Podany e-mail juz istnieje",
+    107: "Zalogowano do systemu",
+    108: "Błędny login lub hasło",
+    109: "Wylogowano z systemu",
 };
 //# sourceMappingURL=responseNumbers.js.map

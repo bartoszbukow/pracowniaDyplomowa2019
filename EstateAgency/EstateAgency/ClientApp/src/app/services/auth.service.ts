@@ -3,6 +3,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { Observable } from "rxjs";
 import { map, catchError } from 'rxjs/operators';
 import { ApiService } from './api.service';
+import { ToastrService } from 'ngx-toastr';
+import { responseNumbers } from './../constants/responseNumbers';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +15,8 @@ export class AuthService {
     redirectTo: string = "";
 
     constructor(@Inject(PLATFORM_ID) private platformId: any,
-        private api: ApiService) { }
+        private api: ApiService,
+        private toastr: ToastrService) { }
 
     // performs the login
     login(username: string, password: string): Observable<any> {
@@ -53,6 +56,7 @@ export class AuthService {
 
     logout(): boolean {
         this.setAuth(null);
+        this.toastr.success(responseNumbers[109], "Sukces!");
         return true;
     }
 

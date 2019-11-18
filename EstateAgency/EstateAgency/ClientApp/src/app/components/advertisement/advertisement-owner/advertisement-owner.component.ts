@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-advertisement-owner',
@@ -14,11 +15,16 @@ export class AdvertisementOwnerComponent implements OnInit {
         pathToReturn: "home"
     }
 
-    constructor(private api: ApiService) { }
+    constructor(private api: ApiService,
+        private router: Router,) { }
 
     ngOnInit() {
         this.api.getAdvertisementListOfUser().subscribe(res => {
             this.advertisements = res;
         });
+    }
+
+    goToAdvertisementAdd() {
+        this.router.navigate(["advertisement/create"]);
     }
 }

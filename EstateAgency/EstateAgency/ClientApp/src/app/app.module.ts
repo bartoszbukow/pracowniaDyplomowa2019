@@ -64,7 +64,7 @@ import { BackToPageComponent } from './components/back-to-page/back-to-page.comp
         MatFormFieldModule,
         MatInputModule,
         ToastrModule.forRoot({
-            timeOut: 10000,
+            timeOut: 5000,
             preventDuplicates: true,
         }),
     ],

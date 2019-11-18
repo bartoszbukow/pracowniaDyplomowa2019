@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginModel } from "./../../../models/login.model";
 import { ToastrService } from 'ngx-toastr';
+import { responseNumbers } from './../../../constants/responseNumbers';
 
 @Component({
     selector: 'app-login',
@@ -47,18 +48,11 @@ export class LoginComponent implements OnInit {
         var password = this.loginForm.value.password;
 
         this.authService.login(email, password).subscribe(res => {
-            if (res) {
-                this.toastr.success("Zalogowano do systemu.", "Sukces!");
-                this.authService.redirectTo ? this.router.navigate(([this.authService.redirectTo])) : this.router.navigate((['']));
-                this.authService.redirectTo = "";
-            } else {
-                this.toastr.error("Logowanie nie powiodło się.", "Error!");
-                //this.loginForm.setErrors({ "login": "User login failed." });
-            }
-                
+            this.toastr.success(responseNumbers[107], "Sukces!");
+            this.authService.redirectTo ? this.router.navigate(([this.authService.redirectTo])) : this.router.navigate((['']));
+            this.authService.redirectTo = "";
         }, error => {
-              this.toastr.error("Logowanie nie powiodło się.", "Error!");
-              //this.loginForm.setErrors({ "login": "User login failed." });
+            this.loginForm.setErrors({ "login": responseNumbers[108] });
         });
     }
 

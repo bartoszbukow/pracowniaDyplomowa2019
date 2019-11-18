@@ -30,6 +30,25 @@ body {
   .mat-drawer {
     position: fixed;
     bottom: 0;
-    top: 64px;
+    top: 56px;
+  }
+
+  .mat-sidenav {
+    height: 100vh;
+  }
+
+  .mat-sidenav-content {
+    min-height: 100vh;
+    padding-top: 64px;
+  }
+}
+
+@media(max-width: 599px){
+  .mat-drawer {
+    top: 48px !important;
+  }
+
+  .mat-sidenav-content {
+    padding-top: 56px !important;
   }
 }

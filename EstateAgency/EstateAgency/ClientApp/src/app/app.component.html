@@ -17,12 +17,12 @@
   </header>
 
   <mat-sidenav-container>
-    <mat-sidenav #sidenav style="height: 100vh;">
+    <mat-sidenav #sidenav>
           <app-nav-menu (sidenavToggle)="sidenav.toggle()"></app-nav-menu>
     </mat-sidenav>
 
-    <mat-sidenav-content style="min-height: 100vh; padding-top: 64px;">
-      <div class="main-content"> <!--88-->
+    <mat-sidenav-content>
+      <div class="main-content">
         <main>
           <router-outlet></router-outlet>
         </main>
