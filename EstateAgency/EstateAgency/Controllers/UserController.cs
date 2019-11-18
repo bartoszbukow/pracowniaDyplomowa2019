@@ -30,10 +30,8 @@ namespace EstateAgency.Controllers
         public async Task<IActionResult> UserAdd([FromBody]UserViewModel model)
         {
             if (model == null) return new StatusCodeResult(500);
-            ApplicationUser user = await UserManager.FindByNameAsync(model.UserName);
 
-            if (user != null) return BadRequest("Username already exists");
-            user = await UserManager.FindByEmailAsync(model.Email);
+            ApplicationUser user = await UserManager.FindByEmailAsync(model.Email);
 
             if (user != null) return BadRequest(106);
             var now = DateTime.Now;
@@ -41,6 +39,7 @@ namespace EstateAgency.Controllers
             user = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = model.Email,
                 Name = model.Name,
                 Email = model.Email,
                 Surname = model.Surname,

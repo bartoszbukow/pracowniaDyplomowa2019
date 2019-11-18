@@ -34,9 +34,9 @@ export class UserEditComponent implements OnInit {
         if (this.userEditForm) {
             this.api.getUserEditData().subscribe(res => {
                 this.userEditForm.setValue({
-                    name: res.userName,
+                    name: res.name,
                     phoneNumber: res.phoneNumber,
-                    displayName: res.displayName,
+                    surname: res.surname,
                     email: res.email
                 });
             });
@@ -58,13 +58,11 @@ export class UserEditComponent implements OnInit {
                 Validators.minLength(9),
             ])],
 
-            displayName: [this.user.surname, Validators.compose([
+            surname: [this.user.surname, Validators.compose([
                 Validators.required,
                 Validators.minLength(2),
                 Validators.maxLength(20)
             ])],
-
-            email: [this.user.email],
         });
     }
 

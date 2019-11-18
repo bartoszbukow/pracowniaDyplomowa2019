@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
                 Validators.pattern('^[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}$'),
             ])],
 
-            displayName: [this.user.surname, Validators.compose([
+            surname: [this.user.surname, Validators.compose([
                 Validators.required,
                 Validators.minLength(2),
                 Validators.maxLength(20)

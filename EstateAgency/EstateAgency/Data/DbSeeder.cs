@@ -52,12 +52,13 @@ namespace EstateAgency.Data
             var user_Admin = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = "Admin",
                 Email = "admin@admin.com",
                 CreatedDate = createdDate,
                 LastModifiedDate = lastModifiedDate,
                 PhoneNumber = "516603856",
-                Name = "Bartosz",
-                Surname = "Bukowski"
+                Name = "Admin",
+                Surname = "Admin"
             };
 
             // Insert "Admin" into the Database and assign the "Administrator" and "RegisteredUser" roles to him.
@@ -75,6 +76,7 @@ namespace EstateAgency.Data
             var user_Ryan = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = "Ryan",
                 Email = "ryan@testmakerfree.com",
                 CreatedDate = createdDate,
                 LastModifiedDate = lastModifiedDate,
@@ -85,6 +87,7 @@ namespace EstateAgency.Data
             var user_Solice = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = "Solice",
                 Email = "solice@testmakerfree.com",
                 CreatedDate = createdDate,
                 LastModifiedDate = lastModifiedDate,
