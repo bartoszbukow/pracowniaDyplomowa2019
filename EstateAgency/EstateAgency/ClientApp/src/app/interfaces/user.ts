@@ -1,7 +1,7 @@
 interface IUser {
-    userName: string;
+    name: string;
     password: string;
     email: string;
     phoneNumber: string;
-    displayName: string;
+    surname: string;
 }

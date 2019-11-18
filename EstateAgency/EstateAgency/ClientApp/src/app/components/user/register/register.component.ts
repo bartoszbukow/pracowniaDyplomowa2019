@@ -5,6 +5,7 @@ import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { responseNumbers } from './../../../constants/responseNumbers';
 
 @Component({
     selector: 'app-register',
@@ -43,7 +44,7 @@ export class RegisterComponent implements OnInit {
                 Validators.pattern('^[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}$'),
             ])],
 
-            displayName: [this.user.displayName, Validators.compose([
+            displayName: [this.user.surname, Validators.compose([
                 Validators.required,
                 Validators.minLength(2),
                 Validators.maxLength(20)
@@ -69,9 +70,9 @@ export class RegisterComponent implements OnInit {
                 Validators.required,
             ])],
         },
-        {
-            validator: this.mustMatch('password', 'passwordConfirm')
-        });
+            {
+                validator: this.mustMatch('password', 'passwordConfirm')
+            });
     }
 
     get f() {
@@ -80,25 +81,19 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         var tempUser = <IUser>{};
-        tempUser.userName = this.registerForm.value.name;
+        tempUser.name = this.registerForm.value.name;
         tempUser.email = this.registerForm.value.email;
         tempUser.phoneNumber = this.registerForm.value.phoneNumber;
         tempUser.password = this.registerForm.value.password;
-        tempUser.displayName = this.registerForm.value.displayName;
+        tempUser.surname = this.registerForm.value.surname;
 
         this.api.postRegisterUser(tempUser).subscribe(res => {
-            if (res) {
-                this.toastr.success("Konto zostało utworzone", "Sukces!");
-                this.router.navigate(["login"]);
-            } else {
-                this.toastr.error("Tworzenie konta nie powiodło się", "Error!");
-                //this.registerForm.setErrors({ "register": "User registration failed." });
-                console.log("nie idało sie hehe");
-            }
-        }, error => {
-            this.toastr.error("Tworzenie konta nie powiodło się", "Error!");
-            //this.registerForm.setErrors({ "register": "User registration failed." });
-        });
+            this.toastr.success(responseNumbers[104], "Sukces!");
+            this.router.navigate(["login"]);
+        },
+            error => {
+                this.registerForm.setErrors({ "register": responseNumbers[error.error] });
+            });
     }
 
     getFormControl(name: string) {

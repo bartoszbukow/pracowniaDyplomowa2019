@@ -54,5 +54,8 @@ export class ApiService {
     putUser(user) {
         return this.http.put<IAdvertisement>(this.url + "api/user/UserEdit", user);
     }
-    UserEdit
+
+    putUserChangePassword(data) {
+        return this.http.put(this.url + "api/user/UserChangePassword", data);
+    }
 }

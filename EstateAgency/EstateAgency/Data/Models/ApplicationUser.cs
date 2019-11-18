@@ -21,7 +21,8 @@ namespace EstateAgency.Data.Models
 
         #region Properties
 
-        public string DisplayName { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public string Notes { get; set; }
         [Required]
         public int Type { get; set; }

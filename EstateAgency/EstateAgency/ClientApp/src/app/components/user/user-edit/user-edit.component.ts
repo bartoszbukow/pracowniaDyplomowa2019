@@ -1,10 +1,11 @@
 import { ApiService } from '../../../services/api.service';
-import { RegisterModel } from "./../../../models/register.model";
+import { UserEditModel } from "./../../../models/userEdit.model";
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { responseNumbers } from './../../../constants/responseNumbers';
 
 @Component({
     selector: 'app-user-edit',
@@ -14,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class UserEditComponent implements OnInit {
 
     userEditForm: FormGroup;
-    user: RegisterModel = new RegisterModel();
+    user: UserEditModel = new UserEditModel();
 
     constructor(private router: Router,
         private fb: FormBuilder,
@@ -57,7 +58,7 @@ export class UserEditComponent implements OnInit {
                 Validators.minLength(9),
             ])],
 
-            displayName: [this.user.displayName, Validators.compose([
+            displayName: [this.user.surname, Validators.compose([
                 Validators.required,
                 Validators.minLength(2),
                 Validators.maxLength(20)
@@ -76,21 +77,17 @@ export class UserEditComponent implements OnInit {
             return;
         }
         var tempUser = <IUser>{};
-        tempUser.userName = this.userEditForm.value.name;
-        tempUser.email = this.userEditForm.value.email;
-        tempUser.displayName = this.userEditForm.value.displayName;
+        tempUser.name = this.userEditForm.value.name;
+        tempUser.surname = this.userEditForm.value.surname;
         tempUser.phoneNumber = this.userEditForm.value.phoneNumber;
 
         this.api.putUser(tempUser).subscribe(res => {
-            if (res) {
-                this.toastr.success("Konto zostało zaktualizowane", "Sukces!");
-                this.router.navigate(["home"]);
-            } else {
-                this.toastr.error("Aktualizacja konta nie powiodło się", "Error!");
-            }
-        }, error => {
-            this.toastr.error("Aktualizacja konta nie powiodło się", "Error!");
-        });
+            this.toastr.success(responseNumbers[102], "Sukces!");
+            this.router.navigate(["home"]);
+        },
+            error => {
+                this.userEditForm.setErrors({ "error": responseNumbers[error.error] });
+            });
     }
 
     getFormControl(name: string) {

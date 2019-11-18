@@ -20,12 +20,10 @@ namespace EstateAgency.ViewModels.UserViewModels
 
         #region Properties  
         
-        [JsonProperty("userName")]
-        public string UserName { get; set; }
-        [JsonProperty("email")]
-        public string Email { get; set; }
-        [JsonProperty("displayName")]
-        public string DisplayName { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("surname")]
+        public string Surname { get; set; }
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
 

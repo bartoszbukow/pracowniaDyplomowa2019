@@ -25,7 +25,7 @@ namespace EstateAgency.Controllers
         #endregion
 
         #region RESTful Conventions    
-        
+
         [HttpPost()]
         public async Task<IActionResult> UserAdd([FromBody]UserViewModel model)
         {
@@ -35,19 +35,20 @@ namespace EstateAgency.Controllers
             if (user != null) return BadRequest("Username already exists");
             user = await UserManager.FindByEmailAsync(model.Email);
 
-            if (user != null) return BadRequest("Email already exists.");
+            if (user != null) return BadRequest(106);
             var now = DateTime.Now;
 
             user = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.UserName,
+                Name = model.Name,
                 Email = model.Email,
-                DisplayName = model.DisplayName,
+                Surname = model.Surname,
                 PhoneNumber = model.PhoneNumber,
                 CreatedDate = now,
                 LastModifiedDate = now
             };
+
 
             await UserManager.CreateAsync(user, model.Password);
             await UserManager.AddToRoleAsync(user, "RegisteredUser");
@@ -63,7 +64,7 @@ namespace EstateAgency.Controllers
         [Authorize]
         public async Task<IActionResult> MyAdvertisement()
         {
-            var requestUser = await GetCurrentUserAsync();
+            ApplicationUser requestUser = await GetCurrentUserAsync();
             if (requestUser == null)
             {
                 return Unauthorized();
@@ -77,15 +78,20 @@ namespace EstateAgency.Controllers
         public async Task<IActionResult> UserEdit([FromBody] UserEditViewModel model)
         {
             if (model == null) return new StatusCodeResult(500);
-            ApplicationUser user = await UserManager.FindByEmailAsync(model.Email);
+            ApplicationUser user = await GetCurrentUserAsync();
 
             if (user == null) return NotFound(new { Error = $"The user has not been found" });
 
-            user.UserName = model.UserName;
+            user.Name = model.Name;
             user.PhoneNumber = model.PhoneNumber;
-            user.DisplayName = model.DisplayName;
+            user.Surname = model.Surname;
 
-            await UserManager.UpdateAsync(user);
+            var result = await UserManager.UpdateAsync(user);
+
+            if (result.Errors.Any())
+            {
+                return BadRequest(103);
+            }
 
             return new JsonResult(user.Adapt<UserEditViewModel>(), JsonSettings);
         }
@@ -96,9 +102,13 @@ namespace EstateAgency.Controllers
         {
             if (model == null) return new StatusCodeResult(500);
 
-            string userId = User.Claims.First(c => c.Type == "UserID").Value;
-            var user = await UserManager.FindByIdAsync(userId);
+            ApplicationUser user = await GetCurrentUserAsync();
             var result = await UserManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+            if (result.Errors.Any())
+            {
+                return BadRequest(100);
+            }
 
             return new JsonResult(user.Adapt<UserEditViewModel>(), JsonSettings);
         }
@@ -109,7 +119,7 @@ namespace EstateAgency.Controllers
         {
             if (model == null) return new StatusCodeResult(500);
 
-            var user = await UserManager.FindByIdAsync(model.Id);
+            ApplicationUser user = await UserManager.FindByIdAsync(model.Id);
             var advertisements = DbContext.Advertisements.Where(q => q.UserId == model.Id);
 
             foreach (var advertisement in advertisements)
@@ -117,15 +127,15 @@ namespace EstateAgency.Controllers
                 DbContext.Advertisements.Remove(advertisement);
             }
 
-            await UserManager.DeleteAsync(user);
-            return new OkResult();
+            var result = await UserManager.DeleteAsync(user);
+            return Ok(result);
         }
 
         [HttpGet("UserEditData")]
         [Authorize]
         public async Task<IActionResult> UserEditData()
         {
-            var requestUser = await GetCurrentUserAsync();
+            ApplicationUser requestUser = await GetCurrentUserAsync();
             if (requestUser == null)
             {
                 return Unauthorized();

@@ -52,17 +52,18 @@ namespace EstateAgency.Data
             var user_Admin = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = "Admin",
-                Email = "admin@testmakerfree.com",
+                Email = "admin@admin.com",
                 CreatedDate = createdDate,
                 LastModifiedDate = lastModifiedDate,
-                PhoneNumber = "516603856"
+                PhoneNumber = "516603856",
+                Name = "Bartosz",
+                Surname = "Bukowski"
             };
 
             // Insert "Admin" into the Database and assign the "Administrator" and "RegisteredUser" roles to him.
             if (await userManager.FindByNameAsync(user_Admin.UserName) == null)
             {
-                await userManager.CreateAsync(user_Admin, "Pass4Admin");
+                await userManager.CreateAsync(user_Admin, "Pass4Admin$");
                 await userManager.AddToRoleAsync(user_Admin, role_RegisteredUser);
                 await userManager.AddToRoleAsync(user_Admin, role_Administrator);
                 // Remove Lockout and E-Mail confirmation.
@@ -74,20 +75,22 @@ namespace EstateAgency.Data
             var user_Ryan = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = "Ryan",
                 Email = "ryan@testmakerfree.com",
                 CreatedDate = createdDate,
                 LastModifiedDate = lastModifiedDate,
-                PhoneNumber = "515609978"
+                PhoneNumber = "515609978",
+                Name = "Ryan",
+                Surname = "Ronaldo"
             };
             var user_Solice = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = "Solice",
                 Email = "solice@testmakerfree.com",
                 CreatedDate = createdDate,
                 LastModifiedDate = lastModifiedDate,
-                PhoneNumber = "603394456"
+                PhoneNumber = "603394456",
+                Name = "Solice",
+                Surname = "Benzema"
             };
             var user_Vodan = new ApplicationUser()
             {
@@ -96,13 +99,15 @@ namespace EstateAgency.Data
                 Email = "vodan@testmakerfree.com",
                 CreatedDate = createdDate,
                 LastModifiedDate = lastModifiedDate,
-                PhoneNumber = "609354423"
+                PhoneNumber = "609354423",
+                Name = "Vodan",
+                Surname = "Bale"
             };
             
             /// Insert sample registered users into the Database and also assign the "Registered" role to him.
             if (await userManager.FindByNameAsync(user_Ryan.UserName) == null)
             {
-                await userManager.CreateAsync(user_Ryan, "Pass4Ryan");
+                await userManager.CreateAsync(user_Ryan, "Pass4Ryan$");
                 await userManager.AddToRoleAsync(user_Ryan, role_RegisteredUser);
                 // Remove Lockout and E-Mail confirmation.
                 user_Ryan.EmailConfirmed = true;
@@ -111,7 +116,7 @@ namespace EstateAgency.Data
            
             if (await userManager.FindByNameAsync(user_Solice.UserName) == null)
             {
-                await userManager.CreateAsync(user_Solice, "Pass4Solice");
+                await userManager.CreateAsync(user_Solice, "Pass4Solice$");
                 await userManager.AddToRoleAsync(user_Solice, role_RegisteredUser);
                 // Remove Lockout and E-Mail confirmation.
                 user_Solice.EmailConfirmed = true;
@@ -120,7 +125,7 @@ namespace EstateAgency.Data
             
             if (await userManager.FindByNameAsync(user_Vodan.UserName) == null)
             {
-                await userManager.CreateAsync(user_Vodan, "Pass4Vodan");
+                await userManager.CreateAsync(user_Vodan, "Pass4Vodan$");
                 await userManager.AddToRoleAsync(user_Vodan, role_RegisteredUser);
                 // Remove Lockout and E-Mail confirmation.
                 user_Vodan.EmailConfirmed = true;

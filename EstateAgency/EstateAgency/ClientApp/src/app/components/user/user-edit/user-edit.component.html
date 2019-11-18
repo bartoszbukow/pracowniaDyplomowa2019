@@ -4,6 +4,9 @@
       <div class="card-body">
         <img id="user-edit-img" class="user-edit-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
         <div class="list-header-title">Edycja Profilu Użytkownika</div>
+        <div class="alert alert-danger" *ngIf="userEditForm.errors?.error" role="alert">
+          {{userEditForm.errors.error}}
+        </div>
         <form [formGroup]="userEditForm" (ngSubmit)="editUser()">
           <div class="row">
             <div class="col-md-12">
@@ -11,12 +14,12 @@
                 <label>Imie</label>
                 <input type="text"
                        class="form-control"
-                       name="displayName"
+                       name="name"
                        required
-                       formControlName="displayName"
-                       [ngClass]="{'is-invalid':hasError('displayName')}"
-                       autocomplete="displayName">
-                <div *ngIf="hasError('displayName')" class="invalid-feedback">
+                       formControlName="name"
+                       [ngClass]="{'is-invalid':hasError('name')}"
+                       autocomplete="name">
+                <div *ngIf="hasError('name')" class="invalid-feedback">
                   Imie musi zawierać od 2 do 20 lister oraz pierwsza z nich musi być duża
                 </div>
               </div>
@@ -27,12 +30,12 @@
                 <label>Nazwisko</label>
                 <input type="text"
                        class="form-control"
-                       name="name"
+                       name="surname"
                        required
-                       formControlName="name"
-                       [ngClass]="{'is-invalid':hasError('name')}"
-                       autocomplete="name">
-                <div *ngIf="hasError('name')" class="invalid-feedback">
+                       formControlName="surname"
+                       [ngClass]="{'is-invalid':hasError('surname')}"
+                       autocomplete="surname">
+                <div *ngIf="hasError('surname')" class="invalid-feedback">
                   Nazwisko musi zawierać od 2 do 20 lister oraz pierwsza z nich musi być duża
                 </div>
               </div>
@@ -57,7 +60,7 @@
             <div class="col-md-12">
               <input type="submit"
                      class="btn btn-primary btn-lg btn-block mt-3"
-                     [disabled]="!userEditForm.value.email || !userEditForm.value.name || !userEditForm.value.displayName"
+                     [disabled]="!userEditForm.value.phoneNumber || !userEditForm.value.name || !userEditForm.value.surname"
                      value="Aktualizuj">
             </div>
           </div>
