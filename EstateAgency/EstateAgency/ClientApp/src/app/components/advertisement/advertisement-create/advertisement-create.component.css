@@ -88,6 +88,7 @@
   grid-column: 2;
   grid-row-start: 1;
   grid-row-end: 10;
+  margin-bottom: 30px;
 }
 .advertisement-create-box .create-content-box .dividing-line .line {
   width: 50%;
@@ -199,6 +200,7 @@
   grid-column: 3;
   grid-row-start: 10;
   grid-row-end: 11;
+  margin-top: 20px;
 }
 .advertisement-create-box .create-content-box .button-box .button-box__area {
   width: 400px;
@@ -220,9 +222,30 @@
     max-width: 92%;
   }
 }
-.upload {
-  font-weight: bold;
-  color: #28a745;
-  margin-left: 15px;
-  line-height: 36px;
+@media (max-width: 767px) {
+  .advertisement-create-box .create-content-box {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 100px 40px calc(100% - 140px);
+    grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+    grid-auto-flow: row;
+    padding: 30px;
+  }
+}
+@media (max-width: 490px) {
+  .advertisement-create-box .create-content-box .button-box {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+  .advertisement-create-box .create-content-box .button-box .button-box__area {
+    width: 100%;
+  }
+  .advertisement-create-box .create-content-box .button-box .button-box__area button {
+    width: calc(50% - 10px);
+    margin: 0 5px;
+  }
+  .advertisement-create-box .create-content-box .button-box .button-box__area button #button-box__text2 {
+    display: none;
+  }
 }

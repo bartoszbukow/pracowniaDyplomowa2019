@@ -86,6 +86,7 @@
   height: 100%;
   padding: 20px 30px 0 30px;
   position: relative;
+  border-left: solid #D5DBE0 1px;
 }
 .advertisement-box .card-box .data-box .data-box__header .price {
   font-size: 32px;
@@ -133,15 +134,14 @@
   height: 50px;
 }
 .advertisement-box .description-box {
-  margin-top: 20px;
+  margin: 20px 0;
 }
 .advertisement-box .description-box .description-box__title {
   padding: 10px 0;
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-size: 28px;
 }
 .advertisement-box .description-box .description-box__content {
+  min-height: 100px;
   font-size: 16px;
   border-radius: 0;
   background-color: #FFFFFF;
@@ -157,6 +157,7 @@
 @media (max-width: 767px) {
   .advertisement-box .card-box {
     height: auto;
+    border: none;
   }
   .advertisement-box .card-box .slider-box {
     width: 100%;
@@ -178,6 +179,7 @@
   .advertisement-box .card-box .data-box {
     width: 100%;
     padding: 30px 0;
+    border: none;
   }
   .advertisement-box .card-box .data-box .button-box {
     position: static;
