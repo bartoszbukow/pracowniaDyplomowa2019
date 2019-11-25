@@ -29,6 +29,7 @@ namespace EstateAgency.Data.Models
         public double Yardage { get; set; }
         public string Category { get; set; }
         [Required] public string UserId { get; set; }
+        [Required] public string Email { get; set; }
         [Required] public DateTime CreatedDate { get; set; }
         [Required] public DateTime LastModifiedDate { get; set; }
         [DefaultValue(0)] public int Type { get; set; }

@@ -58,4 +58,12 @@ export class ApiService {
     putUserChangePassword(data) {
         return this.http.put(this.url + "api/user/UserChangePassword", data);
     }
+
+    postMessage(data) {
+        return this.http.post<IMessageCreate>(this.url + "api/message/MessageCreate", data);
+    }
+
+    getMyMessages() {
+        return this.http.get<IMessageList>(this.url + "api/message/MyMessages");
+    }
 }

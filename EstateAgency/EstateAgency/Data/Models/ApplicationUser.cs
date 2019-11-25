@@ -41,6 +41,9 @@ namespace EstateAgency.Data.Models
         public virtual List<Reservation> Reservations { get; set; }
         public virtual List<Token> Tokens { get; set; }
 
+        public virtual List<Message> SentMessages { get; set; }
+        public virtual List<Message> ReceivedMessages { get; set; }
+
         #endregion
     }
 }

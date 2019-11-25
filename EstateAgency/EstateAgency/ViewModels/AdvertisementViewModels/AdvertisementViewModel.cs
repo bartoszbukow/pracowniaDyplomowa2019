@@ -23,35 +23,38 @@ namespace EstateAgency.ViewModels
         #region Properties
 
         [JsonProperty("id")]
-        public string Id { get; set; }                   //id ogloszenia
+        public string Id { get; set; }                   
 
         [JsonProperty("title")]
-        public string Title { get; set; }               // tytul
+        public string Title { get; set; }              
 
         [JsonProperty("description")]
-        public string Description { get; set; }         //opis
+        public string Description { get; set; }         
 
         [JsonProperty("price")]
-        public double Price { get; set; }              // cena
+        public double Price { get; set; }              
 
         [JsonProperty("yardage")]
-        public double Yardage { get; set; }            //metraz
+        public double Yardage { get; set; }           
 
         [JsonProperty("category")]
-        public string Category { get; set; }            // kategoria
+        public string Category { get; set; }           
 
         [JsonProperty("userId")]
-        public string UserId { get; set; }              // id usera
-        
+        public string UserId { get; set; }
+
+        [JsonProperty("email")]
+        public string Email { get; set; }
+
         [JsonProperty("createdDate")]
-        public DateTime CreatedDate { get; set; }       // data utworzenia
+        public DateTime CreatedDate { get; set; }       
 
         [JsonProperty("lastModifiedDate")]
-        public DateTime LastModifiedDate { get; set; }  // data modyfikacji
+        public DateTime LastModifiedDate { get; set; }  
 
         [JsonProperty("type")]
         [DefaultValue(0)] 
-        public int Type { get; set; } // typ - czy aktywne?
+        public int Type { get; set; }
 
         [JsonProperty("city")]
         public string City { get; set; }

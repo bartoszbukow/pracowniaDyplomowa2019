@@ -62,7 +62,7 @@ namespace EstateAgency.Controllers
 
         [HttpPost("create"), DisableRequestSizeLimit]
         [Authorize]
-        public IActionResult Post([FromForm] IFormCollection form)
+        public async Task<IActionResult> PostAsync([FromForm] IFormCollection form)
         {
             if (form == null) return new StatusCodeResult(500);
 
@@ -81,7 +81,10 @@ namespace EstateAgency.Controllers
             };
 
             advertisement.LastModifiedDate = advertisement.CreatedDate;
-            advertisement.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            ApplicationUser user = await GetCurrentUserAsync();
+            advertisement.UserId = user.Id;
+            advertisement.Email = user.Email;
 
             _dbContext.Advertisements.Add(advertisement);
 

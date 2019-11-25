@@ -6,6 +6,7 @@ interface IAdvertisement {
     yardage: number;
     category: string;
     userId: string;
+    email: string;
     createdDate: any;
     lastModifiedDate: any;
     type: boolean;

@@ -10,4 +10,6 @@ export const responseNumbers =
     107: "Zalogowano do systemu",
     108: "Błędny login lub hasło",
     109: "Wylogowano z systemu",
+    110: "Wiadomość została wysłana",
+    111: "Nie udało się wysłać wiadomości"
 }

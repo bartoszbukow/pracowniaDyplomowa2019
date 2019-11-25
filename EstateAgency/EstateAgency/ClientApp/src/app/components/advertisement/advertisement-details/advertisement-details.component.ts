@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, NavigationExtras} from "@angular/router";
 import { ApiService } from '../../../services/api.service';
 import { AuthService } from '../../../services/auth.service';
 import { Location } from '@angular/common';
@@ -63,5 +63,10 @@ export class AdvertisementComponent implements OnInit {
 
     backClicked() {
         this._location.back();
+    }
+
+    routeToContact() {
+        const navigationExtras: NavigationExtras = { state: { email: this.advertisement.email } };
+        this.router.navigate(["message/create"], navigationExtras);
     }
 }

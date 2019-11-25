@@ -1,0 +1,26 @@
+<div class="backToMainPage">
+  <app-back-to-page [dateToReturn]="this.dateToReturn"></app-back-to-page>
+</div>
+
+<div class="message-list-box">
+  <div class="message-box">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="table-title-senderName">Użytkownik</th>
+          <th class="table-title-messageContent">Ogłoszenie</th>
+          <th class="table-title-createdDate">Data wysłania</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let message of myMessagesList" class="message-item">
+          <!--<th class="table-title-action"><h5><span [ngClass]="'badge badge-' + actionLogs[log.actionId]?.color">{{actionLogs[log.actionId]?.title}}</span></h5></th>-->
+          <td class="table-title-senderName">{{message.senderName}}</td>
+          <td class="table-title-messageContent"> {{message.messageContent}}</td>
+          <td class="table-title-createdDate">{{message.createdDate | date:'dd.MM.yyyy h:mm:ss'}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

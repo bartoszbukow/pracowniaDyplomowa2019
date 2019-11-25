@@ -1,0 +1,52 @@
+<div class="h-100 mt-3">
+  <div class="row justify-content-center align-items-center m-auto message-form">
+    <div class="card rounded shadow bg-white w-100">
+      <div class="card-body">
+        <div class="list-header-title">Nowa wiadomość</div>
+        <div class="alert alert-danger" *ngIf="messageForm.errors?.error" role="alert">
+          {{messageForm.errors.error}}
+        </div>
+        <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>E-mail odbiorcy</label>
+                <input type="email"
+                       class="form-control"
+                       name="recipientEmail"
+                       required
+                       formControlName="recipientEmail"
+                       [ngClass]="{'is-invalid':hasError('recipientEmail')}"
+                       autocomplete="recipientEmail">
+                <div *ngIf="hasError('recipientEmail')" class="invalid-feedback">Podaj poprawny adres e-mail</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Wiadomość</label>
+                <textarea type="text"
+                       formControlName="messageContent"
+                       class="form-control textarea"
+                       [ngClass]="{'is-invalid':hasError('messageContent')}"
+                       required
+                       autocomplete="messageContent"></textarea>
+                <div *ngIf="hasError('messageContent')" class="invalid-feedback">Wiadomość musi zawierać od 2 do 1000 znaków</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <input type="submit" class="btn btn-primary btn-lg btn-block mt-3" [disabled]="!messageForm.value.recipientEmail || !messageForm.value.messageContent" value="Wyślij">
+            </div>
+          </div>
+        </form>
+        <hr />
+        <div class="col-md-12 p-0 mt-3">
+          <button type="submit" class="btn btn-light btn-lg btn-block" value="Anuluj" (click)="backToPage()">Anuluj</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

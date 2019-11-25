@@ -10,6 +10,8 @@ import { AdvertisementCreateComponent } from './components/advertisement/adverti
 import { AdvertisementOwnerComponent } from './components/advertisement/advertisement-owner/advertisement-owner.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { UserChangePasswordComponent } from './components/user/user-change-password/user-change-password.component';
+import { MessageCreateComponent } from './components/message/message-create/message-create.component';
+import { MessageListComponent } from './components/message/message-list/message-list.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,6 +22,8 @@ const appRoutes: Routes = [
     { path: 'advertisement/:id', component: AdvertisementComponent },
     { path: 'user/edit', component: UserEditComponent },
     { path: 'user/change-password', component: UserChangePasswordComponent },
+    { path: 'message/create', component: MessageCreateComponent },
+    { path: 'message/my', component: MessageListComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: '**', component: PageNotFoundComponent }

@@ -1,5 +1,5 @@
 export class UserEditModel {
-    name: String;
-    surname: String;
-    phoneNumber: String;
+    name: string;
+    surname: string;
+    phoneNumber: string;
 }

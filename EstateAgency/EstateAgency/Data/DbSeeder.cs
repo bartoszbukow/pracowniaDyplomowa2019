@@ -147,13 +147,14 @@ namespace EstateAgency.Data
 
             // retrieve the admin user, which we'll use as default author.
             var authorId = dbContext.Users.FirstOrDefault(u => u.UserName == "Admin")?.Id;
+            var authorEmail = dbContext.Users.FirstOrDefault(u => u.UserName == "Admin")?.Email;
 #if DEBUG    
             // create 47 sample advertisements with auto-generated data
             // // (including advertisements, advertisementHistorys & reservations)
             var num = 47;
             for (int i = 1; i <= num; i++)
             {
-                CreateSampleAdvertisement(dbContext, i, authorId, 3, 3, 3, createdDate.AddDays(-num));
+                CreateSampleAdvertisement(dbContext, i, authorId, authorEmail, 3, 3, 3, createdDate.AddDays(-num));
             }
 #endif
             dbContext.SaveChanges();
@@ -162,11 +163,12 @@ namespace EstateAgency.Data
 
         #region Utility Methods 
         private static void CreateSampleAdvertisement(
-            ApplicationDbContext dbContext, int num, string authorId, int numberOfAdvertisementHistory, int numberOfReservations, int numberOfImages, DateTime createdDate)
+            ApplicationDbContext dbContext, int num, string authorId, string authorEmail, int numberOfAdvertisementHistory, int numberOfReservations, int numberOfImages, DateTime createdDate)
         {
             var advertisement = new Advertisement()
             {
                 UserId = authorId,
+                Email = authorEmail,
                 Title = $"Piękne mieszkanie numer {num} w centrum Olsztyna!",
                 Description = $"This is a sample description for advertisement {num}.",
                 Price = 2131,

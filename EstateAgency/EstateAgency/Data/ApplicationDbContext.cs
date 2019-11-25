@@ -50,6 +50,11 @@ namespace EstateAgency.Data
             modelBuilder.Entity<Image>().ToTable("Images");
             modelBuilder.Entity<Image>().Property(i => i.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Image>().HasOne(i => i.Advertisement).WithMany(u => u.Images);
+
+            modelBuilder.Entity<Message>().ToTable("Messages");
+            modelBuilder.Entity<Message>().Property(i => i.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Message>().HasOne(i => i.Sender).WithMany(i => i.SentMessages);
+            modelBuilder.Entity<Message>().HasOne(i => i.Recipient).WithMany(i => i.ReceivedMessages);
         }
 
         #endregion Methods
@@ -61,6 +66,7 @@ namespace EstateAgency.Data
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Token> Tokens { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         #endregion Properties
     }

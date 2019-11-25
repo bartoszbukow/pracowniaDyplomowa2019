@@ -15,6 +15,9 @@
     <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/advertisement/create'" (click)="sidenavCloce();"> Utwórz Ogłoszenie </a>
 
     <hr *ngIf="this.isLoggedIn()" class="hr-style" />
+    <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/message/my'" (click)="sidenavCloce();"> Wiadomości </a>
+
+    <hr *ngIf="this.isLoggedIn()" class="hr-style" />
     <a *ngIf="this.isLoggedIn()" mat-list-item [routerLink]="'/'" (click)="logout(); sidenavCloce();"> Wyloguj </a>
 
   </mat-nav-list>

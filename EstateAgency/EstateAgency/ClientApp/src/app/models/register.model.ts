@@ -1,8 +1,8 @@
 export class RegisterModel {
-    name: String;
-    email: String;
-    password: String;
-    passwordConfirm: String;
-    surname: String;
-    phoneNumber: String;
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirm: string;
+    surname: string;
+    phoneNumber: string;
 }

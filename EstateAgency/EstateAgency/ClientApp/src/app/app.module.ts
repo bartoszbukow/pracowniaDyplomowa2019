@@ -27,6 +27,8 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
 import { UserMenuComponent } from './components/user/user-menu/user-menu.component';
 import { UserChangePasswordComponent } from './components/user/user-change-password/user-change-password.component';
 import { BackToPageComponent } from './components/back-to-page/back-to-page.component';
+import { MessageCreateComponent } from './components/message/message-create/message-create.component';
+import { MessageListComponent } from './components/message/message-list/message-list.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +47,9 @@ import { BackToPageComponent } from './components/back-to-page/back-to-page.comp
         UserEditComponent,
         UserMenuComponent,
         UserChangePasswordComponent,
-        BackToPageComponent
+        BackToPageComponent,
+        MessageCreateComponent,
+        MessageListComponent
     ],
     entryComponents: [],
     imports: [

@@ -1,11 +1,11 @@
 export class AdvertisementModel {
     id?: string;
-    title: String;
-    category: String;
-    desciption: String;
-    yardage: Number;
+    title: string;
+    category: string;
+    desciption: string;
+    yardage: number;
     numberOfRoom: number;
-    price: Number;
+    price: number;
     city: string;
     address: string;
     images?: any;
