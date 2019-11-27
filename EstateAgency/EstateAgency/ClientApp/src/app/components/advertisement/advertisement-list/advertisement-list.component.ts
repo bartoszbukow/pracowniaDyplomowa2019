@@ -14,7 +14,8 @@ export class AdvertisementListComponent implements OnInit {
     url: string;
     private userId: string;
 
-    constructor(private auth: AuthService, private api: ApiService,
+    constructor(private auth: AuthService,
+        private api: ApiService,
         private router: Router,
         @Inject('BASE_URL') baseUrl: string)
     {

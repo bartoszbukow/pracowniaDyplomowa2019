@@ -29,6 +29,7 @@ import { UserChangePasswordComponent } from './components/user/user-change-passw
 import { BackToPageComponent } from './components/back-to-page/back-to-page.component';
 import { MessageCreateComponent } from './components/message/message-create/message-create.component';
 import { MessageListComponent } from './components/message/message-list/message-list.component';
+import { MessageDetailsComponent } from './components/message/message-details/message-details.component';
 
 @NgModule({
     declarations: [
@@ -49,7 +50,8 @@ import { MessageListComponent } from './components/message/message-list/message-
         UserChangePasswordComponent,
         BackToPageComponent,
         MessageCreateComponent,
-        MessageListComponent
+        MessageListComponent,
+        MessageDetailsComponent
     ],
     entryComponents: [],
     imports: [

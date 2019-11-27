@@ -1,0 +1,76 @@
+.backToMainPage {
+  max-width: 81%;
+  margin: 30px auto 0 auto;
+
+  .button-box {
+    width: 140px;
+    height: 40px;
+
+    button {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      color: #292929;
+      border: solid #D5DBE0 1px;
+
+      .button-box__text {
+        margin-left: 5px;
+        font-size: 17px;
+      }
+    }
+
+    button:hover {
+      color: #fff;
+    }
+  }
+}
+
+.converation-box {
+  margin: 20px 0;
+  max-width: 81%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0;
+  background-color: #FFFFFF;
+  border: solid #D5DBE0 1px;
+  padding: 20px;
+
+  .message-item {
+    width: 80%;
+    min-height: 50px;
+    border: solid #D5DBE0 1px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #5f72d7;
+    padding: 15px;
+
+    .message-item__sender-name {
+      font-size: 1.2em;
+      font-weight: bold;
+      float: left;
+    }
+
+    .message-item__created-date{
+      float: right;
+    }
+
+    .message-item__content{
+      width: 100%;
+      clear: both;
+    }
+  }
+
+  .message-item__my-message {
+    float: left;
+  }
+
+  .message-item__your-message {
+    float: right;
+  }
+}
+
+@media (max-width: 980px) {
+  .converation-box {
+    max-width: 92%;
+  }
+}

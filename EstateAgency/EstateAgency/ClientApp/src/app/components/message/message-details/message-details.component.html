@@ -1,0 +1,20 @@
+<div class="backToMainPage">
+  <app-back-to-page [dateToReturn]="this.dateToReturn"></app-back-to-page>
+</div>
+
+<div class="converation-box">
+  <div *ngFor="let message of messages">
+    <div class="message-item" [ngClass]="(message.senderId === this.myId) ? 'message-item__my-message' : 'message-item__your-message'">
+      <div class="message-item__sender-name">
+        {{ message.senderName }}
+      </div>
+      <div class="message-item__created-date">
+        {{ message.createdDate | date:'dd.MM.yyyy h:mm:ss' }}
+      </div>
+      <div class="message-item__content">
+        {{ message.messageContent }}
+      </div>
+    </div>
+  </div>
+  <div style="clear:both;"></div>
+</div>

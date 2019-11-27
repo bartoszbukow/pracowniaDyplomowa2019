@@ -66,4 +66,8 @@ export class ApiService {
     getMyMessages() {
         return this.http.get<IMessageList>(this.url + "api/message/MyMessages");
     }
+
+    getConversation(data) {
+        return this.http.get<IMessagesInConversation>(this.url + "api/message/Conversation" + data);
+    }
 }

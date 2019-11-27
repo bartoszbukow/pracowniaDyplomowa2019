@@ -51,7 +51,7 @@ namespace EstateAgency.Controllers
 
             if (model.ConversationId == null)
             {
-                Message mess = _dbContext.Messages.First(m => (m.SenderId == senderUser.Id && m.RecipientId == recipientUser.Id) || (m.SenderId == recipientUser.Id && m.RecipientId == senderUser.Id));
+                Message mess = _dbContext.Messages.FirstOrDefault(m => (m.SenderId == senderUser.Id && m.RecipientId == recipientUser.Id) || (m.SenderId == recipientUser.Id && m.RecipientId == senderUser.Id));
                 
                 if(mess != null)
                 {
@@ -99,6 +99,29 @@ namespace EstateAgency.Controllers
             }
 
             return  new JsonResult(latestMessageFromGroups.Adapt<MessageListViewModel[]>(), JsonSettings);
+        }
+
+        [HttpGet("Conversation{conversationId}")]
+        [Authorize]
+        public async Task<IActionResult> Conversation(string conversationId)
+        {
+            ApplicationUser requestUser = await GetCurrentUserAsync();
+            if (requestUser == null)
+            {
+                return Unauthorized();
+            }
+
+            var messages = _dbContext.Messages.Where(m => m.ConversationId == conversationId).OrderBy(m => m.CreatedDate);
+
+            var messagesInConversation = messages.Adapt<MessageInConversationViewModel[]>();
+
+            foreach (var message in messagesInConversation)
+            {
+                message.SenderName = _dbContext.Users.FirstOrDefault(u => u.Id == message.SenderId).Name;
+                message.RecipientName = _dbContext.Users.FirstOrDefault(u => u.Id == message.RecipientId).Name;
+            }
+
+            return new JsonResult(messagesInConversation.Adapt<MessageInConversationViewModel[]>(), JsonSettings);
         }
 
         #endregion 

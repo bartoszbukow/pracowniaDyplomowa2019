@@ -32,6 +32,7 @@
     <None Remove="ClientApp\src\app\interfaces\image.ts" />
     <None Remove="ClientApp\src\app\interfaces\messageCreate.ts" />
     <None Remove="ClientApp\src\app\interfaces\messageList.ts" />
+    <None Remove="ClientApp\src\app\interfaces\messagesInConversation.ts" />
     <None Remove="ClientApp\src\app\interfaces\passwordChange.ts" />
     <None Remove="ClientApp\src\app\interfaces\token.response.ts" />
     <None Remove="ClientApp\src\app\interfaces\TokenResponse.ts" />
@@ -54,6 +55,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\image.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\messageCreate.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\messageList.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\messagesInConversation.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\passwordChange.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\token.response.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\user.ts" />

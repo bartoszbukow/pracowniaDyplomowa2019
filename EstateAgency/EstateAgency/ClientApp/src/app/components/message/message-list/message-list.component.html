@@ -13,8 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let message of myMessagesList" class="message-item">
-          <!--<th class="table-title-action"><h5><span [ngClass]="'badge badge-' + actionLogs[log.actionId]?.color">{{actionLogs[log.actionId]?.title}}</span></h5></th>-->
+        <tr *ngFor="let message of myMessagesList" class="message-item" [routerLink]="['/message/conversation', message.conversationId]">
           <td class="table-title-senderName">{{message.senderName}}</td>
           <td class="table-title-messageContent"> {{message.messageContent}}</td>
           <td class="table-title-createdDate">{{message.createdDate | date:'dd.MM.yyyy h:mm:ss'}}</td>

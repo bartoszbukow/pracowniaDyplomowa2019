@@ -12,6 +12,7 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
 import { UserChangePasswordComponent } from './components/user/user-change-password/user-change-password.component';
 import { MessageCreateComponent } from './components/message/message-create/message-create.component';
 import { MessageListComponent } from './components/message/message-list/message-list.component';
+import { MessageDetailsComponent } from './components/message/message-details/message-details.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
     { path: 'user/change-password', component: UserChangePasswordComponent },
     { path: 'message/create', component: MessageCreateComponent },
     { path: 'message/my', component: MessageListComponent },
+    { path: 'message/conversation/:id', component: MessageDetailsComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: '**', component: PageNotFoundComponent }
