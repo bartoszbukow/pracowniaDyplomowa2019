@@ -16,7 +16,7 @@ export class AdvertisementComponent implements OnInit {
     @ViewChild('slider', { static: true }) slider: ElementRef;
 
     dateToReturn: { title: string, pathToReturn: string } = {
-        title: "SZCZEGÓŁY OGŁOSZENIA",
+        title: "Szczegóły ogłoszenia",
         pathToReturn: "locationBack"
     }
 

@@ -11,7 +11,7 @@ export class AdvertisementOwnerComponent implements OnInit {
     advertisements: IAdvertisement[];
 
     dateToReturn: { title: string, pathToReturn: string } = {
-        title: "MOJE OGŁOSZENIA",
+        title: "Moje ogłoszenia",
         pathToReturn: "home"
     }
 

@@ -10,7 +10,7 @@ export class MessageListComponent implements OnInit {
     myMessagesList: any;
 
     dateToReturn: { title: string, pathToReturn: string } = {
-        title: "MOJE WIADOMOŚCI",
+        title: "Moje wiadomości",
         pathToReturn: "home"
     }
 

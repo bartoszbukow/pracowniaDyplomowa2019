@@ -24,7 +24,7 @@ export class AdvertisementCreateComponent implements OnInit {
     formData: FormData = new FormData();
 
     dateToReturn: { title: string, pathToReturn:string } = {
-        title: "NOWE OGŁOSZENIE",
+        title: "Nowe ogłoszenie",
         pathToReturn: "home"
     }
 

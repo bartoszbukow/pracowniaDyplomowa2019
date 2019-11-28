@@ -25,7 +25,7 @@ export class AdvertisementEditComponent implements OnInit {
     numberOfPhotos: number = 0;
 
     dateToReturn: { title: string, pathToReturn: string } = {
-        title: "EDYCJA OGŁOSZENIA",
+        title: "Edycja ogłoszenia",
         pathToReturn: "locationBack"
     }
 
