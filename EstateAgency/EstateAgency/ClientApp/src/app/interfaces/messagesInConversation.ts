@@ -6,4 +6,6 @@ interface IMessagesInConversation {
     recipientName: string;
     createdDate: Date;
     messageContent: string;
+    senderEmail: string;
+    recipientEmail: string;
 }

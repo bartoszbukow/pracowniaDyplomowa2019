@@ -26,6 +26,9 @@ namespace EstateAgency.ViewModels.MessageViewModels
         [JsonProperty("senderId")]
         public string SenderId { get; set; }
 
+        [JsonProperty("senderEmail")]
+        public string SenderEmail { get; set; }
+
         [JsonProperty("senderName")]
         public string SenderName { get; set; }
 
@@ -34,6 +37,9 @@ namespace EstateAgency.ViewModels.MessageViewModels
 
         [JsonProperty("recipientName")]
         public string RecipientName { get; set; }
+
+        [JsonProperty("recipientEmail")]
+        public string RecipientEmail { get; set; }
 
         [JsonProperty("createdDate")]
         public DateTime CreatedDate { get; set; }

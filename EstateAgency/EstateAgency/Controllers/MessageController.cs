@@ -117,8 +117,12 @@ namespace EstateAgency.Controllers
 
             foreach (var message in messagesInConversation)
             {
-                message.SenderName = _dbContext.Users.FirstOrDefault(u => u.Id == message.SenderId).Name;
-                message.RecipientName = _dbContext.Users.FirstOrDefault(u => u.Id == message.RecipientId).Name;
+                var tmpSender =  _dbContext.Users.FirstOrDefault(u => u.Id == message.SenderId);
+                message.SenderName = tmpSender.Name;
+                message.SenderEmail = tmpSender.Email;
+                var tmpRecipient = _dbContext.Users.FirstOrDefault(u => u.Id == message.RecipientId);
+                message.RecipientName = tmpRecipient.Name;
+                message.RecipientEmail = tmpRecipient.Email;
             }
 
             return new JsonResult(messagesInConversation.Adapt<MessageInConversationViewModel[]>(), JsonSettings);

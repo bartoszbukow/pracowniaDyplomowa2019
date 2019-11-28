@@ -3,7 +3,7 @@
 </div>
 
 <div class="converation-box">
-  <div *ngFor="let message of messages">
+  <div *ngFor="let message of messages; trackBy: trackByFn">
     <div class="message-item" [ngClass]="(message.senderId === this.myId) ? 'message-item__my-message' : 'message-item__your-message'">
       <div class="message-item__sender-name">
         {{ message.senderName }}
@@ -17,4 +17,24 @@
     </div>
   </div>
   <div style="clear:both;"></div>
+  <div class="answer-box">
+    <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+      <div class="form-group">
+        <label class="answer-box__label">Wyślij wiadomość</label>
+        <textarea type="text"
+                  formControlName="messageContent"
+                  class="form-control textarea"
+                  [ngClass]="{'is-invalid':hasError('messageContent')}"
+                  required
+                  autocomplete="messageContent"></textarea>
+        <div *ngIf="hasError('messageContent')" class="invalid-feedback">Wiadomość musi zawierać od 2 do 1000 znaków</div>
+      </div>
+      <div class="answer-box__button">
+        <button type="submit">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+      <div style="clear:both;"></div>
+    </form>
+  </div>
 </div>

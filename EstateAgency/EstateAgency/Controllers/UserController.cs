@@ -72,6 +72,19 @@ namespace EstateAgency.Controllers
             return new JsonResult(requestUser.Id, JsonSettings);
         }
 
+        [HttpGet("UserEmail")]
+        [Authorize]
+        public async Task<IActionResult> MyEmail()
+        {
+            ApplicationUser requestUser = await GetCurrentUserAsync();
+            if (requestUser == null)
+            {
+                return Unauthorized();
+            }
+
+            return new JsonResult(requestUser.Email, JsonSettings);
+        }
+
         [HttpPut("UserEdit")]
         [Authorize]
         public async Task<IActionResult> UserEdit([FromBody] UserEditViewModel model)
