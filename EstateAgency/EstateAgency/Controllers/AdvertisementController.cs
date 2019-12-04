@@ -316,6 +316,14 @@ namespace EstateAgency.Controllers
             return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
 
+        [HttpGet("SerchAdvertisements")]
+        public IActionResult SerchAdvertisements([FromBody] AdvertisementViewModel model)
+        {
+
+           return Ok();
+            //return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
+        }
+
         #endregion
     }
 

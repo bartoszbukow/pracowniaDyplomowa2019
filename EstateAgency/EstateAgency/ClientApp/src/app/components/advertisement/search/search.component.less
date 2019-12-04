@@ -1,10 +1,52 @@
 .card {
-  background-color: #D5DBE0;
+  border: none;
   border-radius: 0;
 }
 
 @media(min-width: 576px) {
   .card {
     margin: 0 25px;
+  }
+}
+
+.search-box {
+  background-color: rgba(255,255,255,0.5);
+  margin: 55px 80px 0 80px;
+
+  .main-search-box {
+    .main-search__title {
+      width: calc(~"100% - 30px");
+    }
+
+    input {
+      font-size: 25px;
+    }
+
+    .main-search__icon {
+      width: 30px;
+      background: none;
+      color: inherit;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+    }
+  }
+
+  .active-cyan-2 input[type=text]:not([readonly]) {
+    border-bottom: 1px solid #999;
+    box-shadow: 0 1px 0 0 #999;
+  }
+
+  .active-cyan-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #444;
+    box-shadow: 0 1px 0 0 #444;
+  }
+}
+
+@media(max-width: 1370px) {
+  .search-box {
+    margin: 35px 0 0 0;
   }
 }

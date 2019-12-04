@@ -1,5 +1,5 @@
 <div class="backToMainPage">
-  <app-back-to-page [dateToReturn]="this.dateToReturn" ></app-back-to-page>
+  <app-back-to-page [dateToReturn]="this.dateToReturn"></app-back-to-page>
 </div>
 
 <div class="advertisement-create-box">
@@ -8,6 +8,9 @@
 
       <div class="title-box__name">
         <label>Tytuł</label>
+      </div>
+      <div class="type-box__name">
+        <label>Typ</label>
       </div>
       <div class="caterogy-box__name">
         <label>Kategoria</label>
@@ -47,6 +50,16 @@
                autocomplete="title"
                [ngClass]="{'is-invalid':hasError('title')}">
         <div *ngIf="hasError('title')" class="invalid-feedback">Tytuł musi zawierać od 2 do 50 znaków</div>
+      </div>
+
+      <div class="type-box__content form-group">
+        <select class="form-control"
+                id="type"
+                formControlName="type"
+                autocomplete="type">
+          <option>Sprzedaz</option>
+          <option>Wynajem</option>
+        </select>
       </div>
 
       <div class="caterogy-box__content form-group">
@@ -150,12 +163,13 @@
           <button type="submit"
                   class="btn btn-sm btn-primary"
                   [disabled]="!(createAdvertisementForm.value.title &&
-               createAdvertisementForm.value.category &&
-               createAdvertisementForm.value.description &&
-               createAdvertisementForm.value.yardage &&
-               createAdvertisementForm.value.numberOfRoom &&
-               createAdvertisementForm.value.city &&
-               createAdvertisementForm.value.address)"
+                 createAdvertisementForm.value.type &&
+                 createAdvertisementForm.value.category &&
+                 createAdvertisementForm.value.description &&
+                 createAdvertisementForm.value.yardage &&
+                 createAdvertisementForm.value.numberOfRoom &&
+                 createAdvertisementForm.value.city &&
+                 createAdvertisementForm.value.address)"
                   (click)="createAdvertisement()">
             Utwórz <span id="button-box__text2">Ogłoszenie</span>
           </button>

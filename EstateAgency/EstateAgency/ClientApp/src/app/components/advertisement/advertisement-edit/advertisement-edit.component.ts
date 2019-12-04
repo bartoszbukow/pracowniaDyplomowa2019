@@ -49,6 +49,7 @@ export class AdvertisementEditComponent implements OnInit {
                 this.editAdvertisementForm.setValue({
                     id: res.id,
                     title: res.title,
+                    type: '',
                     category: res.category,
                     description: res.description,
                     yardage: res.yardage,
@@ -58,6 +59,17 @@ export class AdvertisementEditComponent implements OnInit {
                     address: res.address,
                     images: res.images
                 });
+
+                if (+res.type === 1) {
+                    this.editAdvertisementForm.patchValue({
+                        type: 'Wynajem'
+                    });
+                }
+                else {
+                    this.editAdvertisementForm.patchValue({
+                        type: 'Sprzedaz'
+                    });
+                }
 
                 this.numberOfPhotos = res.images.length;
 
@@ -79,6 +91,9 @@ export class AdvertisementEditComponent implements OnInit {
                 Validators.required,
                 Validators.minLength(2),
                 Validators.maxLength(50)
+            ])],
+            type: [this.advertisementModel.type, Validators.compose([
+                Validators.required,
             ])],
             category: [this.advertisementModel.category, Validators.compose([
                 Validators.required,
@@ -131,6 +146,13 @@ export class AdvertisementEditComponent implements OnInit {
     editAdvertisement() {
         if (!this.editAdvertisementForm.valid) {
             return;
+        }
+
+        if (this.editAdvertisementForm.value.type === "Wynajem") {
+            this.editAdvertisementForm.value.type = 1;
+        }
+        else {
+            this.editAdvertisementForm.value.type = 0;
         }
 
         for (var key in this.editAdvertisementForm.value) {

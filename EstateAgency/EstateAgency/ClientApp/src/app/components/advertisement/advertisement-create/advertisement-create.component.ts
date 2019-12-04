@@ -47,6 +47,9 @@ export class AdvertisementCreateComponent implements OnInit {
                 Validators.minLength(2),
                 Validators.maxLength(50)
             ])],
+            type: [this.advertisementModel.type, Validators.compose([
+                Validators.required,
+            ])],
             category: [this.advertisementModel.category, Validators.compose([
                 Validators.required,
             ])],
@@ -97,6 +100,13 @@ export class AdvertisementCreateComponent implements OnInit {
     createAdvertisement() {
         if (!this.createAdvertisementForm.valid) {
             return;
+        }
+
+        if (this.createAdvertisementForm.value.type === "Wynajem") {
+            this.createAdvertisementForm.value.type = 1;
+        }
+        else {
+            this.createAdvertisementForm.value.type = 0;
         }
 
         for (var key in this.createAdvertisementForm.value) {

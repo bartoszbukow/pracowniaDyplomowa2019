@@ -70,4 +70,8 @@ export class ApiService {
     getConversation(data) {
         return this.http.get<IMessagesInConversation>(this.url + "api/message/Conversation" + data);
     }
+
+    getSerchedAdvertisements(data) {
+        return this.http.get<IAdvertisement[]>(this.url + "api/advertisement/SerchAdvertisements", data);
+    }
 }

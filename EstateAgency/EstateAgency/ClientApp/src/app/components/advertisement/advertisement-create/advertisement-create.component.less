@@ -18,7 +18,7 @@
     height: 100%;
     display: grid;
     grid-template-columns: 150px 40px calc(~"100% - 190px");
-    grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto;
     grid-auto-flow: row;
     padding: 30px;
 
@@ -30,7 +30,7 @@
       min-height: 50px;
     }
 
-    .caterogy-box__name {
+    .type-box__name {
       grid-column: 1;
       grid-row-start: 2;
       grid-row-end: 3;
@@ -38,23 +38,23 @@
       min-height: 50px;
     }
 
-    .description-box__name {
+    .caterogy-box__name {
       grid-column: 1;
       grid-row-start: 3;
       grid-row-end: 4;
+      text-align: right;
+      min-height: 50px;
+    }
+
+    .description-box__name {
+      grid-column: 1;
+      grid-row-start: 4;
+      grid-row-end: 5;
       text-align: right;
       min-height: 100px;
     }
 
     .yardage-box__name {
-      grid-column: 1;
-      grid-row-start: 4;
-      grid-row-end: 5;
-      text-align: right;
-      min-height: 50px;
-    }
-
-    .numberOfRoom-box__name {
       grid-column: 1;
       grid-row-start: 5;
       grid-row-end: 6;
@@ -62,7 +62,7 @@
       min-height: 50px;
     }
 
-    .price-box__name {
+    .numberOfRoom-box__name {
       grid-column: 1;
       grid-row-start: 6;
       grid-row-end: 7;
@@ -70,7 +70,7 @@
       min-height: 50px;
     }
 
-    .city-box__name {
+    .price-box__name {
       grid-column: 1;
       grid-row-start: 7;
       grid-row-end: 8;
@@ -78,7 +78,7 @@
       min-height: 50px;
     }
 
-    .address-box__name {
+    .city-box__name {
       grid-column: 1;
       grid-row-start: 8;
       grid-row-end: 9;
@@ -86,10 +86,18 @@
       min-height: 50px;
     }
 
-    .photos-box__name {
+    .address-box__name {
       grid-column: 1;
       grid-row-start: 9;
       grid-row-end: 10;
+      text-align: right;
+      min-height: 50px;
+    }
+
+    .photos-box__name {
+      grid-column: 1;
+      grid-row-start: 10;
+      grid-row-end: 11;
       text-align: right;
       min-height: 100px;
     }
@@ -97,7 +105,7 @@
     .dividing-line {
       grid-column: 2;
       grid-row-start: 1;
-      grid-row-end: 10;
+      grid-row-end: 11;
       margin-bottom: 30px;
 
       .line {
@@ -115,59 +123,66 @@
       min-height: 50px;
     }
 
-    .caterogy-box__content {
+    .type-box__content {
       grid-column: 3;
       grid-row-start: 2;
       grid-row-end: 3;
       min-height: 50px;
     }
 
-    .description-box__content {
+    .caterogy-box__content {
       grid-column: 3;
       grid-row-start: 3;
       grid-row-end: 4;
+      min-height: 50px;
+    }
+
+    .description-box__content {
+      grid-column: 3;
+      grid-row-start: 4;
+      grid-row-end: 5;
       min-height: 100px;
     }
 
     .yardage-box__content {
-      grid-column: 3;
-      grid-row-start: 4;
-      grid-row-end: 5;
-      min-height: 50px;
-    }
-
-    .numberOfRoom-box__content {
       grid-column: 3;
       grid-row-start: 5;
       grid-row-end: 6;
       min-height: 50px;
     }
 
-    .price-box__content {
+    .numberOfRoom-box__content {
       grid-column: 3;
       grid-row-start: 6;
       grid-row-end: 7;
       min-height: 50px;
     }
 
-    .city-box__content {
+    .price-box__content {
       grid-column: 3;
       grid-row-start: 7;
       grid-row-end: 8;
       min-height: 50px;
     }
 
-    .address-box__content {
+    .city-box__content {
       grid-column: 3;
       grid-row-start: 8;
       grid-row-end: 9;
       min-height: 50px;
     }
 
-    .photos-box__content {
+    .address-box__content {
       grid-column: 3;
       grid-row-start: 9;
       grid-row-end: 10;
+      min-height: 50px;
+    }
+
+    .photos-box__content {
+      grid-column: 3;
+      grid-row-start: 10;
+      grid-row-end: 11;
       min-height: 100px;
 
       .add-photo-area {
@@ -229,8 +244,8 @@
 
     .button-box {
       grid-column: 3;
-      grid-row-start: 10;
-      grid-row-end: 11;
+      grid-row-start: 11;
+      grid-row-end: 12;
       margin-top: 20px;
 
       .button-box__area {
@@ -266,7 +281,7 @@
       height: 100%;
       display: grid;
       grid-template-columns: 100px 40px calc(~"100% - 140px");
-      grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+      grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto;
       grid-auto-flow: row;
       padding: 30px;
     }

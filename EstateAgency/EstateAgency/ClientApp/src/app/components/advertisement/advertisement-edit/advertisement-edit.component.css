@@ -17,7 +17,7 @@
   height: 100%;
   display: grid;
   grid-template-columns: 150px 40px calc(100% - 190px);
-  grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto;
   grid-auto-flow: row;
   padding: 30px;
 }
@@ -28,66 +28,73 @@
   text-align: right;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .caterogy-box__name {
+.advertisement-create-box .create-content-box .type-box__name {
   grid-column: 1;
   grid-row-start: 2;
   grid-row-end: 3;
   text-align: right;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .description-box__name {
+.advertisement-create-box .create-content-box .caterogy-box__name {
   grid-column: 1;
   grid-row-start: 3;
   grid-row-end: 4;
   text-align: right;
-  min-height: 100px;
+  min-height: 50px;
 }
-.advertisement-create-box .create-content-box .yardage-box__name {
+.advertisement-create-box .create-content-box .description-box__name {
   grid-column: 1;
   grid-row-start: 4;
   grid-row-end: 5;
   text-align: right;
-  min-height: 50px;
+  min-height: 100px;
 }
-.advertisement-create-box .create-content-box .numberOfRoom-box__name {
+.advertisement-create-box .create-content-box .yardage-box__name {
   grid-column: 1;
   grid-row-start: 5;
   grid-row-end: 6;
   text-align: right;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .price-box__name {
+.advertisement-create-box .create-content-box .numberOfRoom-box__name {
   grid-column: 1;
   grid-row-start: 6;
   grid-row-end: 7;
   text-align: right;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .city-box__name {
+.advertisement-create-box .create-content-box .price-box__name {
   grid-column: 1;
   grid-row-start: 7;
   grid-row-end: 8;
   text-align: right;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .address-box__name {
+.advertisement-create-box .create-content-box .city-box__name {
   grid-column: 1;
   grid-row-start: 8;
   grid-row-end: 9;
   text-align: right;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .photos-box__name {
+.advertisement-create-box .create-content-box .address-box__name {
   grid-column: 1;
   grid-row-start: 9;
   grid-row-end: 10;
+  text-align: right;
+  min-height: 50px;
+}
+.advertisement-create-box .create-content-box .photos-box__name {
+  grid-column: 1;
+  grid-row-start: 10;
+  grid-row-end: 11;
   text-align: right;
   min-height: 100px;
 }
 .advertisement-create-box .create-content-box .dividing-line {
   grid-column: 2;
   grid-row-start: 1;
-  grid-row-end: 10;
+  grid-row-end: 11;
   margin-bottom: 30px;
 }
 .advertisement-create-box .create-content-box .dividing-line .line {
@@ -102,52 +109,58 @@
   grid-row-end: 2;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .caterogy-box__content {
+.advertisement-create-box .create-content-box .type-box__content {
   grid-column: 3;
   grid-row-start: 2;
   grid-row-end: 3;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .description-box__content {
+.advertisement-create-box .create-content-box .caterogy-box__content {
   grid-column: 3;
   grid-row-start: 3;
   grid-row-end: 4;
-  min-height: 100px;
+  min-height: 50px;
 }
-.advertisement-create-box .create-content-box .yardage-box__content {
+.advertisement-create-box .create-content-box .description-box__content {
   grid-column: 3;
   grid-row-start: 4;
   grid-row-end: 5;
-  min-height: 50px;
+  min-height: 100px;
 }
-.advertisement-create-box .create-content-box .numberOfRoom-box__content {
+.advertisement-create-box .create-content-box .yardage-box__content {
   grid-column: 3;
   grid-row-start: 5;
   grid-row-end: 6;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .price-box__content {
+.advertisement-create-box .create-content-box .numberOfRoom-box__content {
   grid-column: 3;
   grid-row-start: 6;
   grid-row-end: 7;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .city-box__content {
+.advertisement-create-box .create-content-box .price-box__content {
   grid-column: 3;
   grid-row-start: 7;
   grid-row-end: 8;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .address-box__content {
+.advertisement-create-box .create-content-box .city-box__content {
   grid-column: 3;
   grid-row-start: 8;
   grid-row-end: 9;
   min-height: 50px;
 }
-.advertisement-create-box .create-content-box .photos-box__content {
+.advertisement-create-box .create-content-box .address-box__content {
   grid-column: 3;
   grid-row-start: 9;
   grid-row-end: 10;
+  min-height: 50px;
+}
+.advertisement-create-box .create-content-box .photos-box__content {
+  grid-column: 3;
+  grid-row-start: 10;
+  grid-row-end: 11;
   min-height: 100px;
 }
 .advertisement-create-box .create-content-box .photos-box__content .add-photo-area {
@@ -227,8 +240,8 @@
 }
 .advertisement-create-box .create-content-box .button-box {
   grid-column: 3;
-  grid-row-start: 10;
-  grid-row-end: 11;
+  grid-row-start: 11;
+  grid-row-end: 12;
   margin-top: 20px;
 }
 .advertisement-create-box .create-content-box .button-box .button-box__area {

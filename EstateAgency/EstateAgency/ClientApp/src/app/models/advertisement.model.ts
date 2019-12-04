@@ -1,5 +1,6 @@
 export class AdvertisementModel {
     id?: string;
+    type?: number;
     title: string;
     category: string;
     desciption: string;
