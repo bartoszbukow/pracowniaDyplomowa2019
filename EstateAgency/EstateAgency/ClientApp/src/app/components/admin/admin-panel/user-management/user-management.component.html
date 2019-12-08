@@ -1,0 +1,19 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class="name">Użytkownik</th>
+      <th class="email">Email</th>
+      <th class="button">Zarządzaj</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of userList">
+      <td class="name">{{user.name}} {{user.surname}}</td>
+      <td class="email"> {{user.email}}</td>
+      <td class="button">
+        <button *ngIf="user.flags === 0" class="btn btn-danger" (click)="lockUser(user.id)">ZABLOKUJ</button>
+        <button *ngIf="user.flags === 1" class="btn btn-success" (click)="unlockUser(user.id)">ODBLOKUJ</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

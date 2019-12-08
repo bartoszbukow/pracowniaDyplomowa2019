@@ -53,7 +53,8 @@ namespace EstateAgency.Data
                 LastModifiedDate = lastModifiedDate,
                 PhoneNumber = "516603856",
                 Name = "Admin",
-                Surname = "Admin"
+                Surname = "Admin",
+                Type = 1
             };
 
             if (await userManager.FindByNameAsync(user_Admin.UserName) == null)

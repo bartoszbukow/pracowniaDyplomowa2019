@@ -74,4 +74,16 @@ export class ApiService {
     getSearchedAdvertisements(data) {
         return this.http.get<IAdvertisement[]>(this.url + "api/advertisement/SerchAdvertisements/" + data);
     }
+
+    getAplicationsUsers() {
+        return this.http.get<IUserManagement[]>(this.url + "api/admin/AplicationUsers");
+    }
+
+    putLockUser(data) {
+        return this.http.put<IUserManagement[]>(this.url + "api/admin/LockUser", data);
+    }
+
+    putUnlockUser(data) {
+        return this.http.put<IUserManagement[]>(this.url + "api/admin/UnlockUser", data);
+    }
 }

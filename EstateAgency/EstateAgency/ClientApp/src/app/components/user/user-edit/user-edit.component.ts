@@ -37,7 +37,6 @@ export class UserEditComponent implements OnInit {
                     name: res.name,
                     phoneNumber: res.phoneNumber,
                     surname: res.surname,
-                    email: res.email
                 });
             });
         }

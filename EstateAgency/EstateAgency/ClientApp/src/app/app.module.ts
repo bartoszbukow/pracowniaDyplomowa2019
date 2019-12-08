@@ -35,6 +35,7 @@ import { MessageDetailsComponent } from './components/message/message-details/me
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
 import { AuthGuardService } from './services/auth.guard.service';
 import { AdminGuardService } from './services/admin.guard.service';
+import { UserManagementComponent } from './components/admin/admin-panel/user-management/user-management.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { AdminGuardService } from './services/admin.guard.service';
         MessageCreateComponent,
         MessageListComponent,
         MessageDetailsComponent,
-        AdminPanelComponent
+        AdminPanelComponent,
+        UserManagementComponent
     ],
     entryComponents: [],
     imports: [
