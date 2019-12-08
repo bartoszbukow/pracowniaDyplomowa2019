@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SerchModel } from "./../../../models/serch.model";
 import { ApiService } from '../../../services/api.service';
@@ -9,9 +9,11 @@ import { ApiService } from '../../../services/api.service';
     styleUrls: ['./search.component.less']
 })
 export class SearchComponent implements OnInit {
-
     searchFrom: FormGroup;
     serchModel: SerchModel = new SerchModel();
+    optionsSelect: Array<any>;
+
+    @Output() searchedAdvertisement = new EventEmitter();
 
     constructor(
         private fb: FormBuilder,
@@ -29,9 +31,8 @@ export class SearchComponent implements OnInit {
     }
 
     serchAdvertisements() {
-
-        this.api.getSerchedAdvertisements(this.searchFrom.value.title).subscribe(res => {
-            console.log("udalos sie!");
+        this.api.getSearchedAdvertisements(this.searchFrom.value.title).subscribe(res => {
+            this.searchedAdvertisement.emit(res);
         });
     }
 }

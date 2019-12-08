@@ -316,12 +316,17 @@ namespace EstateAgency.Controllers
             return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
 
-        [HttpGet("SerchAdvertisements")]
-        public IActionResult SerchAdvertisements([FromBody] AdvertisementViewModel model)
+        [HttpGet("SerchAdvertisements/{title}")]
+        public IActionResult SerchAdvertisements(string title)
         {
+            var advertisements = _dbContext.Advertisements.Where(a => a.Title.Contains(title)).ToArray();
 
-           return Ok();
-            //return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
+            foreach (var advertisement in advertisements)
+            {
+                advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
+            }
+
+            return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
 
         #endregion

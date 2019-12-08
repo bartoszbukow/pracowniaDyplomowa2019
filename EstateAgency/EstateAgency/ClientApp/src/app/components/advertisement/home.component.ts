@@ -16,4 +16,8 @@ export class HomeComponent implements OnInit {
             this.advertisements = res;
         });
     }
+
+    onSearchChanged = (searchedAdvertisements: IAdvertisement[]): void => {
+        this.advertisements = searchedAdvertisements;
+    }
 }

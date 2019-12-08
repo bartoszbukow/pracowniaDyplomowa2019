@@ -1,13 +1,13 @@
 <div class="card search-box">
   <div class="card-body">
-    <form [formGroup]="searchFrom" class="form-inline md-form form-sm active-cyan-2 mt-2 main-search-box">
+    <form [formGroup]="searchFrom" class="form-inline md-form form-sm active-cyan-2 mt-2 main-search-box" (ngSubmit)="serchAdvertisements()">
       <input class="form-control main-search__title"
              type="text"
              placeholder="Czego szukasz?"
              aria-label="Search"
              formControlName="title"
              autocomplete="title">
-      <button class="main-search__icon" (click)="serchAdvertisements()">
+      <button class="main-search__icon">
         <i class="fas fa-search" aria-hidden="true" ></i>
       </button>
     </form>
