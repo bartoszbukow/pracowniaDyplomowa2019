@@ -3,10 +3,8 @@
   margin: 30px auto 0 auto;
 }
 .advertisement-create-box {
-  margin: 20px 0;
+  margin: 20px auto;
   max-width: 81%;
-  margin-left: auto;
-  margin-right: auto;
   border-radius: 0;
   background-color: #FFFFFF;
   border: solid #D5DBE0 1px;

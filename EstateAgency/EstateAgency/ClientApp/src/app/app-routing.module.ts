@@ -13,21 +13,25 @@ import { UserChangePasswordComponent } from './components/user/user-change-passw
 import { MessageCreateComponent } from './components/message/message-create/message-create.component';
 import { MessageListComponent } from './components/message/message-list/message-list.component';
 import { MessageDetailsComponent } from './components/message/message-details/message-details.component';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
+import { AuthGuardService } from './services/auth.guard.service';
+import { AdminGuardService } from './services/admin.guard.service';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
-    { path: 'advertisement/my', component: AdvertisementOwnerComponent },
-    { path: 'advertisement/create', component: AdvertisementCreateComponent },
-    { path: 'advertisement/edit/:id', component: AdvertisementEditComponent },
+    { path: 'advertisement/my', component: AdvertisementOwnerComponent, canActivate: [AuthGuardService] },
+    { path: 'advertisement/create', component: AdvertisementCreateComponent, canActivate: [AuthGuardService] },
+    { path: 'advertisement/edit/:id', component: AdvertisementEditComponent, canActivate: [AuthGuardService] },
     { path: 'advertisement/:id', component: AdvertisementComponent },
-    { path: 'user/edit', component: UserEditComponent },
-    { path: 'user/change-password', component: UserChangePasswordComponent },
-    { path: 'message/create', component: MessageCreateComponent },
-    { path: 'message/my', component: MessageListComponent },
-    { path: 'message/conversation/:id', component: MessageDetailsComponent },
+    { path: 'user/edit', component: UserEditComponent, canActivate: [AuthGuardService] },
+    { path: 'user/change-password', component: UserChangePasswordComponent, canActivate: [AuthGuardService] },
+    { path: 'message/create', component: MessageCreateComponent, canActivate: [AuthGuardService] },
+    { path: 'message/my', component: MessageListComponent, canActivate: [AuthGuardService] },
+    { path: 'message/conversation/:id', component: MessageDetailsComponent, canActivate: [AuthGuardService] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'administration', component: AdminPanelComponent, canActivate: [AdminGuardService]},
     { path: '**', component: PageNotFoundComponent }
 ];
 

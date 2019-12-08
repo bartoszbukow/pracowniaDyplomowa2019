@@ -67,7 +67,9 @@ namespace EstateAgency.Controllers
                 var rt = CreateRefreshToken(model.clientId, user.Id);
                 DbContext.Tokens.Add(rt);
                 DbContext.SaveChanges();
-                var t = CreateAccessToken(user.Id, rt.Value);
+
+                var roles = await UserManager.GetRolesAsync(user);
+                var t = CreateAccessToken(user.Id, rt.Value, roles);
                 return Json(t);
             }
             catch (Exception ex)
@@ -95,12 +97,11 @@ namespace EstateAgency.Controllers
                 var rtNew = CreateRefreshToken(rt.ClientId, rt.UserId);
 
                 DbContext.Tokens.Remove(rt);
-
                 DbContext.Tokens.Add(rtNew);
-
                 DbContext.SaveChanges();
 
-                var response = CreateAccessToken(rtNew.UserId, rtNew.Value);
+                var roles = await UserManager.GetRolesAsync(user);
+                var response = CreateAccessToken(rtNew.UserId, rtNew.Value, roles);
 
                 return Json(response);
             }
@@ -122,28 +123,31 @@ namespace EstateAgency.Controllers
             };
         }
 
-        private TokenResponseViewModel CreateAccessToken(string userId, string refreshToken)
+        private TokenResponseViewModel CreateAccessToken(string userId, string refreshToken, IList<string> roles)
         {
             DateTime now = DateTime.UtcNow;
-            var claims = new[] {
-                 new Claim(JwtRegisteredClaimNames.Sub, userId),
-                 new Claim(JwtRegisteredClaimNames.Jti,
-                 Guid.NewGuid().ToString()),
-                 new Claim(JwtRegisteredClaimNames.Iat,
-                 new DateTimeOffset(now).ToUnixTimeSeconds().ToString())   
-                 // TODO: add additional claims here   
-             };
+
+            var claims = new List<Claim>()
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, userId),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString())
+            }
+            .Union(roles.Select(r => new Claim("roles", r)));
 
             var tokenExpirationMins = Configuration.GetValue<int>("Auth:Jwt:TokenExpirationInMinutes");
             var issuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Auth:Jwt:Key"]));
-            var token = new JwtSecurityToken(issuer: Configuration["Auth:Jwt:Issuer"],
+
+            var token = new JwtSecurityToken(
+                issuer: Configuration["Auth:Jwt:Issuer"],
                 audience: Configuration["Auth:Jwt:Audience"],
                 claims: claims,
                 notBefore: now,
                 expires: now.Add(TimeSpan.FromMinutes(tokenExpirationMins)),
-                signingCredentials: new SigningCredentials(issuerSigningKey,
-                SecurityAlgorithms.HmacSha256));
+                signingCredentials: new SigningCredentials(issuerSigningKey, SecurityAlgorithms.HmacSha256));
+            
             var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
+            
             return new TokenResponseViewModel()
             {
                 token = encodedToken,
@@ -151,7 +155,6 @@ namespace EstateAgency.Controllers
                 refresh_token = refreshToken
             };
         }
-
     }
 }
 

@@ -44,6 +44,7 @@
     <None Remove="ClientApp\src\app\models\serch.model.ts" />
     <None Remove="ClientApp\src\app\models\userChangePassword.model.ts" />
     <None Remove="ClientApp\src\app\models\userEdit.model.ts" />
+    <None Remove="ClientApp\src\app\services\admin.guard.service.ts" />
     <None Remove="ClientApp\src\app\services\auth.guard.service.ts" />
     <None Remove="ClientApp\src\app\services\auth.interceptor.ts" />
     <None Remove="ClientApp\src\app\services\auth.response.interceptor.ts" />
@@ -67,12 +68,15 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\serch.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\userChangePassword.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\userEdit.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\admin.guard.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\auth.guard.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\auth.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\auth.response.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\token.response.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\components\admin\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>

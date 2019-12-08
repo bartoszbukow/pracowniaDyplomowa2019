@@ -18,7 +18,6 @@ export class AuthService {
         private api: ApiService,
         private toastr: ToastrService) { }
 
-    // performs the login
     login(username: string, password: string): Observable<any> {
         var data = {
             username: username,
@@ -34,7 +33,7 @@ export class AuthService {
         var data = {
             clientId: this.clientId,
             grant_type: "refresh_token",
-            refresh_token: this.getAuth()!.refresh_token,
+            refresh_token: this.getAuth().refresh_token,
         };
         return this.getAuthFromServer(data);
     }
@@ -63,7 +62,9 @@ export class AuthService {
     setAuth(auth: ITokenResponse | null): boolean {
         if (isPlatformBrowser(this.platformId)) {
             if (auth) {
-                localStorage.setItem(this.authKey, JSON.stringify(auth));
+                localStorage.setItem(
+                    this.authKey,
+                    JSON.stringify(auth));
             } else {
                 localStorage.removeItem(this.authKey);
             }
@@ -74,7 +75,9 @@ export class AuthService {
     getAuth(): ITokenResponse | null {
         if (isPlatformBrowser(this.platformId)) {
             var i = localStorage.getItem(this.authKey);
-            if (i) { return JSON.parse(i); }
+            if (i) {
+                return JSON.parse(i);
+            }
         }
         return null;
     }

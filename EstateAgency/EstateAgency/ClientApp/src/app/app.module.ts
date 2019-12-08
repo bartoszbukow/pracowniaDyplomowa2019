@@ -32,6 +32,10 @@ import { BackToPageComponent } from './components/back-to-page/back-to-page.comp
 import { MessageCreateComponent } from './components/message/message-create/message-create.component';
 import { MessageListComponent } from './components/message/message-list/message-list.component';
 import { MessageDetailsComponent } from './components/message/message-details/message-details.component';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
+import { AuthGuardService } from './services/auth.guard.service';
+import { AdminGuardService } from './services/admin.guard.service';
+
 
 @NgModule({
     declarations: [
@@ -53,7 +57,8 @@ import { MessageDetailsComponent } from './components/message/message-details/me
         BackToPageComponent,
         MessageCreateComponent,
         MessageListComponent,
-        MessageDetailsComponent
+        MessageDetailsComponent,
+        AdminPanelComponent
     ],
     entryComponents: [],
     imports: [
@@ -102,7 +107,9 @@ import { MessageDetailsComponent } from './components/message/message-details/me
             useClass: AuthResponseInterceptor,
             multi: true
         },
-        ApiService
+        ApiService,
+        AuthGuardService,
+        AdminGuardService
     ],
     bootstrap: [AppComponent]
 })

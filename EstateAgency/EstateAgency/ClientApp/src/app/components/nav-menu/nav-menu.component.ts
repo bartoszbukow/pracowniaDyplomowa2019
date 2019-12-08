@@ -27,4 +27,8 @@ export class NavMenuComponent {
     sidenavCloce() {
         this.sidenavToggle.next();
     }
+
+    isAdmin(): boolean {
+        return this.auth.isAdmin();
+    }
 }
