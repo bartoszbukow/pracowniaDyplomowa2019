@@ -140,7 +140,7 @@ namespace EstateAgency.Data
             var num = 47;
             for (int i = 1; i <= num; i++)
             {
-                CreateSampleAdvertisement(dbContext, i, authorId, authorEmail, 3, 3, 3, createdDate.AddDays(-num));
+                CreateSampleAdvertisement(dbContext, i, authorId, authorEmail, 3, 3, createdDate.AddDays(-num));
             }
 #endif
             dbContext.SaveChanges();
@@ -149,7 +149,7 @@ namespace EstateAgency.Data
 
         #region Utility Methods 
         private static void CreateSampleAdvertisement(
-            ApplicationDbContext dbContext, int num, string authorId, string authorEmail, int numberOfAdvertisementHistory, int numberOfReservations, int numberOfImages, DateTime createdDate)
+            ApplicationDbContext dbContext, int num, string authorId, string authorEmail, int numberOfReservations, int numberOfImages, DateTime createdDate)
         {
             var advertisement = new Advertisement()
             {
@@ -165,23 +165,11 @@ namespace EstateAgency.Data
                 City = "Olsztyn",
                 Address = "Barcza 44/39",
                 NumberOfRoom = 3,
-                Rent = 1500
+                Flag = 0
             };
             dbContext.Advertisements.Add(advertisement);
             dbContext.SaveChanges();
 
-            for (int i = 0; i < numberOfAdvertisementHistory; i++)
-            {
-                var advertisementHistory = new AdvertisementHistory()
-                {
-                    AdvertisementId = advertisement.Id,
-                    Notes = "This is a sample advertisement created by the DbSeeder class for testing purposes. " +
-                                             "All the child advertisement history are auto-generated as well.",
-                    CreatedDate = createdDate
-                };
-                dbContext.AdvertisementHistorys.Add(advertisementHistory);
-                dbContext.SaveChanges();
-            }
             for (int i = 0; i < numberOfReservations; i++)
             {
                 dbContext.Reservations.Add(new Reservation()

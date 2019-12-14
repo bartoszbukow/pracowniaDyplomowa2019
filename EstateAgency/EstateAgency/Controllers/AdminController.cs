@@ -1,5 +1,6 @@
 ﻿using EstateAgency.Data;
 using EstateAgency.Data.Models;
+using EstateAgency.ViewModels.AdvertisementViewModels;
 using EstateAgency.ViewModels.UserViewModels;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
@@ -80,6 +81,49 @@ namespace EstateAgency.Controllers
 
             return new JsonResult(users.Adapt<UserManagementViewModel[]>(), JsonSettings);
         }
+
+        [HttpGet("AplicationAdvertisements")]
+        public IActionResult AplicationAdvertisementsAsync()
+        {
+            var advertisements = _dbContext.Advertisements;
+
+            foreach (var advertisement in advertisements)
+            {
+                advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).Take(1).ToList();
+            }
+
+            return new JsonResult(advertisements.Adapt<AdvertisementManagementViewModel[]>(), JsonSettings);
+        }
+
+        [HttpPut("ManagementAdvertisement")]
+        [Authorize]
+        public IActionResult ManagementAdvertisement([FromBody] AdvertisementBlockingViewModel model)
+        {
+            if (model == null) return new StatusCodeResult(500);
+
+            var advertisement = _dbContext.Advertisements.FirstOrDefault(u => u.Id == model.Id);
+
+            if(model.Management == "unlock")
+            {
+                advertisement.Flag = 0;
+            }
+            else
+            {
+                advertisement.Flag = 1;
+            }
+            
+            _dbContext.SaveChanges();
+
+            var advertisements = _dbContext.Advertisements;
+
+            foreach (var advert in advertisements)
+            {
+                advert.Images = _dbContext.Images.Where(image => image.AdvertisementId == advert.Id).Take(1).ToList();
+            }
+
+            return new JsonResult(advertisements.Adapt<AdvertisementManagementViewModel[]>(), JsonSettings);
+        }
+
 
         #endregion
     }

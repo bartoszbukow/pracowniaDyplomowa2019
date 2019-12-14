@@ -156,6 +156,19 @@ namespace EstateAgency.Controllers
             return new JsonResult(requestUser.Adapt<UserEditViewModel>(), JsonSettings);
         }
 
+        [HttpGet("CurrentUser")]
+        [Authorize]
+        public async Task<IActionResult> CurrentUser()
+        {
+            ApplicationUser requestUser = await GetCurrentUserAsync();
+            if (requestUser == null)
+            {
+                return Unauthorized();
+            }
+
+            return new JsonResult(requestUser.Adapt<UserCurrentViewModel>(), JsonSettings);
+        }
+
         #endregion
     }
 }

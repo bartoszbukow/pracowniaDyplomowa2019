@@ -29,6 +29,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\constants\responseNumbers.ts" />
     <None Remove="ClientApp\src\app\interfaces\advertisement.ts" />
+    <None Remove="ClientApp\src\app\interfaces\advertisementManagement.ts" />
     <None Remove="ClientApp\src\app\interfaces\image.ts" />
     <None Remove="ClientApp\src\app\interfaces\messageCreate.ts" />
     <None Remove="ClientApp\src\app\interfaces\messageList.ts" />
@@ -37,6 +38,7 @@
     <None Remove="ClientApp\src\app\interfaces\token.response.ts" />
     <None Remove="ClientApp\src\app\interfaces\TokenResponse.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.ts" />
+    <None Remove="ClientApp\src\app\interfaces\userCurrent.ts" />
     <None Remove="ClientApp\src\app\interfaces\userManagement.ts" />
     <None Remove="ClientApp\src\app\models\advertisement.model.ts" />
     <None Remove="ClientApp\src\app\models\login.model.ts" />
@@ -55,6 +57,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\constants\responseNumbers.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\advertisement.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\advertisementManagement.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\image.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\messageCreate.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\messageList.ts" />
@@ -62,6 +65,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\passwordChange.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\token.response.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\user.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\userCurrent.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\userManagement.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\advertisement.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\login.model.ts" />

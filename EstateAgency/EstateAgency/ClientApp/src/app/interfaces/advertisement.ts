@@ -12,7 +12,6 @@ interface IAdvertisement {
     type: boolean;
     address: string;
     numberOfRoom: number;
-    rent: number;
     city: string;
     images: Array<IImage>;
 }

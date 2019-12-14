@@ -32,16 +32,11 @@ namespace EstateAgency.Data
             modelBuilder.Entity<Advertisement>().ToTable("Advertisements"); 
             modelBuilder.Entity<Advertisement>().Property(i => i.Id).ValueGeneratedOnAdd(); 
             modelBuilder.Entity<Advertisement>().HasOne(i => i.User).WithMany(u => u.Advertisements);
-            modelBuilder.Entity<Advertisement>().HasMany(i => i.AdvertisementHistorys).WithOne(c => c.Advertisement);
 
             modelBuilder.Entity<Reservation>().ToTable("Reservations");
             modelBuilder.Entity<Reservation>().Property(i => i.Id).ValueGeneratedOnAdd(); 
             modelBuilder.Entity<Reservation>().HasOne(i => i.User).WithMany(u => u.Reservations); 
             modelBuilder.Entity<Reservation>().HasOne(i => i.Advertisement).WithMany(u => u.Reservations); 
-
-            modelBuilder.Entity<AdvertisementHistory>().ToTable("AdvertisementHistorys");
-            modelBuilder.Entity<AdvertisementHistory>().Property(i => i.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<AdvertisementHistory>().HasOne(i => i.Advertisement).WithMany(u => u.AdvertisementHistorys);
 
             modelBuilder.Entity<Token>().ToTable("Tokens"); 
             modelBuilder.Entity<Token>().Property(i => i.Id).ValueGeneratedOnAdd();
@@ -62,7 +57,6 @@ namespace EstateAgency.Data
         #region Properties     
 
         public DbSet<Advertisement> Advertisements { get; set; }    
-        public DbSet<AdvertisementHistory> AdvertisementHistorys { get; set; }  
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Token> Tokens { get; set; }
         public DbSet<Image> Images { get; set; }

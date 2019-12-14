@@ -36,6 +36,7 @@ import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.
 import { AuthGuardService } from './services/auth.guard.service';
 import { AdminGuardService } from './services/admin.guard.service';
 import { UserManagementComponent } from './components/admin/admin-panel/user-management/user-management.component';
+import { AdvertisementManagementComponent } from './components/admin/admin-panel/advertisement-management/advertisement-management.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { UserManagementComponent } from './components/admin/admin-panel/user-man
         MessageListComponent,
         MessageDetailsComponent,
         AdminPanelComponent,
-        UserManagementComponent
+        UserManagementComponent,
+        AdvertisementManagementComponent
     ],
     entryComponents: [],
     imports: [
@@ -82,6 +84,7 @@ import { UserManagementComponent } from './components/admin/admin-panel/user-man
         ToastrModule.forRoot({
             timeOut: 5000,
             preventDuplicates: true,
+            positionClass: 'toast-bottom-right',
         }),
         WavesModule,
         InputsModule,

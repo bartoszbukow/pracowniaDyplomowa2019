@@ -8,10 +8,12 @@ import { Router } from "@angular/router";
     styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-
     @Output() sidenavToggle = new EventEmitter();
 
-    constructor(private auth: AuthService, private router: Router) { }
+    constructor(
+        private auth: AuthService,
+        private router: Router,
+    ) { }
 
     logout(): boolean {
         if (this.auth.logout()) {

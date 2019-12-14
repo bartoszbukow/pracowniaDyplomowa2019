@@ -65,9 +65,6 @@ namespace EstateAgency.ViewModels
         [JsonProperty("numberOfRoom")]
         public int NumberOfRoom { get; set; }
 
-        //[JsonProperty("rent")]
-        //public int? Rent { get; set; }
-
         [JsonProperty("images")]
         public virtual List<ImageViewModel> Images { get; set; }
 

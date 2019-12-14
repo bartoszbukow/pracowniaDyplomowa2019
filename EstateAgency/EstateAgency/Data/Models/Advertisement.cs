@@ -36,7 +36,7 @@ namespace EstateAgency.Data.Models
         public string City { get; set; }
         public string Address { get; set; }
         public int NumberOfRoom { get; set; }
-        public int? Rent { get; set; }
+        [Required][DefaultValue(0)] public int Flag { get; set; }
 
         #endregion
 
@@ -44,7 +44,6 @@ namespace EstateAgency.Data.Models
 
         [ForeignKey("UserId")] 
         public virtual ApplicationUser User { get; set; }
-        public virtual List<AdvertisementHistory> AdvertisementHistorys { get; set; }
         public virtual List<Reservation> Reservations { get; set; }
         public virtual List<Image> Images { get; set; }
 

@@ -1,5 +1,7 @@
 <nav>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div *ngIf="this.isLoggedIn()" class="welcome">Witaj {{currentUser?.name}} {{currentUser?.surname}}</div>
+    <div *ngIf="this.isLoggedIn()" class="dropdown-divider"></div>
     <a *ngIf="this.isLoggedIn()" class="dropdown-item" [routerLink]="'/user/edit'">Edytuj Profil</a>
     <a *ngIf="this.isLoggedIn()" class="dropdown-item" [routerLink]="'/user/change-password'">Zmień Hasło</a>
     <a *ngIf="!this.isLoggedIn()" class="dropdown-item" [routerLink]="'/register'"> Rejestracja </a>

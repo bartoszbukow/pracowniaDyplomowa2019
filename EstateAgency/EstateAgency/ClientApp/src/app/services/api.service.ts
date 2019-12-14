@@ -86,4 +86,16 @@ export class ApiService {
     putUnlockUser(data) {
         return this.http.put<IUserManagement[]>(this.url + "api/admin/UnlockUser", data);
     }
+
+    getCurrentUser() {
+        return this.http.get<ICurrentUser>(this.url + "api/user/CurrentUser");
+    }
+
+    getAplicationAdvertisements() {
+        return this.http.get<IAdvertisementManagement[]>(this.url + "api/admin/AplicationAdvertisements");
+    }
+
+    putAdvertisementManagement(data) {
+        return this.http.put<IAdvertisementManagement[]>(this.url + "api/admin/ManagementAdvertisement", data);
+    }
 }

@@ -1,0 +1,32 @@
+<div class="advertisement-management-box">
+  <div class="advertisement-item-box" *ngFor="let advertisement of advertisementList">
+    <div class="image-box">
+      <div class="image-area">
+        <div class="image">
+          <img src="{{advertisement.images[0].path}}" alt="First slide">
+        </div>
+      </div>
+    </div>
+    <div class="basic-imformation-box">
+      <div class="basic-imformation-item">
+        <span class="caption">Tytuł:</span> {{advertisement.title}}
+      </div>
+      <div class="basic-imformation-item">
+        <span class="caption">Email właściciela:</span> {{advertisement.email}}
+      </div>
+      <div class="basic-imformation-item">
+        <span class="caption">Data utworzenia:</span> {{advertisement.createdDate.substring(0, 10)}}
+      </div>
+      <div class="basic-imformation-item">
+        <div *ngIf="+advertisement.type === 1"><span class="caption">Typ:</span> Wynajem</div>
+        <div *ngIf="+advertisement.type === 0"><span class="caption">Typ:</span> Sprzedaz</div>
+      </div>
+    </div>
+    <div class="management-box">
+      <div class="button">
+        <button *ngIf="+advertisement.flag === 0" class="btn btn-danger" (click)="lockAdvertisement(advertisement.id)">ZABLOKUJ</button>
+        <button *ngIf="+advertisement.flag === 1" class="btn btn-success" (click)="unlockAdvertisement(advertisement.id)">ODBLOKUJ</button>
+      </div>
+    </div>
+  </div>
+</div>
