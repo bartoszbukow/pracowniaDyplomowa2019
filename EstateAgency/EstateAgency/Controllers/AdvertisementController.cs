@@ -257,7 +257,7 @@ namespace EstateAgency.Controllers
         [HttpGet("Latest/{num}")]
         public IActionResult Latest(int num = 10)
         {
-            var latest = _dbContext.Advertisements.OrderByDescending(q => q.CreatedDate).Take(num).ToArray();
+            var latest = _dbContext.Advertisements.Where(a => a.Flag != 1).OrderByDescending(q => q.CreatedDate).Take(num).ToArray();
 
             foreach (var advertisement in latest)
             {
@@ -276,7 +276,7 @@ namespace EstateAgency.Controllers
         [HttpGet("ByTitle/{num:int?}")]
         public IActionResult ByTitle(int num = 10)
         {
-            var byTitle = _dbContext.Advertisements.OrderBy(q => q.Title).Take(num).ToArray();
+            var byTitle = _dbContext.Advertisements.Where(a => a.Flag != 1).OrderBy(q => q.Title).Take(num).ToArray();
 
             return new JsonResult(byTitle.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
@@ -284,7 +284,7 @@ namespace EstateAgency.Controllers
         [HttpGet("Random/{num:int?}")]
         public IActionResult Random(int num = 10)
         {
-            var random = _dbContext.Advertisements.OrderBy(q => Guid.NewGuid()).Take(num).ToArray();
+            var random = _dbContext.Advertisements.Where(a => a.Flag != 1).OrderBy(q => Guid.NewGuid()).Take(num).ToArray();
 
             return new JsonResult(random.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
@@ -319,7 +319,7 @@ namespace EstateAgency.Controllers
         [HttpGet("SerchAdvertisements/{title}")]
         public IActionResult SerchAdvertisements(string title)
         {
-            var advertisements = _dbContext.Advertisements.Where(a => a.Title.Contains(title)).ToArray();
+            var advertisements = _dbContext.Advertisements.Where(a => a.Title.Contains(title) && a.Flag != 1).ToArray();
 
             foreach (var advertisement in advertisements)
             {

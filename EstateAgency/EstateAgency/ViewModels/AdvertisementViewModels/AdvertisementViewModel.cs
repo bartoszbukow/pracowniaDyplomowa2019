@@ -56,6 +56,9 @@ namespace EstateAgency.ViewModels
         [DefaultValue(0)] 
         public int Type { get; set; }
 
+        [JsonProperty("flag")]
+        public int Flag { get; set; }
+
         [JsonProperty("city")]
         public string City { get; set; }
 

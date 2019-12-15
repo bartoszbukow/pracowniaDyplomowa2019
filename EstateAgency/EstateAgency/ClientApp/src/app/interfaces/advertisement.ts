@@ -13,6 +13,7 @@ interface IAdvertisement {
     address: string;
     numberOfRoom: number;
     city: string;
+    flag: number;
     images: Array<IImage>;
 }
 

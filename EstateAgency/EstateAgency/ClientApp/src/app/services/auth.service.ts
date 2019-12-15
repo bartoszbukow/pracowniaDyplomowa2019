@@ -48,9 +48,9 @@ export class AuthService {
                 }
                 return Observable.throw('Unauthorized');
             }),
-                catchError((error) => {
-                    return new Observable<any>(error);
-                }));
+              catchError((error) => {
+                return new Observable<any>(error);
+              }));
     }
 
     logout(): boolean {

@@ -12,6 +12,11 @@
                aria-label="Placeholder: Thumbnail" />
           <div *ngIf="+advertisement.type === 1" class="photo-box__advertisement-type">Wynajem</div>
           <div *ngIf="+advertisement.type === 0" class="photo-box__advertisement-type">Sprzedaz</div>
+          <div *ngIf="+advertisement.flag === 1" class="photo-box__advertisement-inaccessible">
+            <div class="inaccessible-text">
+              Zablokowane
+            </div>
+          </div>
         </div>
         <div class="card-body data-box">
           <div class="card-text row data-box__area">

@@ -64,6 +64,11 @@ namespace EstateAgency.Controllers
                     return new UnauthorizedResult();
                 }
 
+                if(user.Flags == 1)
+                {
+                    return BadRequest(106);
+                }
+
                 var rt = CreateRefreshToken(model.clientId, user.Id);
                 DbContext.Tokens.Add(rt);
                 DbContext.SaveChanges();

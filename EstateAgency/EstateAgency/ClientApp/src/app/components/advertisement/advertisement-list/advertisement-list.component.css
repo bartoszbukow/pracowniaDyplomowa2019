@@ -27,6 +27,22 @@
   color: #444;
   font-size: 20px;
 }
+.container .advertisement-box .card-box .photo-box .photo-box__advertisement-inaccessible {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+}
+.container .advertisement-box .card-box .photo-box .photo-box__advertisement-inaccessible .inaccessible-text {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 5px 10px;
+  font-weight: 700;
+  color: #EE2020;
+  font-size: 35px;
+  width: auto;
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
 .container .advertisement-box .card-box .photo-box img {
   height: 330px;
   width: auto;

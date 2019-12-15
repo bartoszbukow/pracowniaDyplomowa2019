@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         this.authService.login(email, password).subscribe(res => {
             this.toastr.success(responseNumbers[107], "Sukces!");
             this.authService.redirectTo ? this.router.navigate(([this.authService.redirectTo])) : this.router.navigate((['']));
-            this.authService.redirectTo = "";
+          this.authService.redirectTo = "";
         }, error => {
             this.loginForm.setErrors({ "login": responseNumbers[108] });
         });
