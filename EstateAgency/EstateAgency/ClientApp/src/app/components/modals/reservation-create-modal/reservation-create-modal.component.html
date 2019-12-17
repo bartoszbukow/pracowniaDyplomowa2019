@@ -1,0 +1,17 @@
+<div class="modal fade" id="modalId" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-trash pr-2"></i>Rezerwacja ogłoszenia</h5>
+      </div>
+      <div class="modal-body text-center">
+        Czy jestes pewien, że chcesz zarezerwować to ogłoszenie?<br/>
+        Rezerwacja będzie aktywna przez jedną dobę. Po upływie 24 godzin zostanie anulowana.
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-info" (click)="addReservation()" id="removeButton">Rezerwuj</button>
+        <button class="btn btn-outline-primary" data-dismiss="modal" name="cancel">Anuluj</button>
+      </div>
+    </div>
+  </div>
+</div>

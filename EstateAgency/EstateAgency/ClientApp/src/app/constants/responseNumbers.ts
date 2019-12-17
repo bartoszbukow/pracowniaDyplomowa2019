@@ -11,5 +11,7 @@ export const responseNumbers =
     108: "Błędny login lub hasło",
     109: "Wylogowano z systemu",
     110: "Wiadomość została wysłana",
-    111: "Nie udało się wysłać wiadomości"
+    111: "Nie udało się wysłać wiadomości",
+    112: "Ogłoszenie zostało usunięte",
+    113: "Nie udało się usunąć ogłoszenia"
 }

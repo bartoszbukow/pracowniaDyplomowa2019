@@ -7,11 +7,11 @@ import { responseNumbers } from './../../../constants/responseNumbers';
 declare let $: any;
 
 @Component({
-  selector: 'app-advertisement-delete-modal',
-  templateUrl: './advertisement-delete-modal.component.html',
-  styleUrls: ['./advertisement-delete-modal.component.less']
+  selector: 'app-reservation-create-modal',
+  templateUrl: './reservation-create-modal.component.html',
+  styleUrls: ['./reservation-create-modal.component.less']
 })
-export class AdvertisementDeleteModalComponent extends Modal implements OnInit, OnDestroy {
+export class ReservationCreateModalComponent extends Modal implements OnInit, OnDestroy {
   advertisement: IAdvertisement;
 
   constructor(
@@ -41,23 +41,23 @@ export class AdvertisementDeleteModalComponent extends Modal implements OnInit, 
     this.dismiss('canceling');
   }
 
-  removeAdvertisement = (advertisementId) => {
-    let data = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: {
-        id: advertisementId
-      }
-    }
-    this.api.deleteAdvertisement(data).subscribe(res => {
-      this.toastr.success(responseNumbers[112], "Sukces!");
-      this.close();
-      this.router.navigate(["home"]);
-    }, error => {
-      $('#modalId').modal('hide');
-        this.toastr.error(responseNumbers[112], "Error!");
-    });
+  addReservation = () => {
+    //let data = {
+    //  headers: {
+    //    'Content-Type': 'application/json',
+    //  },
+    //  body: {
+    //    id: advertisementId
+    //  }
+    //}
+    //this.api.deleteAdvertisement(data).subscribe(res => {
+    //  this.toastr.success(responseNumbers[112], "Sukces!");
+    //  this.close();
+    //  this.router.navigate(["home"]);
+    //}, error => {
+    //  $('#modalId').modal('hide');
+    //  this.toastr.error(responseNumbers[112], "Error!");
+    //});
   }
 }
 

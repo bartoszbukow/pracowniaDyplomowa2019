@@ -1,72 +1,85 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationExtras} from "@angular/router";
+import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { ApiService } from '../../../services/api.service';
 import { AuthService } from '../../../services/auth.service';
 import { Location } from '@angular/common';
+import { ModalService } from './../../../services/modal.service';
+import { ReservationCreateModalComponent } from './../../modals/reservation-create-modal/reservation-create-modal.component';
 declare let $: any;
 
 @Component({
-    selector: 'app-advertisement-details',
-    templateUrl: './advertisement-details.component.html',
-    styleUrls: ['./advertisement-details.component.css']
+  selector: 'app-advertisement-details',
+  templateUrl: './advertisement-details.component.html',
+  styleUrls: ['./advertisement-details.component.css']
 })
 export class AdvertisementComponent implements OnInit {
-    advertisement: IAdvertisement;
-    url: string;
-    @ViewChild('slider', { static: true }) slider: ElementRef;
+  advertisement: IAdvertisement;
+  url: string;
+  @ViewChild('slider', { static: true }) slider: ElementRef;
 
-    dateToReturn: { title: string, pathToReturn: string } = {
-        title: "Szczegóły ogłoszenia",
-        pathToReturn: "locationBack"
+  dateToReturn: { title: string, pathToReturn: string } = {
+    title: "Szczegóły ogłoszenia",
+    pathToReturn: "locationBack"
+  }
+
+  constructor(private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private api: ApiService,
+    public auth: AuthService,
+    @Inject('BASE_URL') baseUrl: string,
+    private _location: Location,
+    private modalService: ModalService
+  ) {
+    this.url = baseUrl;
+  }
+
+  ngOnInit() {
+    this.advertisement = <IAdvertisement>{};
+
+    var id = this.activatedRoute.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.api.getAdvertisement(id).subscribe(res => {
+        this.advertisement = res;
+      });
+    }
+    else {
+      console.log("Invalid id: routing back to home...");
+      this.router.navigate(["home"]);
     }
 
-    constructor(private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private api: ApiService,
-        public auth: AuthService,
-        @Inject('BASE_URL') baseUrl: string,
-        private _location: Location) {
-        this.url = baseUrl;
-    }
+    $(this.slider.nativeElement).carousel({
+      interval: 40000
+    })
+  }
 
-    ngOnInit() {
-        this.advertisement = <IAdvertisement>{};
+  prevSlide = () => {
+    $(this.slider.nativeElement).carousel('prev');
+  }
 
-        var id = this.activatedRoute.snapshot.paramMap.get('id');
+  nextSlide = () => {
+    $(this.slider.nativeElement).carousel('next');
+  }
 
-        if (id) {
-            this.api.getAdvertisement(id).subscribe(res => {
-                this.advertisement = res;
-            });
-        }
-        else {
-            console.log("Invalid id: routing back to home...");
-            this.router.navigate(["home"]);
-        }
+  goToSlide = (index) => {
+    $(this.slider.nativeElement).carousel(index);
+  }
 
-        $(this.slider.nativeElement).carousel({
-            interval: 40000
-        })
-    }
+  backClicked() {
+    this._location.back();
+  }
 
-    prevSlide = () => {
-        $(this.slider.nativeElement).carousel('prev');
-    }
+  routeToContact() {
+    const navigationExtras: NavigationExtras = { state: { email: this.advertisement.email } };
+    this.router.navigate(["message/create"], navigationExtras);
+  }
 
-    nextSlide = () => {
-        $(this.slider.nativeElement).carousel('next');
-    }
+  onCreateModalReservationCreate(): void {
+    const modalRef = this.modalService.open(ReservationCreateModalComponent, { advertisement: this.advertisement });
 
-    goToSlide = (index) => {
-        $(this.slider.nativeElement).carousel(index);
-    }
-
-    backClicked() {
-        this._location.back();
-    }
-
-    routeToContact() {
-        const navigationExtras: NavigationExtras = { state: { email: this.advertisement.email } };
-        this.router.navigate(["message/create"], navigationExtras);
-    }
+    modalRef.onResult().subscribe(
+      closed => { },
+      dismissed => { }
+    );
+  }
 }
