@@ -37,7 +37,9 @@ import { AuthGuardService } from './services/auth.guard.service';
 import { AdminGuardService } from './services/admin.guard.service';
 import { UserManagementComponent } from './components/admin/admin-panel/user-management/user-management.component';
 import { AdvertisementManagementComponent } from './components/admin/admin-panel/advertisement-management/advertisement-management.component';
-
+import { ModalService } from './services/modal.service';
+import { ModalContainerComponent } from './components/modals/modal-container/modal-container.component';
+import { AdvertisementDeleteModalComponent } from './components/modals/advertisement-delete-modal/advertisement-delete-modal.component';
 
 @NgModule({
     declarations: [
@@ -62,9 +64,14 @@ import { AdvertisementManagementComponent } from './components/admin/admin-panel
         MessageDetailsComponent,
         AdminPanelComponent,
         UserManagementComponent,
-        AdvertisementManagementComponent
+        AdvertisementManagementComponent,
+        ModalContainerComponent,
+        AdvertisementDeleteModalComponent,
     ],
-    entryComponents: [],
+    entryComponents: [
+      ModalContainerComponent,
+      AdvertisementDeleteModalComponent
+    ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         MDBBootstrapModule.forRoot(),
@@ -114,7 +121,8 @@ import { AdvertisementManagementComponent } from './components/admin/admin-panel
         },
         ApiService,
         AuthGuardService,
-        AdminGuardService
+        AdminGuardService,
+        ModalService
     ],
     bootstrap: [AppComponent]
 })

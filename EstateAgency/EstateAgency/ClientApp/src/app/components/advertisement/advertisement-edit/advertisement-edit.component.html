@@ -185,14 +185,14 @@
                   (click)="editAdvertisement()">
             Edytuj
           </button>
-
-          <button type="submit"
-                  class="btn btn-sm btn-outline-secondary"
-                  (click)="deleteAdvertisement()">
-            Usuń
+          <button class="btn btn-sm btn-outline-secondary">
+            <div class="text-dropdown-menu" data-toggle="modal" data-target="#modalId" (click)="onCreateModalAdvertisementDelete(this.editAdvertisementForm.value)">
+              Usuń
+            </div>
           </button>
         </div>
       </div>
     </div>
   </form>
 </div>
+

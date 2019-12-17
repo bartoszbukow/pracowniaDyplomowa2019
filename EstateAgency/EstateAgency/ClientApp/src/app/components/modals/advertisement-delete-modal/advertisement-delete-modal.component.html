@@ -1,0 +1,16 @@
+<div class="modal fade" id="modalId" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-trash pr-2"></i>Usuń ogłoszenie</h5>
+      </div>
+      <div class="modal-body text-center">
+        Czy jestes pewien, że chcesz usunąć to ogłoszenie?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" (click)="removeAdvertisement(this.advertisement.id)" id="removeButton">Usuń</button>
+        <button class="btn btn-outline-primary" data-dismiss="modal" name="cancel">Anuluj</button>
+      </div>
+    </div>
+  </div>
+</div>

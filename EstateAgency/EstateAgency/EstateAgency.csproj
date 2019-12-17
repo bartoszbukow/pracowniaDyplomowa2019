@@ -43,6 +43,8 @@
     <None Remove="ClientApp\src\app\models\advertisement.model.ts" />
     <None Remove="ClientApp\src\app\models\login.model.ts" />
     <None Remove="ClientApp\src\app\models\message.model.ts" />
+    <None Remove="ClientApp\src\app\models\modal-ref.model.ts" />
+    <None Remove="ClientApp\src\app\models\modal.model.ts" />
     <None Remove="ClientApp\src\app\models\register.model.ts" />
     <None Remove="ClientApp\src\app\models\serch.model.ts" />
     <None Remove="ClientApp\src\app\models\userChangePassword.model.ts" />
@@ -51,6 +53,7 @@
     <None Remove="ClientApp\src\app\services\auth.guard.service.ts" />
     <None Remove="ClientApp\src\app\services\auth.interceptor.ts" />
     <None Remove="ClientApp\src\app\services\auth.response.interceptor.ts" />
+    <None Remove="ClientApp\src\app\services\modal.service.ts" />
     <None Remove="ClientApp\src\app\services\token.response.ts" />
   </ItemGroup>
 
@@ -70,6 +73,8 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\advertisement.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\login.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\message.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\modal.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\modal-ref.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\register.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\serch.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\userChangePassword.model.ts" />
@@ -78,10 +83,12 @@
     <TypeScriptCompile Include="ClientApp\src\app\services\auth.guard.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\auth.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\auth.response.interceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\modal.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\token.response.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\components\modals\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>

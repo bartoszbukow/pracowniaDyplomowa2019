@@ -1,10 +1,12 @@
- import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AdvertisementModel } from "./../../../models/advertisement.model";
 import { ApiService } from '../../../services/api.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
+import { ModalService } from './../../../services/modal.service';
+import { AdvertisementDeleteModalComponent } from './../../modals/advertisement-delete-modal/advertisement-delete-modal.component';
 
 class ImageSnipped {
     constructor(public src: string, public file: File) {
@@ -36,7 +38,8 @@ export class AdvertisementEditComponent implements OnInit {
         private toastr: ToastrService,
         private _location: Location,
         private activatedRoute: ActivatedRoute,
-        ) { }
+        private modalService: ModalService
+    ) { }
 
     ngOnInit() {
         this.selectedFileList = new Array<ImageSnipped>();
@@ -225,20 +228,13 @@ export class AdvertisementEditComponent implements OnInit {
         }
     }
 
-    deleteAdvertisement() {
-        let data = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: {
-                id: this.editAdvertisementForm.value.id
-            }
-        }
-        this.api.deleteAdvertisement(data).subscribe(res => {
-            this.toastr.success("Ogłoszenie zostało usunięte", "Sukces!");
-            this.router.navigate(["home"]);
-        }, error => {
-            this.toastr.error("Nie udało się usunąć ogłoszenia", "Error!");
-        });
+    onCreateModalAdvertisementDelete(advertisement): void {
+      const modalRef = this.modalService.open(AdvertisementDeleteModalComponent, { advertisement: advertisement });
+
+      modalRef.onResult().subscribe(
+        closed => { },
+        dismissed => { }
+      );
     }
 }
+
