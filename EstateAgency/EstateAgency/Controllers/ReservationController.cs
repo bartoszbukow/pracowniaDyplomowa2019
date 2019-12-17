@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EstateAgency.Data;
 using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -52,9 +53,27 @@ namespace EstateAgency.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Post(ReservationViewModel m)
+        public async Task<IActionResult> PostAsync([FromBody]ReservationViewModel model)
         {
-            throw new NotImplementedException();
+            if (model == null) return new StatusCodeResult(500);
+
+            ApplicationUser currentUser = await GetCurrentUserAsync();
+
+            var reservation = new Reservation
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserId = currentUser.Id.ToString(),
+                AdvertisementId = model.Id,
+                ReservationActive = 1,
+                CreatedDate = DateTime.Now,
+                ReservationTo = DateTime.Now,
+                ReservationFrom = DateTime.Now.AddDays(1)
+            };
+
+            _dbContext.Reservations.Add(reservation);
+            _dbContext.SaveChanges();
+
+            return Json(reservation.Adapt<ReservationViewModel>(), JsonSettings);
         }
 
         [HttpDelete("{id}")]

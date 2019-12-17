@@ -96,6 +96,10 @@ export class ApiService {
     }
 
     putAdvertisementManagement(data) {
-        return this.http.put<IAdvertisementManagement[]>(this.url + "api/admin/ManagementAdvertisement", data);
+          return this.http.put<IAdvertisementManagement[]>(this.url + "api/admin/ManagementAdvertisement", data);
+    }
+
+    postReservationCreate(data) {
+      return this.http.post<IReservation>(this.url + "api/reservation", data);
     }
 }

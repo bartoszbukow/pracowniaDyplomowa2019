@@ -13,5 +13,7 @@ export const responseNumbers =
     110: "Wiadomość została wysłana",
     111: "Nie udało się wysłać wiadomości",
     112: "Ogłoszenie zostało usunięte",
-    113: "Nie udało się usunąć ogłoszenia"
+    113: "Nie udało się usunąć ogłoszenia",
+    114: "Rezerwacja została utworzona",
+    115: "Nie udało się utworzyć rezerwacji",
 }
