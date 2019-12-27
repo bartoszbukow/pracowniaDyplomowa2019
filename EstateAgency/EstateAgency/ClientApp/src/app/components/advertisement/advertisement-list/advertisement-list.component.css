@@ -111,3 +111,6 @@
     bottom: 0;
   }
 }
+app-pagination {
+  margin: auto;
+}

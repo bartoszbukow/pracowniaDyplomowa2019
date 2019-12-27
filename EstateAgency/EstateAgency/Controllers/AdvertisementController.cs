@@ -261,24 +261,42 @@ namespace EstateAgency.Controllers
 
         #region Attribute-based routing methods
 
-        // GET api/advertisement/latest
-        [HttpGet("Latest/{num}")]
-        public IActionResult Latest(int num = 10)
+        [HttpPost("AdvertisementList")]
+        public IActionResult AdvertisementList([FromBody] PagingDataViewModel request)
         {
-            var latest = _dbContext.Advertisements.Where(a => a.Flag != 1).OrderByDescending(q => q.CreatedDate).Take(num).ToArray();
+            List<Advertisement> advertisements = new List<Advertisement>();
 
-            foreach (var advertisement in latest)
+            if (request.Title == null || request.Title == "")
             {
-                foreach (var image in _dbContext.Images)
-                {
-                    if (image.AdvertisementId == advertisement.Id)
-                    {
-                        advertisement.Images.Add(image);
-                    }
-                }
+                advertisements = _dbContext.Advertisements.Where(a => a.Flag != 1).ToList();
+            }
+            else
+            {
+                advertisements = _dbContext.Advertisements.Where(a => a.Title.Contains(request.Title) && a.Flag != 1).ToList();
             }
 
-            return new JsonResult(latest.Adapt<AdvertisementViewModel[]>(), JsonSettings);
+            foreach (var advertisement in advertisements)
+            {
+                advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
+            }
+
+            request.PageNumber = (request.PageNumber > 0 ? request.PageNumber : 1) - 1;
+            request.MaxRecords = request.MaxRecords != 0 ? request.MaxRecords : 100;
+
+            var requestedAdvertisements = advertisements
+                .OrderByDescending(x => x.CreatedDate)
+                .Skip(request.MaxRecords * request.PageNumber)
+                .Take(request.MaxRecords)
+                .Select(x => x.Adapt<AdvertisementViewModel>())
+                .ToList();
+
+            var responseViewModel = new AdvertisementPagedViewModel
+            {
+                Advertisements = requestedAdvertisements,
+                PageCount = advertisements.Count() % request.MaxRecords == 0 ? advertisements.Count() / request.MaxRecords : advertisements.Count() / request.MaxRecords + 1
+            };
+
+            return new JsonResult(responseViewModel.Adapt<AdvertisementPagedViewModel>(), JsonSettings);
         }
 
         [HttpGet("ByTitle/{num:int?}")]
@@ -324,34 +342,34 @@ namespace EstateAgency.Controllers
             return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
 
-        [HttpPost("SerchAdvertisements")]
-        public IActionResult SerchAdvertisements([FromBody] AdvertisementSearchViewModel request)
-        {
-            var advertisements = _dbContext.Advertisements.Where(a => a.Title.Contains(request.Title) && a.Flag != 1).ToArray();
+        //[HttpPost("SerchAdvertisements")]
+        //public IActionResult SerchAdvertisements([FromBody] AdvertisementSearchViewModel request)
+        //{
+        //    var advertisements = _dbContext.Advertisements.Where(a => a.Title.Contains(request.Title) && a.Flag != 1).ToArray();
 
-            foreach (var advertisement in advertisements)
-            {
-                advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
-            }
+        //    foreach (var advertisement in advertisements)
+        //    {
+        //        advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
+        //    }
 
-            request.PageNumber = (request.PageNumber > 0 ? request.PageNumber : 1) - 1;
-            request.MaxRecords = request.MaxRecords != 0 ? request.MaxRecords : 100;
+        //    request.PageNumber = (request.PageNumber > 0 ? request.PageNumber : 1) - 1;
+        //    request.MaxRecords = request.MaxRecords != 0 ? request.MaxRecords : 100;
 
-            var requestedAdvertisements = advertisements
-                .OrderByDescending(x => x.LastModifiedDate)
-                .Skip(request.MaxRecords * request.PageNumber)
-                .Take(request.MaxRecords)
-                .Select(x => x.Adapt<AdvertisementViewModel>())
-                .ToList();
+        //    var requestedAdvertisements = advertisements
+        //        .OrderByDescending(x => x.LastModifiedDate)
+        //        .Skip(request.MaxRecords * request.PageNumber)
+        //        .Take(request.MaxRecords)
+        //        .Select(x => x.Adapt<AdvertisementViewModel>())
+        //        .ToList();
 
-            var responseViewModel = new AdvertisementPagedViewModel
-            {
-                Advertisements = requestedAdvertisements,
-                PageCount = advertisements.Count() % request.MaxRecords == 0 ? advertisements.Count() / request.MaxRecords : advertisements.Count() / request.MaxRecords + 1
-            };
+        //    var responseViewModel = new AdvertisementPagedViewModel
+        //    {
+        //        Advertisements = requestedAdvertisements,
+        //        PageCount = advertisements.Count() % request.MaxRecords == 0 ? advertisements.Count() / request.MaxRecords : advertisements.Count() / request.MaxRecords + 1
+        //    };
 
-            return new JsonResult(responseViewModel.Adapt<AdvertisementPagedViewModel>(), JsonSettings);
-        }
+        //    return new JsonResult(responseViewModel.Adapt<AdvertisementPagedViewModel>(), JsonSettings);
+        //}
 
         #endregion
     }

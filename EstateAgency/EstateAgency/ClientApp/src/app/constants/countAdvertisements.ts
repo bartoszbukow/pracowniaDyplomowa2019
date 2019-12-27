@@ -1,1 +1,1 @@
-export const countAdvertisements = 10;
+export const countAdvertisements = 9;

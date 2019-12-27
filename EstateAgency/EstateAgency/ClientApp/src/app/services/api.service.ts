@@ -19,8 +19,8 @@ export class ApiService {
     return this.http.post<ITokenResponse>(this.url + "api/token/auth", data);
   }
 
-  getAdvertisementList() {
-    return this.http.get<IAdvertisement[]>(this.url + "api/advertisement/Latest/9");
+  getAdvertisementList(data) {
+    return this.http.post<IAdvertisementPaged>(this.url + "api/advertisement/AdvertisementList", data);
   }
 
   getAdvertisementListOfUser() {
@@ -69,10 +69,6 @@ export class ApiService {
 
   getConversation(data) {
     return this.http.get<IMessagesInConversation>(this.url + "api/message/Conversation" + data);
-  }
-
-  getSearchedAdvertisements(data) {
-    return this.http.post<IAdvertisementPaged>(this.url + "api/advertisement/SerchAdvertisements", data);
   }
 
   getAplicationsUsers() {

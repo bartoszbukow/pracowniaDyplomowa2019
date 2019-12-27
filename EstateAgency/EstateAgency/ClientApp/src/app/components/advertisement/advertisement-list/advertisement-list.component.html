@@ -54,5 +54,14 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <app-pagination
+                  (goPage)="goToPage($event)"
+                  (goNext)="onNext()"
+                  (goPrev)="onPrev()"
+                  [pagesToShow]="4"
+                  [page]="pageNumber"
+                  [count]="pageCount"></app-pagination>
+  </div>
 </div>
 

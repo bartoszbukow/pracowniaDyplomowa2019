@@ -41,6 +41,7 @@ import { ModalService } from './services/modal.service';
 import { ModalContainerComponent } from './components/modals/modal-container/modal-container.component';
 import { AdvertisementDeleteModalComponent } from './components/modals/advertisement-delete-modal/advertisement-delete-modal.component';
 import { ReservationCreateModalComponent } from './components/modals/reservation-create-modal/reservation-create-modal.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
     declarations: [
@@ -69,6 +70,7 @@ import { ReservationCreateModalComponent } from './components/modals/reservation
         ModalContainerComponent,
         AdvertisementDeleteModalComponent,
         ReservationCreateModalComponent,
+        PaginationComponent,
     ],
     entryComponents: [
       ModalContainerComponent,
