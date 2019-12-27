@@ -71,6 +71,9 @@ namespace EstateAgency.ViewModels
         [JsonProperty("images")]
         public virtual List<ImageViewModel> Images { get; set; }
 
+        [JsonProperty("reservations")]
+        public virtual List<ReservationViewModel> Reservations { get; set; }
+
         #endregion
     }
 }

@@ -38,6 +38,18 @@
   display: inline-block;
   height: 100%;
   background-color: #f7f7f7;
+  position: relative;
+}
+.advertisement-box .card-box .slider-box .reservation__active {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 5px 10px;
+  font-weight: 700;
+  color: #444;
+  font-size: 20px;
+  z-index: 10000;
 }
 .advertisement-box .card-box .slider-box .carousel {
   width: 100%;

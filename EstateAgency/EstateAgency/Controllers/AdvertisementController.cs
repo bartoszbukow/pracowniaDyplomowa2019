@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using EstateAgency.Data;
 using EstateAgency.Data.Models;
 using EstateAgency.ViewModels;
+using EstateAgency.ViewModels.AdvertisementViewModels;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -56,6 +57,7 @@ namespace EstateAgency.Controllers
             }
 
             advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == id).ToList();
+            advertisement.Reservations = _dbContext.Reservations.Where(reservation => reservation.AdvertisementId == id && reservation.ReservationActive == 1).ToList();
 
             return new JsonResult(advertisement.Adapt<AdvertisementViewModel>(), JsonSettings);
         }
@@ -229,6 +231,7 @@ namespace EstateAgency.Controllers
             }
 
             advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
+            advertisement.Reservations = _dbContext.Reservations.Where(reservation => reservation.AdvertisementId == advertisement.Id).ToList();
 
             var folderName = Path.Combine("wwwroot", "Images");
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
@@ -242,6 +245,11 @@ namespace EstateAgency.Controllers
                 {
                     System.IO.File.Delete(f);
                 }
+            }
+
+            foreach(var reservation in advertisement.Reservations)
+            {
+                _dbContext.Reservations.Remove(reservation);
             }
 
             _dbContext.Advertisements.Remove(advertisement);
@@ -316,17 +324,33 @@ namespace EstateAgency.Controllers
             return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
 
-        [HttpGet("SerchAdvertisements/{title}")]
-        public IActionResult SerchAdvertisements(string title)
+        [HttpPost("SerchAdvertisements")]
+        public IActionResult SerchAdvertisements([FromBody] AdvertisementSearchViewModel request)
         {
-            var advertisements = _dbContext.Advertisements.Where(a => a.Title.Contains(title) && a.Flag != 1).ToArray();
+            var advertisements = _dbContext.Advertisements.Where(a => a.Title.Contains(request.Title) && a.Flag != 1).ToArray();
 
             foreach (var advertisement in advertisements)
             {
                 advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
             }
 
-            return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
+            request.PageNumber = (request.PageNumber > 0 ? request.PageNumber : 1) - 1;
+            request.MaxRecords = request.MaxRecords != 0 ? request.MaxRecords : 100;
+
+            var requestedAdvertisements = advertisements
+                .OrderByDescending(x => x.LastModifiedDate)
+                .Skip(request.MaxRecords * request.PageNumber)
+                .Take(request.MaxRecords)
+                .Select(x => x.Adapt<AdvertisementViewModel>())
+                .ToList();
+
+            var responseViewModel = new AdvertisementPagedViewModel
+            {
+                Advertisements = requestedAdvertisements,
+                PageCount = advertisements.Count() % request.MaxRecords == 0 ? advertisements.Count() / request.MaxRecords : advertisements.Count() / request.MaxRecords + 1
+            };
+
+            return new JsonResult(responseViewModel.Adapt<AdvertisementPagedViewModel>(), JsonSettings);
         }
 
         #endregion

@@ -41,6 +41,7 @@ export class AdvertisementComponent implements OnInit {
     if (id) {
       this.api.getAdvertisement(id).subscribe(res => {
         this.advertisement = res;
+        console.log(res);
       });
     }
     else {

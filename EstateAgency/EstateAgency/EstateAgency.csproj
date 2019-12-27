@@ -27,9 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\constants\countAdvertisements.ts" />
     <None Remove="ClientApp\src\app\constants\responseNumbers.ts" />
     <None Remove="ClientApp\src\app\interfaces\advertisement.ts" />
     <None Remove="ClientApp\src\app\interfaces\advertisementManagement.ts" />
+    <None Remove="ClientApp\src\app\interfaces\advertisementPaged.ts" />
     <None Remove="ClientApp\src\app\interfaces\image.ts" />
     <None Remove="ClientApp\src\app\interfaces\messageCreate.ts" />
     <None Remove="ClientApp\src\app\interfaces\messageList.ts" />
@@ -59,9 +61,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\constants\countAdvertisements.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\constants\responseNumbers.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\advertisement.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\advertisementManagement.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\advertisementPaged.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\image.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\messageCreate.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\messageList.ts" />

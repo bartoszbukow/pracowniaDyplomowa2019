@@ -59,6 +59,16 @@ namespace EstateAgency.Controllers
 
             ApplicationUser currentUser = await GetCurrentUserAsync();
 
+            var reservations = _dbContext.Reservations.Where(r => r.AdvertisementId == model.Id).ToList();
+
+            foreach(var res in reservations)
+            {
+                if(res.ReservationActive == 1)
+                {
+                    return BadRequest(115);
+                }
+            }
+
             var reservation = new Reservation
             {
                 Id = Guid.NewGuid().ToString(),

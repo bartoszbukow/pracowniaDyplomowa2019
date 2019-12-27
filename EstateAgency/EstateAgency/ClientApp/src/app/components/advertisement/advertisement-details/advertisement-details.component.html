@@ -5,6 +5,9 @@
 <div class="advertisement-box">
   <div class="card-box">
     <div class="slider-box">
+      <div *ngIf="advertisement.reservations && advertisement.reservations.length !== 0" class="reservation__active">
+        Zarezerwowane
+      </div>
       <div id="slider" #slider class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li *ngFor="let image of advertisement.images; let k = index"
@@ -28,7 +31,6 @@
           <span class="sr-only">Next</span>
         </button>
       </div>
-
     </div>
     <div class="data-box">
       <div class="data-box__header">
