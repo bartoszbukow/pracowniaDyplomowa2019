@@ -56,6 +56,21 @@ namespace EstateAgency.Controllers
                 });
             }
 
+            foreach (var reservation in _dbContext.Reservations)
+            {
+                if(reservation.ReservationActive == 1)
+                {
+                    var tmpTime = DateTime.Now.Subtract(reservation.CreatedDate).TotalMinutes;
+                    if (tmpTime > 1440)
+                    {
+                        reservation.ReservationActive = 0;
+                        _dbContext.Reservations.Remove(reservation);
+                    }
+                }
+            }
+
+            _dbContext.SaveChanges();
+
             advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == id).ToList();
             advertisement.Reservations = _dbContext.Reservations.Where(reservation => reservation.AdvertisementId == id && reservation.ReservationActive == 1).ToList();
 
@@ -297,22 +312,6 @@ namespace EstateAgency.Controllers
             };
 
             return new JsonResult(responseViewModel.Adapt<AdvertisementPagedViewModel>(), JsonSettings);
-        }
-
-        [HttpGet("ByTitle/{num:int?}")]
-        public IActionResult ByTitle(int num = 10)
-        {
-            var byTitle = _dbContext.Advertisements.Where(a => a.Flag != 1).OrderBy(q => q.Title).Take(num).ToArray();
-
-            return new JsonResult(byTitle.Adapt<AdvertisementViewModel[]>(), JsonSettings);
-        }
-
-        [HttpGet("Random/{num:int?}")]
-        public IActionResult Random(int num = 10)
-        {
-            var random = _dbContext.Advertisements.Where(a => a.Flag != 1).OrderBy(q => Guid.NewGuid()).Take(num).ToArray();
-
-            return new JsonResult(random.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
 
         [HttpGet("MyAdvertisement")]

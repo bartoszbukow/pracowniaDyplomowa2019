@@ -38,12 +38,6 @@ namespace EstateAgency.Controllers
 
         #region RESTful conventions methods 
 
-        [HttpGet("{id}")]
-        public IActionResult Get(string id)
-        {
-            return Content("Not implemented (yet)!");
-        }
-
         [HttpPut]
         [Authorize]
         public IActionResult Put(ReservationViewModel m)
@@ -65,7 +59,15 @@ namespace EstateAgency.Controllers
             {
                 if(res.ReservationActive == 1)
                 {
-                    return BadRequest(115);
+                    var tmpTime = DateTime.Now.Subtract(res.CreatedDate).TotalMinutes;
+                    if (tmpTime > 1440)
+                    {
+                        res.ReservationActive = 0;
+                    }
+                    else
+                    {
+                        return BadRequest(115);
+                    }
                 }
             }
 
@@ -84,50 +86,6 @@ namespace EstateAgency.Controllers
             _dbContext.SaveChanges();
 
             return Json(reservation.Adapt<ReservationViewModel>(), JsonSettings);
-        }
-
-        [HttpDelete("{id}")]
-        [Authorize]
-        public IActionResult Delete(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region Attribute-based routing methods
-
-        // GET api/reservation/all
-        [HttpGet("All/{questionId}")]
-        public IActionResult All(string userId, string advertisementId)
-        {
-            var sampleReservation = new List<ReservationViewModel>();
-            // add a first sample reservation
-            sampleReservation.Add(new ReservationViewModel()
-            {
-                Id = "1",
-                UserId = userId,
-                AdvertisementId = advertisementId,
-                CreatedDate = DateTime.Now,
-                ReservationFrom = DateTime.Now,
-                ReservationTo = DateTime.Now
-            });
-            // add a bunch of other sample reservations
-            for (int i = 2; i <= 5; i++)
-            {
-                sampleReservation.Add(new ReservationViewModel()
-                {
-                    Id = $"{i}",
-                    UserId = userId,
-                    AdvertisementId = advertisementId,
-                    CreatedDate = DateTime.Now,
-                    ReservationFrom = DateTime.Now,
-                    ReservationTo = DateTime.Now
-                });
-            }
-            // output the result in JSON format
-            return new JsonResult(
-                sampleReservation, JsonSettings);
         }
 
         #endregion
