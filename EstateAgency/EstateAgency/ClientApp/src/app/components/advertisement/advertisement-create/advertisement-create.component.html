@@ -85,14 +85,19 @@
       </div>
 
       <div class="yardage-box__content form-group">
-        <input type="text"
-               class="form-control"
-               name="yardage"
-               required
-               formControlName="yardage"
-               autocomplete="yardage"
-               [ngClass]="{'is-invalid':hasError('yardage')}">
-        <div *ngIf="hasError('yardage')" class="invalid-feedback">Podana wartość musi być liczba całkowita</div>
+        <div class="input-group ">
+          <input type="text"
+                 class="form-control"
+                 name="yardage"
+                 required
+                 formControlName="yardage"
+                 autocomplete="yardage"
+                 [ngClass]="{'is-invalid':hasError('yardage')}">
+          <div class="input-group-prepend">
+            <div class="input-group-text">m2</div>
+          </div>
+          <div *ngIf="hasError('yardage')" class="invalid-feedback">Podana wartość musi być liczba całkowita</div>
+        </div>
       </div>
 
       <div class="numberOfRoom-box__content form-group">
@@ -107,14 +112,20 @@
       </div>
 
       <div class="price-box__content form-group">
-        <input type="text"
-               class="form-control"
-               name="price"
-               required
-               formControlName="price"
-               autocomplete="price"
-               [ngClass]="{'is-invalid':hasError('price')}">
-        <div *ngIf="hasError('price')" class="invalid-feedback">Podana wartość musi być liczba całkowita</div>
+        <div class="input-group ">
+          <input type="text"
+                 class="form-control"
+                 name="price"
+                 required
+                 formControlName="price"
+                 autocomplete="price"
+                 [ngClass]="{'is-invalid':hasError('price')}">
+          <div class="input-group-prepend">
+            <div class="input-group-text">zł</div>
+          </div>
+          <div *ngIf="hasError('price')" class="invalid-feedback">Podana wartość musi być liczba całkowita</div>
+        </div>
+        
       </div>
 
       <div class="city-box__content form-group">

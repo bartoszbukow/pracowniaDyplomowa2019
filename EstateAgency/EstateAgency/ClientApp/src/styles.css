@@ -10,4 +10,13 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.spinner-container {
+  position: relative;
+  height: 100%;
+}
+
+.spinner-element{
+    position: absolute;
+    top: 50%;
+}
 

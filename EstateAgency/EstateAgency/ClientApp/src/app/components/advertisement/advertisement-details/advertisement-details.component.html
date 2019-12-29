@@ -67,12 +67,12 @@
         </div>
       </div>
 
-      <div class="button-box">
+      <div *ngIf="this.isLoggedIn()" class="button-box">
         <div class="button-box__inner">
-          <button class="bg-success" (click)="routeToContact()">KONTAKT</button>
+          <button class="btn btn-success" (click)="routeToContact()">KONTAKT</button>
         </div>
         <div *ngIf="+advertisement.type === 1" class="button-box__inner" data-toggle="modal" data-target="#modalId">
-          <button class="bg-info" (click)="onCreateModalReservationCreate()">REZERWACJA</button>
+          <button class="btn btn-info" (click)="onCreateModalReservationCreate()">REZERWACJA</button>
         </div>
       </div>
     </div>

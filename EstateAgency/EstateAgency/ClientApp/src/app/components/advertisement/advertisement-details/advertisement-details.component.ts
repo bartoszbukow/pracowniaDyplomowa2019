@@ -83,4 +83,8 @@ export class AdvertisementComponent implements OnInit {
       dismissed => { }
     );
   }
+
+  isLoggedIn(): boolean {
+    return this.auth.isLoggedIn();
+  }
 }
