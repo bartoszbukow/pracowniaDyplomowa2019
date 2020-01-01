@@ -23,11 +23,13 @@
 .advertisement-management-box .advertisement-item-box .image-box .image-area .image {
   height: 90px;
   width: auto;
+  max-width: 130px;
 }
 .advertisement-management-box .advertisement-item-box .image-box .image-area .image img {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
+  max-width: 130px;
 }
 .advertisement-management-box .advertisement-item-box .basic-imformation-box {
   grid-column: 2;

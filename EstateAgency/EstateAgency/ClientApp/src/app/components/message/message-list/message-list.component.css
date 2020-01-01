@@ -57,3 +57,15 @@
     max-width: 92%;
   }
 }
+@media (max-width: 767px) {
+  .message-list-box .message-box .table .table-title-senderName {
+    width: 200px;
+  }
+  .message-list-box .message-box .table .table-title-messageContent {
+    width: auto;
+  }
+  .message-list-box .message-box .table .table-title-createdDate {
+    width: 0;
+    display: none;
+  }
+}

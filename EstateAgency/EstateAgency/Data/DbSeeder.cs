@@ -28,7 +28,7 @@ namespace EstateAgency.Data
         #region Seed Methods 
         private static async Task CreateUsers(ApplicationDbContext dbContext, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
-            DateTime createdDate = new DateTime(2016, 03, 01, 12, 30, 00);
+            DateTime createdDate = new DateTime(2020, 01, 01, 12, 30, 00);
             DateTime lastModifiedDate = DateTime.Now;
 
             string role_Administrator = "Administrator";
