@@ -71,7 +71,7 @@
         <div class="button-box__inner">
           <button class="btn btn-success" (click)="routeToContact()">KONTAKT</button>
         </div>
-        <div *ngIf="+advertisement.type === 1" class="button-box__inner" data-toggle="modal" data-target="#modalId">
+        <div *ngIf="+advertisement.type === 1 && !this.IAmOwnerOfAdvertisement()" class="button-box__inner" data-toggle="modal" data-target="#modalId">
           <button class="btn btn-info" (click)="onCreateModalReservationCreate()">REZERWACJA</button>
         </div>
       </div>

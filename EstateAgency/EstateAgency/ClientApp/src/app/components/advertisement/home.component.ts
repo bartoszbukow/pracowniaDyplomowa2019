@@ -32,7 +32,11 @@ export class HomeComponent implements OnInit {
 
     this.api.getAdvertisementList(data).subscribe(res => {
       this.advertisements = res.advertisements;
-      this.pageCount = res.pageCount;
+
+      if (this.pageCount !== res.pageCount && (localStorage.getItem("search") !== undefined || localStorage.getItem("search") !== null)) {
+        this.pageCount = res.pageCount;
+        this.pageNumber = 1;
+      }
     });
 
     let scrollToTop = window.setInterval(() => {

@@ -281,7 +281,7 @@ namespace EstateAgency.Controllers
         {
             List<Advertisement> advertisements = new List<Advertisement>();
 
-            if (request.Title == null || request.Title == "")
+            if (request.Title == null || request.Title == "null" || request.Title == "")
             {
                 advertisements = _dbContext.Advertisements.Where(a => a.Flag != 1).ToList();
             }
@@ -295,7 +295,7 @@ namespace EstateAgency.Controllers
                 advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
             }
 
-            request.PageNumber = (request.PageNumber > 0 ? request.PageNumber : 1) - 1;
+            request.PageNumber = (request.PageNumber > 0  && (request.Title == null || request.Title == "null" || request.Title == "") ? request.PageNumber : 1) - 1;
             request.MaxRecords = request.MaxRecords != 0 ? request.MaxRecords : 100;
 
             var requestedAdvertisements = advertisements
@@ -340,35 +340,6 @@ namespace EstateAgency.Controllers
 
             return new JsonResult(advertisements.Adapt<AdvertisementViewModel[]>(), JsonSettings);
         }
-
-        //[HttpPost("SerchAdvertisements")]
-        //public IActionResult SerchAdvertisements([FromBody] AdvertisementSearchViewModel request)
-        //{
-        //    var advertisements = _dbContext.Advertisements.Where(a => a.Title.Contains(request.Title) && a.Flag != 1).ToArray();
-
-        //    foreach (var advertisement in advertisements)
-        //    {
-        //        advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
-        //    }
-
-        //    request.PageNumber = (request.PageNumber > 0 ? request.PageNumber : 1) - 1;
-        //    request.MaxRecords = request.MaxRecords != 0 ? request.MaxRecords : 100;
-
-        //    var requestedAdvertisements = advertisements
-        //        .OrderByDescending(x => x.LastModifiedDate)
-        //        .Skip(request.MaxRecords * request.PageNumber)
-        //        .Take(request.MaxRecords)
-        //        .Select(x => x.Adapt<AdvertisementViewModel>())
-        //        .ToList();
-
-        //    var responseViewModel = new AdvertisementPagedViewModel
-        //    {
-        //        Advertisements = requestedAdvertisements,
-        //        PageCount = advertisements.Count() % request.MaxRecords == 0 ? advertisements.Count() / request.MaxRecords : advertisements.Count() / request.MaxRecords + 1
-        //    };
-
-        //    return new JsonResult(responseViewModel.Adapt<AdvertisementPagedViewModel>(), JsonSettings);
-        //}
 
         #endregion
     }

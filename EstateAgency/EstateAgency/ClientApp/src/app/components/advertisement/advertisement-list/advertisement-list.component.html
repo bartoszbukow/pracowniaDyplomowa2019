@@ -53,6 +53,9 @@
         </div>
       </div>
     </div>
+    <div *ngIf="this.advertisements?.length === 0">
+      <span>Nie znaleziono żadnej oferty</span>
+    </div>
   </div>
   <div class="row">
     <app-pagination

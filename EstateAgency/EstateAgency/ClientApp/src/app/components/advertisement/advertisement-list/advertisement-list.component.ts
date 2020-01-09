@@ -53,23 +53,14 @@ export class AdvertisementListComponent implements OnInit {
   }
 
   goToPage(n: number): void {
-    //this.pageNumber = n;
-    //this.postDeviceLogs();
-    //this.onPageChanged.emit();
     this.pageNumberChanged.emit(n);
   }
 
   onNext(): void {
-    //this.pageNumber++;
-    //this.postDeviceLogs();
-    //this.onPageChanged.emit();
     this.pageNumberChanged.emit(this.pageNumber + 1);
   }
 
   onPrev(): void {
-    //this.pageNumber--;
-    //this.postDeviceLogs();
-    //this.onPageChanged.emit();
     this.pageNumberChanged.emit(this.pageNumber - 1);
   }
 }

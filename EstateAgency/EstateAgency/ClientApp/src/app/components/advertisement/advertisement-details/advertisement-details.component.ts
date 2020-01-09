@@ -16,6 +16,7 @@ export class AdvertisementComponent implements OnInit {
   advertisement: IAdvertisement;
   url: string;
   @ViewChild('slider', { static: true }) slider: ElementRef;
+  private userId: string;
 
   dateToReturn: { title: string, pathToReturn: string } = {
     title: "Szczegóły ogłoszenia",
@@ -41,8 +42,12 @@ export class AdvertisementComponent implements OnInit {
     if (id) {
       this.api.getAdvertisement(id).subscribe(res => {
         this.advertisement = res;
-        console.log(res);
       });
+
+      if (this.isLoggedIn()) {
+        this.api.getUserId().subscribe(res => { this.userId = <string>res });
+      }
+
     }
     else {
       console.log("Invalid id: routing back to home...");
@@ -86,5 +91,12 @@ export class AdvertisementComponent implements OnInit {
 
   isLoggedIn(): boolean {
     return this.auth.isLoggedIn();
+  }
+
+  IAmOwnerOfAdvertisement() {
+    if (this.isLoggedIn() && this.advertisement.userId === this.userId) {
+      return true;
+    }
+    return false;
   }
 }
