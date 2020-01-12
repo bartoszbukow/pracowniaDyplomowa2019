@@ -28,7 +28,7 @@ export class UserMenuComponent implements OnInit {
     }
   }
 
-  logout(): boolean {
+  logout = (): boolean => {
     if (this.auth.logout()) {
       this.router.navigate(["home"]);
       this.toastr.success(responseNumbers[109], "Sukces!");
@@ -36,7 +36,7 @@ export class UserMenuComponent implements OnInit {
     return false;
   }
 
-  isLoggedIn(): boolean {
+  isLoggedIn = (): boolean => {
     return this.auth.isLoggedIn();
   }
 }

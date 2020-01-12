@@ -20,13 +20,8 @@ export class ReservationCreateModalComponent extends Modal implements OnInit, On
     super();
   }
 
-  onInjectInputs(inputs): void {
+  onInjectInputs = (inputs: any): void => {
     this.advertisement = inputs.advertisement;
-  }
-
-  ngOnDestroy() {
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
   }
 
   ngOnInit() {
@@ -35,11 +30,16 @@ export class ReservationCreateModalComponent extends Modal implements OnInit, On
     })
   }
 
-  cancel(): void {
+  ngOnDestroy() {
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+  }
+
+  cancel = (): void => {
     this.dismiss('canceling');
   }
 
-  addReservation = () => {
+  addReservation = (): void => {
     var tempReservation = <IReservation>{};
     tempReservation.id = this.advertisement.id;
 
@@ -48,7 +48,7 @@ export class ReservationCreateModalComponent extends Modal implements OnInit, On
       this.close();
     }, error => {
       $('#modalId').modal('hide');
-        this.toastr.error(responseNumbers[115], "Error!");
+      this.toastr.error(responseNumbers[115], "Error!");
     });
   }
 }

@@ -14,23 +14,23 @@ export class PaginationComponent {
   @Output() goNext = new EventEmitter<boolean>();
   @Output() goPage = new EventEmitter<number>();
 
-  onPage(n: number): void {
+  onPage = (n: number): void => {
     this.goPage.emit(n);
   }
 
-  onPrev(): void {
+  onPrev = (): void => {
     this.goPrev.emit(true);
   }
 
-  onNext(next: boolean): void {
+  onNext = (next: boolean): void => {
     this.goNext.emit(next);
   }
 
-  lastPage(): boolean {
+  lastPage = (): boolean => {
     return this.count === this.page;
   }
 
-  getPages(): number[] {
+  getPages = (): number[] => {
     const c = this.count;
     const p = this.page || 1;
     const pagesToShow = this.pagesToShow || 9;

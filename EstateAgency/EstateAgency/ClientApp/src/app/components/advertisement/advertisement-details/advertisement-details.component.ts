@@ -23,11 +23,12 @@ export class AdvertisementComponent implements OnInit {
     pathToReturn: "locationBack"
   }
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(
+    @Inject('BASE_URL') baseUrl: string,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private api: ApiService,
     public auth: AuthService,
-    @Inject('BASE_URL') baseUrl: string,
     private _location: Location,
     private modalService: ModalService
   ) {
@@ -36,7 +37,6 @@ export class AdvertisementComponent implements OnInit {
 
   ngOnInit() {
     this.advertisement = <IAdvertisement>{};
-
     var id = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (id) {
@@ -59,28 +59,28 @@ export class AdvertisementComponent implements OnInit {
     })
   }
 
-  prevSlide = () => {
+  prevSlide = (): void => {
     $(this.slider.nativeElement).carousel('prev');
   }
 
-  nextSlide = () => {
+  nextSlide = (): void => {
     $(this.slider.nativeElement).carousel('next');
   }
 
-  goToSlide = (index) => {
+  goToSlide = (index: number): void => {
     $(this.slider.nativeElement).carousel(index);
   }
 
-  backClicked() {
+  backClicked = (): void => {
     this._location.back();
   }
 
-  routeToContact() {
+  routeToContact = (): void => {
     const navigationExtras: NavigationExtras = { state: { email: this.advertisement.email } };
     this.router.navigate(["message/create"], navigationExtras);
   }
 
-  onCreateModalReservationCreate(): void {
+  onCreateModalReservationCreate = (): void => {
     const modalRef = this.modalService.open(ReservationCreateModalComponent, { advertisement: this.advertisement });
 
     modalRef.onResult().subscribe(
@@ -89,11 +89,11 @@ export class AdvertisementComponent implements OnInit {
     );
   }
 
-  isLoggedIn(): boolean {
+  isLoggedIn = (): boolean => {
     return this.auth.isLoggedIn();
   }
 
-  IAmOwnerOfAdvertisement() {
+  IAmOwnerOfAdvertisement = (): boolean => {
     if (this.isLoggedIn() && this.advertisement.userId === this.userId) {
       return true;
     }

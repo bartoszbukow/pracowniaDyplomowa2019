@@ -26,13 +26,13 @@ export class SearchComponent implements OnInit, OnDestroy {
     localStorage.removeItem("search");
   }
 
-  createForm() {
+  createForm = (): void => {
     this.searchFrom = this.fb.group({
       title: [this.serchModel.title]
     });
   }
 
-  serchAdvertisements() {
+  serchAdvertisements = (): void => {
     localStorage.setItem("search", this.searchFrom.value.title);
     this.searchedAdvertisement.emit();
   }

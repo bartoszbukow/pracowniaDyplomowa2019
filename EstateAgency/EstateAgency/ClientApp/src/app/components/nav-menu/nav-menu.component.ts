@@ -18,7 +18,7 @@ export class NavMenuComponent {
     private toastr: ToastrService
   ) { }
 
-  logout(): boolean {
+  logout = (): boolean => {
     if (this.auth.logout()) {
       this.router.navigate(["home"]);
       this.toastr.success(responseNumbers[109], "Sukces!");
@@ -26,15 +26,15 @@ export class NavMenuComponent {
     return false;
   }
 
-  isLoggedIn(): boolean {
+  isLoggedIn = (): boolean => {
     return this.auth.isLoggedIn();
   }
 
-  sidenavCloce() {
+  sidenavCloce = (): void => {
     this.sidenavToggle.next();
   }
 
-  isAdmin(): boolean {
+  isAdmin = (): boolean => {
     return this.auth.isAdmin();
   }
 }

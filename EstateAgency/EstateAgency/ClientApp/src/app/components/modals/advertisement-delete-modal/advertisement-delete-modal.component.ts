@@ -22,13 +22,9 @@ export class AdvertisementDeleteModalComponent extends Modal implements OnInit, 
     super();
   }
 
-  onInjectInputs(inputs): void {
+  onInjectInputs = (inputs: any): void => {
+    console.log(inputs);
     this.advertisement = inputs.advertisement;
-  }
-
-  ngOnDestroy() {
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
   }
 
   ngOnInit() {
@@ -37,11 +33,16 @@ export class AdvertisementDeleteModalComponent extends Modal implements OnInit, 
     })
   }
 
-  cancel(): void {
+  ngOnDestroy() {
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+  }
+
+  cancel = (): void => {
     this.dismiss('canceling');
   }
 
-  removeAdvertisement = (advertisementId) => {
+  removeAdvertisement = (advertisementId: string): void => {
     let data = {
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +57,7 @@ export class AdvertisementDeleteModalComponent extends Modal implements OnInit, 
       this.router.navigate(["home"]);
     }, error => {
       $('#modalId').modal('hide');
-        this.toastr.error(responseNumbers[112], "Error!");
+      this.toastr.error(responseNumbers[112], "Error!");
     });
   }
 }

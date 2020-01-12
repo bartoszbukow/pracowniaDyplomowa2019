@@ -17,11 +17,12 @@ export class AdvertisementListComponent implements OnInit {
   selectedAdvertisement: IAdvertisement;
   url: string;
   private userId: string;
-  
-  constructor(private auth: AuthService,
+
+  constructor(
+    @Inject('BASE_URL') baseUrl: string,
+    private auth: AuthService,
     private api: ApiService,
-    private router: Router,
-    @Inject('BASE_URL') baseUrl: string) {
+    private router: Router) {
     this.url = baseUrl;
   }
 
@@ -31,36 +32,36 @@ export class AdvertisementListComponent implements OnInit {
     }
   }
 
-  isLoggedIn(): boolean {
+  isLoggedIn = (): boolean => {
     return this.auth.isLoggedIn();
   }
 
-  onSelect(advertisement: IAdvertisement) {
+  onSelect = (advertisement: IAdvertisement): void => {
     this.selectedAdvertisement = advertisement;
     this.router.navigate(["advertisement", this.selectedAdvertisement.id]);
   }
 
-  onEdit(advertisement: IAdvertisement) {
+  onEdit = (advertisement: IAdvertisement): void => {
     this.selectedAdvertisement = advertisement;
     this.router.navigate(["advertisement/edit", this.selectedAdvertisement.id]);
   }
 
-  IAmOwnerOfAdvertisement(advertisement) {
+  IAmOwnerOfAdvertisement = (advertisement: IAdvertisement): boolean => {
     if (this.isLoggedIn() && advertisement.userId === this.userId) {
       return true;
     }
     return false;
   }
 
-  goToPage(n: number): void {
+  goToPage = (n: number): void => {
     this.pageNumberChanged.emit(n);
   }
 
-  onNext(): void {
+  onNext = (): void => {
     this.pageNumberChanged.emit(this.pageNumber + 1);
   }
 
-  onPrev(): void {
+  onPrev = (): void => {
     this.pageNumberChanged.emit(this.pageNumber - 1);
   }
 }
