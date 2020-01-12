@@ -1,0 +1,23 @@
+<main>
+  <section class="jumbotron text-center jumbotron-witch-search">
+    <div class="container">
+      <div class="title-backgroung">
+        <h1 class="jumbotron-heading">CHCESZ SPRZEDAĆ NIERUCHOMOŚĆ? MY CI W TYM POMOŻEMY!</h1>
+        <p class="lead">
+          W naszej firmie nie tylko możesz coś wystawić na sprzedaż ale i również znaleźć coś interesującego do kupienia! Poniższa wyszukiwarka Ci w tym pomoze!
+        </p>
+      </div>
+    </div>
+    <app-search (searchedAdvertisement)='getAdvertisementList($event)'>
+    </app-search>
+  </section>
+  <div class="album py-5">
+    <app-advertisement-list (pageNumberChanged)='onPageChanged($event)'
+                            [advertisements]="this.advertisements"
+                            [pageNumber]="this.pageNumber"
+                            [pageCount]="this.pageCount">
+    </app-advertisement-list>
+  </div>
+</main>
+
+

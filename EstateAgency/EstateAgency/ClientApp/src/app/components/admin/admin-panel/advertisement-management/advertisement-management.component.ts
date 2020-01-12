@@ -2,40 +2,40 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../../services/api.service';
 
 @Component({
-    selector: 'app-advertisement-management',
-    templateUrl: './advertisement-management.component.html',
-    styleUrls: ['./advertisement-management.component.less']
+  selector: 'app-advertisement-management',
+  templateUrl: './advertisement-management.component.html',
+  styleUrls: ['./advertisement-management.component.less']
 })
 export class AdvertisementManagementComponent implements OnInit {
-    advertisementList: Array<IAdvertisementManagement>;
+  advertisementList: Array<IAdvertisementManagement>;
 
-    constructor(
-        private api: ApiService
-    ) { }
+  constructor(
+    private api: ApiService
+  ) { }
 
-    ngOnInit() {
-        this.api.getAplicationAdvertisements().subscribe(res => {
-            this.advertisementList = res;
-        });
-    }
+  ngOnInit() {
+    this.api.getAplicationAdvertisements().subscribe(res => {
+      this.advertisementList = res;
+    });
+  }
 
-    lockAdvertisement(userId) {
-        var data = {};
-        data["id"] = userId;
-        data["management"] = "lock";
+  lockAdvertisement = (userId: string): void => {
+    var data = {};
+    data["id"] = userId;
+    data["management"] = "lock";
 
-        this.api.putAdvertisementManagement(data).subscribe(res => {
-            this.advertisementList = res;
-        })
-    }
+    this.api.putAdvertisementManagement(data).subscribe(res => {
+      this.advertisementList = res;
+    })
+  }
 
-    unlockAdvertisement(userId) {
-        var data = {};
-        data["id"] = userId;
-        data["management"] = "unlock";
+  unlockAdvertisement = (userId: string): void => {
+    var data = {};
+    data["id"] = userId;
+    data["management"] = "unlock";
 
-        this.api.putAdvertisementManagement(data).subscribe(res => {
-            this.advertisementList = res;
-        })
-    }
+    this.api.putAdvertisementManagement(data).subscribe(res => {
+      this.advertisementList = res;
+    })
+  }
 }

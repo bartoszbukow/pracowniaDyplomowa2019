@@ -11,7 +11,6 @@ import { MDBBootstrapModule , WavesModule, InputsModule, ButtonsModule } from 'a
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { HomeComponent } from './components/advertisement/home.component';
 import { AdvertisementListComponent } from './components/advertisement/advertisement-list/advertisement-list.component';
 import { ApiService } from './services/api.service';
 import { AdvertisementComponent } from './components/advertisement/advertisement-details/advertisement-details.component';
@@ -42,12 +41,12 @@ import { ModalContainerComponent } from './components/modals/modal-container/mod
 import { AdvertisementDeleteModalComponent } from './components/modals/advertisement-delete-modal/advertisement-delete-modal.component';
 import { ReservationCreateModalComponent } from './components/modals/reservation-create-modal/reservation-create-modal.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        HomeComponent,
         AdvertisementListComponent,
         AdvertisementComponent,
         LoginComponent,
@@ -71,6 +70,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
         AdvertisementDeleteModalComponent,
         ReservationCreateModalComponent,
         PaginationComponent,
+        DashboardComponent,
     ],
     entryComponents: [
       ModalContainerComponent,

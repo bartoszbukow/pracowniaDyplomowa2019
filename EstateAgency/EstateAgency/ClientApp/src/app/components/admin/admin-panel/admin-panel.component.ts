@@ -5,11 +5,4 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './admin-panel.component.html',
     styleUrls: ['./admin-panel.component.less']
 })
-export class AdminPanelComponent implements OnInit {
-
-    constructor() { }
-
-    ngOnInit() {
-    }
-
-}
+export class AdminPanelComponent {}
