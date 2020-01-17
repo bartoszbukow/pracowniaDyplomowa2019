@@ -9,39 +9,152 @@
   }
 }
 
+
 .search-box {
   background-color: rgba(255,255,255,0.8);
   margin: 55px 80px 0 80px;
 
   .main-search-box {
-    .main-search__title {
-      width: calc(~"100% - 30px");
-    }
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 70px 70px 70px;
+    grid-auto-flow: row;
+    margin-bottom: 0 !important;
 
     input {
       font-size: 23px;
+      width: 100%;
     }
 
-    .main-search__icon {
-      width: 30px;
-      background: none;
-      color: inherit;
-      border: none;
-      padding: 0;
-      font: inherit;
-      cursor: pointer;
-      outline: inherit;
+    .main-search__title {
+      grid-column-start: 1;
+      grid-column-end: 6;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+
+    .main-search__category {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 2;
+      grid-row-end: 3;
+
+      .select-text {
+        position: relative;
+        font-family: inherit;
+        background-color: transparent;
+        width: 100%;
+        padding: 5px 0 8px 0;
+        font-size: 23px;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid #999;
+        color: #495057;
+
+        .select-bar {
+          position: relative;
+          width: 100%;
+        }
+
+        .select-bar:before, .select-bar:after {
+          content: '';
+          height: 2px;
+          width: 0;
+          bottom: -1px;
+          position: absolute;
+          background: #444;
+        }
+
+        .select-bar:before {
+          left: 50%;
+        }
+
+        .select-bar:after {
+          right: 50%;
+        }
+      }
+
+      .select-text:focus {
+        outline: none;
+        border-bottom: 2px solid #444;
+      }
+
+      .select-text:focus ~ .select-bar:before, .select-text:focus ~ .select-bar:after {
+        width: 50%;
+      }
+    }
+
+    .main-search__priceFrom {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+
+    .main-search__priceTo {
+      grid-column-start: 3;
+      grid-column-end: 4;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+
+    .main-search__yardageFrom {
+      grid-column-start: 4;
+      grid-column-end: 5;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+
+    .main-search__yardageTo {
+      grid-column-start: 5;
+      grid-column-end: 6;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+
+    .main-search__button {
+      grid-column-start: 5;
+      grid-column-end: 6;
+      grid-row-start: 3;
+      grid-row-end: 4;
+      margin-top: 20px;
+
+      button {
+        padding: 5px 20px;
+        float: right;
+        margin-right: 10px;
+
+        .text {
+          padding-right: 10px;
+          font-size: 23px;
+        }
+      }
+    }
+
+    .main-search__title,
+    .main-search__category,
+    .main-search__priceFrom,
+    .main-search__priceTo,
+    .main-search__yardageFrom,
+    .main-search__yardageTo,
+    .main-search__button {
+      padding: 0 5px 0 5px;
     }
   }
 
   .active-cyan-2 input[type=text]:not([readonly]) {
     border-bottom: 1px solid #999;
-    box-shadow: 0 1px 0 0 #999;
+    box-shadow: 0 0 0 0 #999;
   }
 
   .active-cyan-2 input[type=text]:focus:not([readonly]) {
     border-bottom: 1px solid #444;
     box-shadow: 0 1px 0 0 #444;
+  }
+
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #495057;
+    opacity: 1; /* Firefox */
   }
 }
 
@@ -51,12 +164,29 @@
   }
 }
 
-
 @media(max-width: 1200px) and (min-width: 981px) {
   .search-box {
     .main-search-box {
       input {
         font-size: 20px;
+      }
+
+      .main-search__category {
+        .select-text {
+          font-size: 20px;
+        }
+      }
+
+      .main-search__button {
+        button {
+          padding: 4px 18px;
+          margin-right: 8px;
+
+          .text {
+            padding-right: 8px;
+            font-size: 20px;
+          }
+        }
       }
     }
   }
@@ -68,15 +198,165 @@
       input {
         font-size: 19px;
       }
+
+      .main-search__category {
+        .select-text {
+          font-size: 19px;
+        }
+      }
+
+      .main-search__button {
+        button {
+          padding: 3px 16px;
+          margin-right: 6px;
+
+          .text {
+            padding-right: 6px;
+            font-size: 19px;
+          }
+        }
+      }
     }
   }
 }
 
+
 @media(max-width: 767px) {
   .search-box {
     .main-search-box {
+      grid-template-columns: 33.33% 33.33% 33.33%;
+      grid-template-rows: 70px 70px 70px;
+
       input {
         font-size: 18px;
+      }
+
+      .main-search__title {
+        grid-column-start: 1;
+        grid-column-end: 4;
+      }
+
+      .main-search__category {
+        .select-text {
+          font-size: 18px;
+        }
+      }
+
+      .main-search__yardageFrom {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;
+      }
+
+      .main-search__yardageTo {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
+      }
+
+      .main-search__button {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 3;
+        grid-row-end: 4;
+
+        margin-top: 10px;
+
+        button {
+          padding: 2px 14px;
+          margin-right: 0;
+
+          .text {
+            padding-right: 4px;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media(max-width: 490px) {
+  .search-box {
+    .main-search-box {
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 70px 70px 70px 70px;
+
+      input {
+        font-size: 18px;
+      }
+
+      .main-search__title {
+        grid-column-start: 1;
+        grid-column-end: 4;
+      }
+
+      .main-search__category {
+        .select-text {
+          font-size: 18px;
+        }
+      }
+
+      .main-search__priceTo {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;
+      }
+
+      .main-search__yardageFrom {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
+      }
+
+      .main-search__yardageTo {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 4;
+        grid-row-end: 5;
+      }
+
+      .main-search__button {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        grid-row-end: 5;
+        margin-top: 10px;
+
+        button {
+          padding: 2px 14px;
+          margin-right: 0;
+
+          .text {
+            padding-right: 4px;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media(max-width: 350px) {
+  .search-box {
+    .main-search-box {
+      
+      .main-search__button {
+        button {
+          padding: 1px 7px;
+          margin-right: 0;
+
+          .text {
+            padding-right: 2px;
+            font-size: 18px;
+          }
+        }
       }
     }
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { SerchModel } from "./../../../models/serch.model";
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -28,12 +28,57 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   createForm = (): void => {
     this.searchFrom = this.fb.group({
-      title: [this.serchModel.title]
+      title: [this.serchModel.title, Validators.compose([
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50)
+      ])],
+      type: [this.serchModel.type, Validators.compose([
+        Validators.required,
+      ])],
+      yardageFrom: [this.serchModel.yardageFrom, Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]{1,}$'),
+        Validators.maxLength(10)
+      ])],
+      yardageTo: [this.serchModel.yardageTo, Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]{1,}$'),
+        Validators.maxLength(10)
+      ])],
+      priceFrom: [this.serchModel.priceFrom, Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]{1,}$'),
+        Validators.maxLength(20)
+      ])],
+      priceTo: [this.serchModel.priceTo, Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]{1,}$'),
+        Validators.maxLength(20)
+      ])],
     });
+
+    this.searchFrom.controls['type'].setValue("Typ", { onlySelf: true });
   }
 
   serchAdvertisements = (): void => {
-    localStorage.setItem("search", this.searchFrom.value.title);
+
+    if (this.searchFrom.value.type === "Wynajem") {
+      this.searchFrom.value.type = 1;
+    }
+    else if (this.searchFrom.value.type === "Sprzedaz") {
+      this.searchFrom.value.type = 0;
+    }
+    else {
+      this.searchFrom.value.type = null;
+    }
+
+    localStorage.setItem("searchTitle", this.searchFrom.value.title);
+    localStorage.setItem("searchType", this.searchFrom.value.type);
+    localStorage.setItem("searchYardageTo", this.searchFrom.value.yardageTo);
+    localStorage.setItem("searchYardageFrom", this.searchFrom.value.yardageFrom);
+    localStorage.setItem("searchPriceTo", this.searchFrom.value.priceTo);
+    localStorage.setItem("searchPriceFrom", this.searchFrom.value.priceFrom);
     this.searchedAdvertisement.emit();
   }
 }

@@ -58,7 +58,7 @@ namespace EstateAgency.Controllers
 
             foreach (var reservation in _dbContext.Reservations)
             {
-                if(reservation.ReservationActive == 1)
+                if (reservation.ReservationActive == 1)
                 {
                     var tmpTime = DateTime.Now.Subtract(reservation.CreatedDate).TotalMinutes;
                     if (tmpTime > 1440)
@@ -262,7 +262,7 @@ namespace EstateAgency.Controllers
                 }
             }
 
-            foreach(var reservation in advertisement.Reservations)
+            foreach (var reservation in advertisement.Reservations)
             {
                 _dbContext.Reservations.Remove(reservation);
             }
@@ -279,15 +279,37 @@ namespace EstateAgency.Controllers
         [HttpPost("AdvertisementList")]
         public IActionResult AdvertisementList([FromBody] PagingDataViewModel request)
         {
-            List<Advertisement> advertisements = new List<Advertisement>();
+            List<Advertisement> advertisements = _dbContext.Advertisements.Where(a => a.Flag != 1).ToList();
 
-            if (request.Title == null || request.Title == "null" || request.Title == "")
+
+            if (request.Title != null && request.Title != "null" && request.Title != "")
             {
-                advertisements = _dbContext.Advertisements.Where(a => a.Flag != 1).ToList();
+                advertisements = advertisements.Where(a => a.Title.Contains(request.Title)).ToList();
             }
-            else
+
+            if (request.PriceFrom > 0)
             {
-                advertisements = _dbContext.Advertisements.Where(a => a.Title.Contains(request.Title) && a.Flag != 1).ToList();
+                advertisements = advertisements.Where(a => a.Price >= request.PriceFrom).ToList();
+            }
+
+            if (request.PriceTo > 0)
+            {
+                advertisements = advertisements.Where(a => a.Price <= request.PriceTo).ToList();
+            }
+
+            if (request.YardageFrom > 0)
+            {
+                advertisements = advertisements.Where(a => a.Yardage >= request.YardageFrom).ToList();
+            }
+
+            if (request.YardageTo > 0)
+            {
+                advertisements = advertisements.Where(a => a.Yardage <= request.YardageTo).ToList();
+            }
+
+            if (request.Type == 0 || request.Type == 1)
+            {
+                advertisements = advertisements.Where(a => a.Type == request.Type).ToList();
             }
 
             foreach (var advertisement in advertisements)
@@ -295,7 +317,7 @@ namespace EstateAgency.Controllers
                 advertisement.Images = _dbContext.Images.Where(image => image.AdvertisementId == advertisement.Id).ToList();
             }
 
-            request.PageNumber = (request.PageNumber > 0  && (request.Title == null || request.Title == "null" || request.Title == "") ? request.PageNumber : 1) - 1;
+            request.PageNumber = (request.PageNumber > 0 && (request.Title == null || request.Title == "null" || request.Title == "") ? request.PageNumber : 1) - 1;
             request.MaxRecords = request.MaxRecords != 0 ? request.MaxRecords : 100;
 
             var requestedAdvertisements = advertisements

@@ -12,6 +12,21 @@ namespace EstateAgency.ViewModels.AdvertisementViewModels
         [JsonProperty("title")]
         public string Title { get; set; }
 
+        [JsonProperty("yardageTo")]
+        public string YardageTo { get; set; }
+
+        [JsonProperty("yardageFrom")]
+        public string YardageFrom { get; set; }
+
+        [JsonProperty("priceTo")]
+        public string PriceTo { get; set; }
+
+        [JsonProperty("priceFrom")]
+        public string PriceFrom { get; set; }
+
+        [JsonProperty("type")]
+        public int Type { get; set; }
+
         [JsonProperty("maxRecord")]
         public int MaxRecords { get; set; }
 

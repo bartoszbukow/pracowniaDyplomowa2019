@@ -1,15 +1,68 @@
 <div class="card search-box">
   <div class="card-body">
-    <form [formGroup]="searchFrom" class="form-inline md-form form-sm active-cyan-2 mt-2 main-search-box" (ngSubmit)="serchAdvertisements()">
-      <input class="form-control main-search__title"
-             type="text"
-             placeholder="Czego szukasz?"
-             aria-label="Search"
-             formControlName="title"
-             autocomplete="title">
-      <button class="main-search__icon">
-        <i class="fas fa-search" aria-hidden="true" ></i>
-      </button>
+    <form [formGroup]="searchFrom" class="form-inline md-form form-sm active-cyan-2 mt-2 main-search-box">
+      <div class="main-search__title">
+        <input class="form-control"
+               type="text"
+               placeholder="Czego szukasz?"
+               aria-label="Search"
+               formControlName="title"
+               autocomplete="title">
+      </div>
+
+      <div class="main-search__category">
+        <select class="select-text" required formControlName="type">
+          <option value="Typ" disabled selected hidden>Typ</option>
+          <option value="Sprzedaz">Sprzedaż</option>
+          <option value="Wynajem">Wynajem</option>
+        </select>
+        <span class="select-bar"></span>
+      </div>
+
+      <div class="main-search__priceFrom">
+        <input class="form-control"
+               type="text"
+               placeholder="Cena od"
+               aria-label="price from"
+               formControlName="priceFrom"
+               autocomplete="priceFrom">
+      </div>
+
+      <div class="main-search__priceTo">
+        <input class="form-control"
+               type="text"
+               placeholder="Cena do"
+               aria-label="price to"
+               formControlName="priceTo"
+               autocomplete="priceTo">
+      </div>
+
+      <div class="main-search__yardageFrom">
+        <input class="form-control"
+               type="text"
+               placeholder="Metraż od"
+               aria-label="yardage from"
+               formControlName="yardageFrom"
+               autocomplete="yardageFrom">
+      </div>
+
+      <div class="main-search__yardageTo">
+        <input class="form-control"
+               type="text"
+               placeholder="Metraż do"
+               aria-label="yardage to"
+               formControlName="yardageTo"
+               autocomplete="yardageTo">
+      </div>
+
+      <div class="main-search__button">
+        <button type="button" class="btn btn-secondary" (click)="serchAdvertisements()">
+          <span class="text">Wyszukaj</span>
+          <i class="fas fa-search" aria-hidden="true"></i>
+        </button>
+        
+      </div>
+
     </form>
   </div>
 </div>
