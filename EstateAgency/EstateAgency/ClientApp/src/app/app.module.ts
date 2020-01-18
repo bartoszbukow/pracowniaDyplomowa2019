@@ -42,6 +42,7 @@ import { AdvertisementDeleteModalComponent } from './components/modals/advertise
 import { ReservationCreateModalComponent } from './components/modals/reservation-create-modal/reservation-create-modal.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ChangePasswordModalComponent } from './components/modals/change-password-modal/change-password-modal.component';
 
 @NgModule({
     declarations: [
@@ -71,11 +72,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
         ReservationCreateModalComponent,
         PaginationComponent,
         DashboardComponent,
+        ChangePasswordModalComponent,
     ],
     entryComponents: [
       ModalContainerComponent,
       AdvertisementDeleteModalComponent,
-      ReservationCreateModalComponent
+      ReservationCreateModalComponent,
+      ChangePasswordModalComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

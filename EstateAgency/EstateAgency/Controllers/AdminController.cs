@@ -124,7 +124,32 @@ namespace EstateAgency.Controllers
             return new JsonResult(advertisements.Adapt<AdvertisementManagementViewModel[]>(), JsonSettings);
         }
 
+        [HttpPut("AdminChangeUserPassword")]
+        public async Task<IActionResult> AdminChangeUserPassword([FromBody] AdminChangeUserPasswordViewModel model)
+        {
+            if (model == null) return new StatusCodeResult(500);
+
+            ApplicationUser user = await UserManager.FindByIdAsync(model.UserId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                user.PasswordHash = UserManager.PasswordHasher.HashPassword(user, model.NewPassword);
+                await UserManager.UpdateAsync(user);
+            }
+            catch
+            {
+                return BadRequest(100);
+            }
+            
+            return Ok();
+        }
 
         #endregion
     }
 }
+

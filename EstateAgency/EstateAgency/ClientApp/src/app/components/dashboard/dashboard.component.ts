@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { countAdvertisements } from './../../constants/countAdvertisements';
-import { PaginationComponent } from './../pagination/pagination.component'; 
 
 @Component({
   selector: 'app-dashboard',
@@ -9,8 +8,6 @@ import { PaginationComponent } from './../pagination/pagination.component';
   styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit {
-  @ViewChild(PaginationComponent, { static: true }) advertisementList: PaginationComponent;
-
   advertisements: IAdvertisement[];
   pageNumber: number = 1;
   pageCount: number;

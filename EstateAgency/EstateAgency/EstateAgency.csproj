@@ -29,6 +29,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\constants\countAdvertisements.ts" />
     <None Remove="ClientApp\src\app\constants\responseNumbers.ts" />
+    <None Remove="ClientApp\src\app\interfaces\adminChangeUserPassword.ts" />
     <None Remove="ClientApp\src\app\interfaces\advertisement.ts" />
     <None Remove="ClientApp\src\app\interfaces\advertisementManagement.ts" />
     <None Remove="ClientApp\src\app\interfaces\advertisementPaged.ts" />
@@ -63,6 +64,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\constants\countAdvertisements.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\constants\responseNumbers.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\adminChangeUserPassword.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\advertisement.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\advertisementManagement.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\advertisementPaged.ts" />

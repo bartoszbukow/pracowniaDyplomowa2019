@@ -16,48 +16,67 @@
 .table tr:last-child {
   border-bottom: none;
 }
-.table .name {
-  width: 300px;
+.table .main-data {
+  width: calc(100% - 150px);
+}
+.table .main-data .main-data__name,
+.table .main-data .main-data__email {
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.table .email {
-  width: calc(100% - 430px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.table .buttons {
+  width: 150px;
+  text-align: center;
 }
-.table .button {
-  width: 130px;
+.table .buttons button {
+  height: 25px;
+  font-size: 15px;
 }
-@media (max-width: 1199px) {
-  .table .name {
-    width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .table .email {
-    width: calc(100% - 330px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .table .button {
-    width: 130px;
+.table .buttons .btn {
+  padding: 0 10px;
+}
+.table .buttons .buttons__password,
+.table .buttons .buttons__lock {
+  width: 100%;
+  text-align: center;
+}
+/*@media (max-width: 1199px) {
+  .table {
+    .name {
+      width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .email {
+      width: calc(~"100% - 330px");
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .button {
+      width: 130px;
+    }
   }
 }
+
+
 @media (max-width: 767px) {
-  table .name {
-    width: auto;
+  table {
+    .name {
+      width: auto;
+    }
+    .email {
+      width: 0;
+      display: none;
+    }
+    .button {
+      width: 130px;
+      float: right;
+    }
   }
-  table .email {
-    width: 0;
-    display: none;
-  }
-  table .button {
-    width: 130px;
-    float: right;
-  }
-}
+}*/

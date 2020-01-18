@@ -1,18 +1,28 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th class="name">Użytkownik</th>
-      <th class="email">Email</th>
-      <th class="button">Zarządzaj</th>
+      <th class="main-data">Użytkownik</th>
+      <th class="buttons">Zarządzaj</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let user of userList">
-      <td class="name">{{user.name}} {{user.surname}}</td>
-      <td class="email"> {{user.email}}</td>
-      <td class="button">
-        <button *ngIf="user.flags === 0" class="btn btn-danger" (click)="lockUser(user.id)">ZABLOKUJ</button>
-        <button *ngIf="user.flags === 1" class="btn btn-success" (click)="unlockUser(user.id)">ODBLOKUJ</button>
+      <td class="main-data">
+        <div class="main-data__name">
+          {{user.name}} {{user.surname}}
+        </div>
+        <div class="main-data__email">
+          {{user.email}}
+        </div>
+     </td>
+      <td class="buttons">
+        <div class="buttons__lock">
+          <button *ngIf="user.flags === 0" class="btn btn-danger" (click)="lockUser(user.id)">ZABLOKUJ</button>
+          <button *ngIf="user.flags === 1" class="btn btn-success" (click)="unlockUser(user.id)">ODBLOKUJ</button>
+        </div>
+        <div class="buttons__password">
+          <button class="btn btn-info" (click)="onCreateModalChangePassword(user)">ZMIEŃ HASŁO</button>
+        </div>
       </td>
     </tr>
   </tbody>

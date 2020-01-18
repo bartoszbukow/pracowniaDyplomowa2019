@@ -18,26 +18,40 @@
     border-bottom: none;
   }
 
-  .name {
-    width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .main-data {
+    width: calc(~"100% - 150px");
+
+    .main-data__name,
+    .main-data__email {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
-  .email {
-    width: calc(~"100% - 430px");
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  .buttons {
+    width: 150px;
+    text-align: center;
 
-  .button {
-    width: 130px;
+    button {
+      height: 25px;
+      font-size: 15px;
+    }
+
+    .btn {
+      padding: 0 10px;
+    }
+
+    .buttons__password,
+    .buttons__lock {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
 
-@media (max-width: 1199px) {
+/*@media (max-width: 1199px) {
   .table {
     .name {
       width: 200px;
@@ -74,4 +88,4 @@
       float: right;
     }
   }
-}
+}*/

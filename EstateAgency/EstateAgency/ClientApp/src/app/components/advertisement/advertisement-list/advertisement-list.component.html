@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-lg-4 advertisement-box" *ngFor="let advertisement of advertisements">
-      <div class="card mb-4 shadow-sm card-box">
+      <div class="card mb-4 shadow-sm card-box" (click)="onSelect(advertisement)">
         <div class="photo-box">
           <img class="bd-placeholder-img card-img-top photo-box__area"
                src="{{this.url}}{{advertisement.images[0].path}}"

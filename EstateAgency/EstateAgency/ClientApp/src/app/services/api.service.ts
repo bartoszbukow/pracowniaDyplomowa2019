@@ -99,4 +99,7 @@ export class ApiService {
     return this.http.post<IReservation>(this.url + "api/reservation", data);
   }
 
+  putAdminChangeUserPassword(data) {
+    return this.http.put(this.url + "api/admin/AdminChangeUserPassword", data);
+  }
 }
