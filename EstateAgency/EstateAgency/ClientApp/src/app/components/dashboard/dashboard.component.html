@@ -13,6 +13,7 @@
   </section>
   <div class="album py-5">
     <app-advertisement-list (pageNumberChanged)='onPageChanged($event)'
+                            (deletedAdvertisement)='onDeleteAdvertisementChange()'
                             [advertisements]="this.advertisements"
                             [pageNumber]="this.pageNumber"
                             [pageCount]="this.pageCount">

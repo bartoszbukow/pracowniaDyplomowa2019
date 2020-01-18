@@ -50,7 +50,6 @@ export class AdvertisementComponent implements OnInit {
 
     }
     else {
-      console.log("Invalid id: routing back to home...");
       this.router.navigate(["home"]);
     }
 

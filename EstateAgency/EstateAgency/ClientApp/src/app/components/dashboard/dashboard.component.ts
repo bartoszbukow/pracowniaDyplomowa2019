@@ -87,6 +87,10 @@ export class DashboardComponent implements OnInit {
     this.getAdvertisementList();
   }
 
+  onDeleteAdvertisementChange = () => {
+    this.getAdvertisementList();
+  }
+
   isNumberValidator = (variableName: string): boolean => {
     var item = localStorage.getItem(variableName);
     if (item !== undefined && item !== null && item !== "null" && item !== "" && !isNaN(Number(item))) return true;

@@ -21,7 +21,7 @@
           <button *ngIf="user.flags === 1" class="btn btn-success" (click)="unlockUser(user.id)">ODBLOKUJ</button>
         </div>
         <div class="buttons__password">
-          <button class="btn btn-info" (click)="onCreateModalChangePassword(user)">ZMIEŃ HASŁO</button>
+          <button class="btn btn-info" data-toggle="modal" data-target="#modalId" (click)="onCreateModalChangePassword(user)">ZMIEŃ HASŁO</button>
         </div>
       </td>
     </tr>

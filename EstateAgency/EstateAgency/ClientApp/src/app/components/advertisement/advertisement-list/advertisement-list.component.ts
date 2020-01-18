@@ -2,6 +2,9 @@ import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular
 import { ApiService } from '../../../services/api.service';
 import { AuthService } from './../../../services/auth.service';
 import { Router } from "@angular/router";
+import { ModalService } from './../../../services/modal.service';
+import { AdvertisementDeleteModalComponent } from './../../modals/advertisement-delete-modal/advertisement-delete-modal.component';
+declare let $: any;
 
 @Component({
   selector: 'app-advertisement-list',
@@ -13,6 +16,7 @@ export class AdvertisementListComponent implements OnInit {
   @Input() pageNumber: number;
   @Input() pageCount: number;
   @Output() pageNumberChanged = new EventEmitter();
+  @Output() deletedAdvertisement = new EventEmitter();
 
   selectedAdvertisement: IAdvertisement;
   url: string;
@@ -22,6 +26,7 @@ export class AdvertisementListComponent implements OnInit {
     @Inject('BASE_URL') baseUrl: string,
     private auth: AuthService,
     private api: ApiService,
+    private modalService: ModalService,
     private router: Router) {
     this.url = baseUrl;
   }
@@ -63,5 +68,16 @@ export class AdvertisementListComponent implements OnInit {
 
   onPrev = (): void => {
     this.pageNumberChanged.emit(this.pageNumber - 1);
+  }
+
+  onCreateModalAdvertisementDelete = (advertisement: IAdvertisement): void => {
+    const modalRef = this.modalService.open(AdvertisementDeleteModalComponent, { advertisement: advertisement });
+    modalRef.onResult().subscribe(
+      closed => {
+        this.deletedAdvertisement.emit();
+        $("body").removeAttr("style");
+      },
+      dismissed => { }
+    );
   }
 }

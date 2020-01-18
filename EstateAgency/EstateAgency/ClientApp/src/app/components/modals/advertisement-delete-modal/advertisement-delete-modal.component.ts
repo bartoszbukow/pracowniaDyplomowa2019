@@ -23,7 +23,6 @@ export class AdvertisementDeleteModalComponent extends Modal implements OnInit, 
   }
 
   onInjectInputs = (inputs: any): void => {
-    console.log(inputs);
     this.advertisement = inputs.advertisement;
   }
 

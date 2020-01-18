@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-lg-4 advertisement-box" *ngFor="let advertisement of advertisements">
-      <div class="card mb-4 shadow-sm card-box" (click)="onSelect(advertisement)">
-        <div class="photo-box">
+      <div class="card mb-4 shadow-sm card-box">
+        <div class="photo-box" (click)="onSelect(advertisement)">
           <img class="bd-placeholder-img card-img-top photo-box__area"
                src="{{this.url}}{{advertisement.images[0].path}}"
                alt="image"
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="card-body data-box">
-          <div class="card-text row data-box__area">
+          <div class="card-text row data-box__area" (click)="onSelect(advertisement)">
             <div class="col-6">
               <span class="data-box__city">{{advertisement.city}}</span>
               <span class="data-box__address">{{advertisement.address}}</span>
@@ -34,18 +34,18 @@
             </div>
           </div>
           <div class="d-flex justify-content-between align-items-center pt-3 pb-2 button-box">
-            <div class="btn-group">
+            <div *ngIf="IAmOwnerOfAdvertisement(advertisement)" class="btn-group">
               <button type="button"
-                      class="btn btn-sm btn-outline-secondary button-box__details"
-                      [class.selected]="advertisement === selectedAdvertisement"
-                      (click)="onSelect(advertisement)">
-                SZCZEGÓŁY OFERTY
-              </button>
-              <button *ngIf="IAmOwnerOfAdvertisement(advertisement)"
-                      type="button"
                       class="btn btn-sm btn-outline-secondary button-box__edit"
                       (click)="onEdit(advertisement)">
                 EDYCJA
+              </button>
+              <button type="button"
+                      class="btn btn-sm btn-outline-secondary button-box__details"
+                      data-toggle="modal"
+                      data-target="#modalId"
+                      (click)="onCreateModalAdvertisementDelete(advertisement)">
+                USUŃ
               </button>
             </div>
           </div>
