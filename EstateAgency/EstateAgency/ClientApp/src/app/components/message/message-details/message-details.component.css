@@ -56,6 +56,7 @@
 }
 .converation-box .message-item__your-message {
   float: right;
+  background-color: #8fa5fa;
 }
 .converation-box .answer-box {
   width: 100%;
